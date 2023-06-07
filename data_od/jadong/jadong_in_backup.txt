@@ -1,0 +1,11 @@
+yotoon:거인처형지:14500:false:550:875:13
+yotoon:들소황무지:12000:false:300:850:40
+midgard:폐성터:0:false:500:830:10
+midgard:바위해안:0:true:615:805:7
+yotoon:트롤의기원:15500:false:650:850:15
+yotoon:예티서식지:19000:false:800:805:20
+yotoon:바람의땅:17000:false:750:830:15
+yotoon:늑대고원:19000:false:800:830:20
+yotoon:전사야영지:18000:true:510:830:25
+yotoon:울부짖는산:20000:false:850:805:10
+yotoon:광기의고원:19000:true:565:850:15

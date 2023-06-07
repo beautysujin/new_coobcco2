@@ -1,0 +1,14 @@
+avatar_1_2
+avatar_2_2
+avatar_3_1
+avatar_3_2
+avatar_4_2
+avatar_5_2
+loon_2_1
+loon_2_2
+moogi_1_2
+moogi_3_2
+talgut_1_2
+talgut_2_1
+talgut_2_2
+talgut_3_1
