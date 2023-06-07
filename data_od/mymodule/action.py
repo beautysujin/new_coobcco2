@@ -132,7 +132,7 @@ def go_jangchack(cla):
 
 def go_soongan_f5(cla):
     try:
-        from myfunction import imgs_set, click_pos_2, random_int, drag_pos, go_to_home, click_pos_reg
+        from myfunction import imgs_set, click_pos_2, random_int, drag_pos, go_to_home, click_pos_reg, imgs_set_
         import numpy as np
         import cv2
 
@@ -163,24 +163,24 @@ def go_soongan_f5(cla):
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(560, 100, 950, 860, cla, img)
+                        imgs_ = imgs_set_(560, 100, 950, 860, cla, img, 0.85)
                         if imgs_ is None or imgs_ == False:
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan_2.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set(560, 100, 950, 860, cla, img)
+                            imgs_ = imgs_set_(560, 100, 950, 860, cla, img, 0.85)
                             if imgs_ is None or imgs_ == False:
                                 drag_pos(770, 900, 770, 200, cla)
                                 time.sleep(1)
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(560, 100, 950, 860, cla, img)
+                                imgs_ = imgs_set_(560, 100, 950, 860, cla, img, 0.85)
                                 if imgs_ is None or imgs_ == False:
                                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan_2.png"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(560, 100, 950, 860, cla, img)
+                                    imgs_ = imgs_set_(560, 100, 950, 860, cla, img, 0.85)
                                     if imgs_ is None or imgs_ == False:
                                         # isquick_ = True
                                         print("soongan(이)가 진짜 없다...")
