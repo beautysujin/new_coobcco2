@@ -6,7 +6,7 @@ sys.path.append('C:/my_games/coobcco2/data_od/mymodule')
 import variable as v_
 
 def go_test(cla):
-    from action import go_mynumber_, go_bag, go_potion_off
+    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5
     from chango import go_chango, chango_, auction
     from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing
     from event_get import game_event_get_ready, game_event_get, go_item_open, go_ticket_open, go_get_open
@@ -40,14 +40,7 @@ def go_test(cla):
 
     print("aaaaaaaaaaaaaaaaaaaaa")
 
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(80, 440, 220, 580, cla, img, 0.8)
-    if imgs_ is None or imgs_ == False:
-        print("zero", imgs_)
-    else:
-        print("파악", imgs_)
+    go_soongan_f5(cla)
 
     # go_get_open(cla)
 
