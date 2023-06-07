@@ -80,10 +80,6 @@ import os.path
 
 if __name__ == '__main__':
     try:
-        print("hihihi")
-        # sys.path.append('C:\my_games\coobcco2\data_od\mymodule')
-        print(sys.path)
-        # import main_p
         app = QApplication(sys.argv)
         ex = main_p.MyApp()
 
