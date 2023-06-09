@@ -325,6 +325,11 @@ def jadong_cla_play(cla, where):
         return 0
 
 def complete_1(cla):
+
+    import numpy as np
+    import cv2
+    from function import imgs_set_, click_pos_reg, click_pos_2
+
     try:
         print("complete_1")
         # 수령 다 받을때까지 WHILE  반복
