@@ -1411,13 +1411,19 @@ def nida_grow(cla):
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\nidhog_7.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(700, 120, 910, 160, cla, img, 0.75)
+                imgs_ = imgs_set_(700, 120, 910, 160, cla, img, 0.8)
                 if imgs_ is not None and imgs_ != False:
                     quest_count += 1
-                    result_ = False
+
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\quest\\complete_1.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set_(700, 120, 910, 160, cla, img, 0.8)
+                if imgs_ is not None and imgs_ != False:
+                    quest_count += 1
 
                 if quest_count > 5:
-                    result_ = False
+                    result_ = True
 
 
 def yotoon_grow_end(cla):
