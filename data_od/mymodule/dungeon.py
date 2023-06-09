@@ -284,10 +284,18 @@ def jadong_cla_play(cla, where):
         nowPlay = 'jadong'
 
 
+        result = False
+        if result == True:
+            print("xxxxxxxxxxxx")
+        else:
+            print("zzzzzzzzzzzz")
+
+
         clean_screen(cla, "jadong_cla_play")
         result_ = now_hunting(nowPlay, cla)  # False는 현재 노사냥, True는 현재 사냥중
         print("result_ = now_hunting(nowPlay, cla)", result_)
         print("jadong_cla_play : ", where)
+
         if result_ == False:
             jadong_cla_ready(cla, where)  # False는 자동사냥 진행, True는 자동사냥 노진행
             print("자동사냥 시작")
@@ -302,11 +310,13 @@ def jadong_cla_play(cla, where):
             time.sleep(5 + random_int())
             print("자동사냥 체크 끝")
 
-            complete_1(cla)
+
 
             # 여기에 초기화 시간 넣어서 코딩하기(시간함수)
             # 시간
-
+        else:
+            complete_1(cla)
+            myPotion_check(nowPlay, cla)
         time.sleep(1 + random_int())
         jadong_0_check = False
 
