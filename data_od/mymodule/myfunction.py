@@ -83,7 +83,7 @@ def imgs_set(a, b, c, d, cla, img):
         if cla == 'two':
             plus = 960
         result = pyautogui.locateCenterOnScreen(img, region=(a + plus, b, c - a + 10 , d - b + 10),
-                                               confidence=0.7)
+                                               confidence=0.81)
         return result
     except ValueError:
         return False

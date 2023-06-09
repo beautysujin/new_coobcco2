@@ -301,12 +301,100 @@ def jadong_cla_play(cla, where):
                 v_.two_cla_ing = nowPlay
             time.sleep(5 + random_int())
             print("자동사냥 체크 끝")
+
+            complete_1(cla)
+
             # 여기에 초기화 시간 넣어서 코딩하기(시간함수)
             # 시간
 
         time.sleep(1 + random_int())
         jadong_0_check = False
 
+    except Exception as e:
+        print(e)
+        return 0
+
+def complete_1(cla):
+    try:
+        print("complete_1")
+        # 수령 다 받을때까지 WHILE  반복
+
+        a = False
+        aa = 0
+        while a is False:
+            aa += 1
+            if aa >= 10:
+                a = True
+
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\quest\\complete_1.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set_(770, 170, 840, 320, cla, img, 0.85)
+            if imgs_ is not None and imgs_ != False:
+                # 퀘스트 의뢰 완료 수령 클릭
+                print("complete_1", imgs_)
+                click_pos_reg(imgs_.x, imgs_.y, cla)
+
+                # # 카드 있는지 파악 후 있다면 카드 클릭
+                # for i in range(5):
+                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\quest\\card.PNG"
+                #     img_array = np.fromfile(full_path, np.uint8)
+                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #     imgs_ = imgs_set_(300, 550, 680, 680, cla, img, 0.85)
+                #     if imgs_ is not None and imgs_ != False:
+                #         print("card", imgs_)
+                #         click_pos_2(540, 620, cla)
+                #         break
+                #     else:
+                #         print("카드 없다...")
+                #     time.sleep(1)
+
+                # 카드 있는지 파악 후 있다면 카드 클릭_2
+                card_search_ = False
+                card_search_count = 0
+                while card_search_ is False:
+                    card_search_count += 1
+                    if card_search_count > 10:
+                        card_search_ = True
+
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\quest\\card.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(300, 550, 680, 680, cla, img, 0.85)
+                    if imgs_ is not None and imgs_ != False:
+                        print("card", imgs_)
+                        click_pos_2(540, 620, cla)
+                        card_search_ = True
+
+                        # 카드 수령 마무리 단계
+                        card_search_2 = False
+                        card_search_count2 = 0
+                        while card_search_2 is False:
+                            card_search_count2 += 1
+                            if card_search_count2 > 10:
+                                card_search_2 = True
+
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\quest\\card.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(300, 550, 680, 680, cla, img, 0.85)
+                            if imgs_ is not None and imgs_ != False:
+                                print("카드 아직 있다.")
+                            else:
+                                card_search_2 = True
+                                # 절대값 REG, 1,2클라 적용 POS_2
+                                click_pos_2(550, 930, cla)
+                                print("카드 없다...")
+                            time.sleep(1)
+
+                    else:
+                        print("카드 없다...")
+                    time.sleep(1)
+
+            else:
+                print("complete_1 없")
+                a = True
+            time.sleep(3)
     except Exception as e:
         print(e)
         return 0
