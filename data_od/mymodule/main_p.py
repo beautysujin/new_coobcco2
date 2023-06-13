@@ -684,10 +684,10 @@ class FirstTab(QWidget):
         sche_down_modify = QPushButton('down')
         sche_down_modify.clicked.connect(self.sche_down_modify)
         # 스케쥴 변경 확인
-        sche_add1 = QPushButton('one실행', self)
-        sche_add1.clicked.connect(self.mySchedule_start1)
-        sche_add2 = QPushButton('onetwo실행', self)
-        sche_add2.clicked.connect(self.mySchedule_start2)
+        self.sche_add1 = QPushButton('one 대기중', self)
+        self.sche_add1.clicked.connect(self.mySchedule_start1)
+        self.sche_add2 = QPushButton('two 대기중', self)
+        self.sche_add2.clicked.connect(self.mySchedule_start2)
 
         # 테스트 버튼
         self.mytestin = QPushButton('테스뚜')
@@ -854,8 +854,8 @@ class FirstTab(QWidget):
         hbox7.addWidget(sche_up_modify)
         hbox7.addWidget(sche_down_modify)
         hbox7.addStretch(4)
-        hbox7.addWidget(sche_add1)
-        hbox7.addWidget(sche_add2)
+        hbox7.addWidget(self.sche_add1)
+        hbox7.addWidget(self.sche_add2)
         hbox7.addStretch(8)
         hbox7.addLayout(hbox1)
 
@@ -1832,6 +1832,12 @@ class FirstTab(QWidget):
             v_.global_howcla = 'onecla'
             m_ = Monitoring(self)
             m_.start()
+
+            self.sche_add1.setText("one 실행중")
+            self.sche_add2.setText("two")
+            self.sche_add1.setDisabled(True)
+            self.sche_add2.setDisabled(True)
+
             time.sleep(0.3)
             start_onecla = game_Playing_onecla(self)
             start_onecla.start()
@@ -1844,6 +1850,12 @@ class FirstTab(QWidget):
             v_.global_howcla = 'onecla'
             m_ = Monitoring(self)
             m_.start()
+
+            self.sche_add1.setText("one")
+            self.sche_add2.setText("two 실행중")
+            self.sche_add1.setDisabled(True)
+            self.sche_add2.setDisabled(True)
+
             time.sleep(0.3)
             start_twocla = game_Playing_twocla(self)
             start_twocla.start()
