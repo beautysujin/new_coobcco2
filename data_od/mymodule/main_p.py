@@ -683,7 +683,7 @@ class FirstTab(QWidget):
         #스케쥴 한칸 아래로
         sche_down_modify = QPushButton('down')
         sche_down_modify.clicked.connect(self.sche_down_modify)
-        # 스케쥴 변경 확인
+        # 스케쥴 변경 확인.
         self.sche_add1 = QPushButton('one 대기중', self)
         self.sche_add1.clicked.connect(self.mySchedule_start1)
         self.sche_add2 = QPushButton('two 대기중', self)
