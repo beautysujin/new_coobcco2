@@ -1,4 +1,5 @@
-430/seven
-490/fourteen
+360/fourteen
+420/seven
+480/fourteen
 600/yellow_six
 660/fourteen

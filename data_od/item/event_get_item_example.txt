@@ -1,3 +1,10 @@
-490/fivetofive:600/fourteen:660/fourteen:720/fourteen:drag:seven:seven_four
+490/fivetofive
+600/fourteen
+660/fourteen
+720/fourteen
+drag
+seven
+seven_four
 yellow_six
 black_six
+change
