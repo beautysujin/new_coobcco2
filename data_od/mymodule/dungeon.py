@@ -771,7 +771,7 @@ def dunjeon_in_cla_ready(cla, dunjeon):
                 if dunjeon == 'underprison':
                     imgs_ = imgs_set(710, 440, 850, 580, cla, img)
 
-                if imgs_ is None or imgs_ == False:
+                if imgs_ is None:
                     print("rock 없고, 0초 인지 파악하자")
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
                     img_array = np.fromfile(full_path, np.uint8)
@@ -779,11 +779,11 @@ def dunjeon_in_cla_ready(cla, dunjeon):
 
                     # 여기 던전마다 이미지 위치 달라져야 한다
                     if dunjeon == 'gonghu':
-                        imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.8)
+                        imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.85)
                     if dunjeon == 'nanjang':
-                        imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.8)
+                        imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.85)
                     if dunjeon == 'underprison':
-                        imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.8)
+                        imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.85)
 
 
 

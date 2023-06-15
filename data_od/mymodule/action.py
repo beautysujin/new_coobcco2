@@ -1097,9 +1097,17 @@ def go_mynumber_(cla):
 
 def go_potion_off(cla):
     try:
-        from myfunction import imgs_set
+        from myfunction import imgs_set, click_pos_reg
         import numpy as np
         import cv2
+
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion_hp_set_3.png"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(725, 815, 770, 865, cla, img)
+
+        if imgs_ is not None and imgs_ != False:
+            click_pos_reg(imgs_.x, imgs_.y, cla)
 
         go_ = False
 
