@@ -24,22 +24,22 @@ def is_stop(cla):
         plus = 960
 
 
-    # stop_18181818 = False
-    # stop_count = 0
-    # while stop_18181818 is False:
-    #     stop_count += 1
-    #     if stop_count > 10:
-    #         stop_18181818 = True
-    #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\stop\\stop_view.PNG"
-    #     img_array = np.fromfile(full_path, np.uint8)
-    #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    #     imgs_ = imgs_set(60, 500, 400, 900, cla, img)
-    #     if imgs_ is not None and imgs_ != False:
-    #         print("stop_view", imgs_)
-    #         click_pos_reg(imgs_.x, imgs_.y, cla)
-    #         stop_18181818 = True
-    #     else:
-    #         print("stop_view 없")
-    #     time.sleep(0.3)
+    stop_18181818 = False
+    stop_count = 0
+    while stop_18181818 is False:
+        stop_count += 1
+        if stop_count > 10:
+            stop_18181818 = True
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\stop\\stop_view.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(60, 500, 400, 900, cla, img)
+        if imgs_ is not None and imgs_ != False:
+            print("stop_view", imgs_)
+            click_pos_reg(imgs_.x, imgs_.y, cla)
+            stop_18181818 = True
+        else:
+            print("stop_view 없")
+        time.sleep(0.3)
 
 
