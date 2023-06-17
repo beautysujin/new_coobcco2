@@ -474,6 +474,7 @@ def go_to_home(data, cla):
         from action import go_boonhae, go_escape, go_bag
         from where import go_somopoom
         from dungeon import dunjeon_cla_play, jadong_cla_play
+        from dungeon_su import dunjeon_cla_play_su
         from schedule import myQuest_play_check
         print("def go_to_home(cla): start", data)
         print("소모품 상점 가기전에 분해부터 ㄱㄱ", cla)
@@ -483,14 +484,16 @@ def go_to_home(data, cla):
         isPotionChecked = False
 
         isGoToHome = False
+        gohome_count = 0
         while isGoToHome is False:
+            gohome_count += 1
+            if gohome_count >= 6:
+                isGoToHome = True
+
             compl_ = maul_mission_complete(cla)
-            if compl_ == False:
-                print("def go_to_home(data, cla): 완료 안보영")
-            else:
+            if compl_ == True:
                 print("def go_to_home(data, cla): 완료 보영")
                 go_maul_bosang(cla)
-
 
 
             print("어디에서 왔니?", data)
@@ -509,15 +512,6 @@ def go_to_home(data, cla):
                     this_yotoon = True
                 if result__ == 'mana':
                     this_mana = True
-            #if result_vil == 'yotoon':
-            #    this_yotoon = True
-            #     test
-            #if result_vil == 'mana':
-            #    result__ = in_village_go_to(cla)
-            #    if result__ == 'nida':
-            #        this_nida = True
-            #    if result__ == 'yotoon':
-            #        this_yotoon = True
 
 
             if cla == 'one':
@@ -527,15 +521,14 @@ def go_to_home(data, cla):
                 mypotion_cla = v_.mypotion_2
                 mymoney_ = v_.mymoney_2
             print("myMoney", mymoney_)
-            time.sleep(1)
 
 
             go_bag(cla, "go_to_home")
             go_boonhae(cla, "go_to_home")
 
-            time.sleep(random_int())
+            time.sleep(1)
             click_pos_2(920, 55, cla)
-            time.sleep(random_int())
+            time.sleep(1)
         ###########################################
             if this_mana == True:
                 print("분해 후 이제 소모품 상점으로 가는 길")
@@ -549,13 +542,17 @@ def go_to_home(data, cla):
                     isSomopoom = False
                     isSomopoomCount = 0
                     while isSomopoom is False:
+                        isSomopoomCount += 1
+                        if isSomopoomCount >=20:
+                            isSomopoom = True
+
                         result_somopoom = go_somopoom(cla)
                         print('result_somopoom1 = go_somopoom(cla)', result_somopoom)
                         time.sleep(random_int())
                         if result_somopoom == False:
                             result_go_chango = go_chango(cla, 'village')
                             if result_go_chango == True:
-                                isSomopoomCount += 1
+
                                 click_pos_2(770, 910, cla)
                                 if this_yotoon == True:
                                     time.sleep(1)
@@ -563,20 +560,20 @@ def go_to_home(data, cla):
                                     time.sleep(1)
                                     click_pos_2(810, 980, cla)
                                 time.sleep(10 + random_int())
-                                if isSomopoomCount == 12 or isSomopoomCount == 24:
+                                if isSomopoomCount == 12:
                                     isSomopoomCount = 0
                                     go_escape(cla)
                             else:
                                 result_menu = menuOpenCheck(cla, "go_to_home_middle1")
                                 if result_menu == True:
                                     click_pos_2(920, 55, cla)
-                                    time.sleep(random_int())
+                                    time.sleep(1)
 
                         else:
                             isSomopoom = True
                             print("def go_to_home(data, cla): 소모품 상점 도착")
                             # 물약
-                            time.sleep(random_int())
+                            time.sleep(1)
                             # print("물약")
                             click_pos_2(150, 165, cla)
                             #
@@ -665,8 +662,14 @@ def go_to_home(data, cla):
                             if imme_ != True:
 
                                 time.sleep(1)
-                                item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
-                                item_how_manyed_bool = item_how_manyed_.isdigit()
+                                item_how_manyed_ = text_check_get(448, 484, 490, 500, cla)
+                                print("순간 파악", item_how_manyed_)
+                                result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
+                                print("순간 숫자 파악", result_)
+                                result_ = int_put_(result_)
+                                print("순간 숫자 파악2", result_)
+                                item_how_manyed_bool = result_.isdigit()
+                                print("순간 숫자 변환", item_how_manyed_bool)
                                 if item_how_manyed_bool == False:
                                     click_pos_2(580, 590, cla)
                                     time.sleep(1)
@@ -687,10 +690,7 @@ def go_to_home(data, cla):
                                             click_pos_2(550, 690, cla)
                                             time.sleep(1)
                                         else:
-                                            click_pos_2(380, 590, cla)
-                                            time.sleep(1)
-                                            click_pos_2(380, 590, cla)
-                                            time.sleep(1)
+
                                             click_pos_2(550, 690, cla)
                                             time.sleep(1)
                                             # click_pos_2(410, 690, cla)
@@ -700,7 +700,7 @@ def go_to_home(data, cla):
                             # 순록 스테이크
                             click_pos_2(150, 240, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('순록스테이크', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -726,7 +726,7 @@ def go_to_home(data, cla):
                             # 벌꿀술
                             click_pos_2(150, 330, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('벌꿀술', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -752,7 +752,7 @@ def go_to_home(data, cla):
                             # 프라낭 연어
                             click_pos_2(150, 410, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('프라낭 연어', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -778,7 +778,7 @@ def go_to_home(data, cla):
                             # 사리풀
                             click_pos_2(150, 480, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('사리풀', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -942,8 +942,14 @@ def go_to_home(data, cla):
                             if imme_ != True:
 
                                 time.sleep(1)
-                                item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
-                                item_how_manyed_bool = item_how_manyed_.isdigit()
+                                item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
+                                print("순간 파악", item_how_manyed_)
+                                result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
+                                print("순간 숫자 파악", result_)
+                                result_ = int_put_(result_)
+                                print("순간 숫자 파악2", result_)
+                                item_how_manyed_bool = result_.isdigit()
+                                print("순간 숫자 변환", item_how_manyed_bool)
                                 if item_how_manyed_bool == False:
                                     click_pos_2(580, 590, cla)
                                     time.sleep(1)
@@ -979,7 +985,7 @@ def go_to_home(data, cla):
                             if this_nida == True:
                                 click_pos_2(150, 320 + 80, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('순록스테이크', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -1008,7 +1014,7 @@ def go_to_home(data, cla):
                             if this_nida == True:
                                 click_pos_2(150, 400 + 80, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('벌꿀술', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -1037,7 +1043,7 @@ def go_to_home(data, cla):
                             if this_nida == True:
                                 click_pos_2(150, 480 + 80, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('프라낭 연어', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -1066,7 +1072,7 @@ def go_to_home(data, cla):
                             if this_nida == True:
                                 click_pos_2(150, 560 + 80, cla)
                             time.sleep(1)
-                            item_how_manyed_ = text_check_get(400, 480, 480, 510, cla)
+                            item_how_manyed_ = text_check_get(448, 482, 515, 505, cla)
                             print('사리풀', item_how_manyed_)
                             if len(item_how_manyed_) >= 1:
                                 result_ = re.sub(r'[^0-9]', '', item_how_manyed_)
@@ -1145,22 +1151,17 @@ def go_to_home(data, cla):
                 print("게임 시작 하러 ㄱㄱ : maul_mission(cla, data)", data)
                 maul_mission(cla, data)
 
-            elif data == 'gonghu':
+            elif data == '공허' or data == '난쟁이' or data == '지하감옥':
                 isGoToHome = True
-                data_ = "check"
                 print("게임 시작 하러 ㄱㄱ : dunjeon_cla_play(cla, data_, data)", data)
-                dunjeon_cla_play(cla, data_, data)
 
-            elif data == 'nanjang':
-                isGoToHome = True
-                data_ = "check"
-                print("게임 시작 하러 ㄱㄱ : dunjeon_cla_play(cla, data_, data)", data)
-                dunjeon_cla_play(cla, data_, data)
-            elif data == 'underprison':
-                isGoToHome = True
-                data_ = "check"
-                print("게임 시작 하러 ㄱㄱ : dunjeon_cla_play(cla, data_, data)", data)
-                dunjeon_cla_play(cla, data_, data)
+                result_where = myQuest_play_check(cla, 'go_to_home')
+                dunjeon_spl_ = result_where[0][2].split("_")
+                print("dunjeon_spl_[0]", dunjeon_spl_[0])
+                print("dunjeon_spl_[1]", dunjeon_spl_[1])
+
+                dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
+
             elif data == 'jadong':
                 isGoToHome = True
                 # 여긴 자동?

@@ -1123,7 +1123,16 @@ def go_potion_off(cla):
             imgs_ = imgs_set(725, 815, 770, 865, cla, img)
 
             if imgs_ is None or imgs_ == False:
-                print("포션off가 안보여2")
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion_hp_set_4.png"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(725, 815, 770, 865, cla, img)
+
+                if imgs_ is None or imgs_ == False:
+                    print("포선 off 안보여.............")
+                else:
+                    print("potion_hp_set_4 보여2")
+                    go_ = True
             else:
                 print("포션off가 보여2")
                 go_ = True
@@ -1964,121 +1973,109 @@ def now_hunting_is(data, cla):
             gold_1 = 0
             gold_2 = 0
 
-            # hun_data = data
-            if cla == 'one':
-                cla_ing_ = v_.one_cla_ing
-            if cla == 'two':
-                cla_ing_ = v_.two_cla_ing
-
             print("///////////////////////////////////////now_hunting_is//////////////////////////////////////////////////")
-            myQuest_grow_result = myQuest_grow_check(cla)
-            print('now_hunting_is : myQuest_grow_result', myQuest_grow_result)
-            print("cla_ing_ : now_hunting_is", cla_ing_)
+            isgoldCheck = False
+            while isgoldCheck is False:
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gold_check.png"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(350, 60, 440, 100, cla, img)
+                if imgs_ is not None:
+                    isgoldCheck = True
+                    print("gold_check 보여", imgs_)
 
-            print("ing1", ing_Check_)
-            if cla_ing_ == 'maul' or cla_ing_ == 'grow' or myQuest_grow_result[2] == '요툰육성' or myQuest_grow_result[2] == '니다육성':
-                ing_Check_ = True
-            else:
-                isgoldCheck = False
-                while isgoldCheck is False:
+                else:
+                    print("gold_check 안보여")
+                    result = go_now_hunting_is(cla)
+                    click_pos_reg(result[0], result[1], cla)
+                    pyautogui.moveTo(480, 550, 0.2)
+                    time.sleep(random_int())
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gold_check.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set(350, 60, 440, 100, cla, img)
                     if imgs_ is not None:
                         isgoldCheck = True
-                        print("gold_check 보여", imgs_)
+                        print("gold_check 보여2", imgs_)
 
                     else:
-                        print("gold_check 안보여")
+                        check_count += 1
+                        print("gold_check 안보여2")
+                        clean_screen(cla, "now_hunting_is")
+                        time.sleep(0.3)
                         result = go_now_hunting_is(cla)
                         click_pos_reg(result[0], result[1], cla)
                         pyautogui.moveTo(480, 550, 0.2)
-                        time.sleep(random_int())
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gold_check.png"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(350, 60, 440, 100, cla, img)
-                        if imgs_ is not None:
+                        time.sleep(1)
+                        if check_count > 3:
                             isgoldCheck = True
-                            print("gold_check 보여2", imgs_)
+                            print("gold_check 안보여서 가방으로 체크")
 
-                        else:
-                            check_count += 1
-                            print("gold_check 안보여2")
-                            clean_screen(cla, "now_hunting_is")
-                            time.sleep(0.3)
-                            result = go_now_hunting_is(cla)
-                            click_pos_reg(result[0], result[1], cla)
-                            pyautogui.moveTo(480, 550, 0.2)
-                            time.sleep(1)
-                            if check_count > 3:
-                                isgoldCheck = True
-                                print("gold_check 안보여서 가방으로 체크")
+            if check_count > 3:
+                go_bag(cla, "now_hunting_is")
 
-                if check_count > 3:
-                    go_bag(cla, "now_hunting_is")
+                mygold_check = text_check_get_3(810, 40, 900, 70, 1, cla)
+                mygold_ = int_put_(mygold_check)
+                mygold_bool = mygold_.isdigit()
+                if mygold_bool == True:
+                    print("mygold_", mygold_)
+                    gold_1 = int(mygold_)
+                    time.sleep(12)
 
                     mygold_check = text_check_get_3(810, 40, 900, 70, 1, cla)
                     mygold_ = int_put_(mygold_check)
                     mygold_bool = mygold_.isdigit()
                     if mygold_bool == True:
                         print("mygold_", mygold_)
-                        gold_1 = int(mygold_)
-                        time.sleep(12)
-
-                        mygold_check = text_check_get_3(810, 40, 900, 70, 1, cla)
-                        mygold_ = int_put_(mygold_check)
-                        mygold_bool = mygold_.isdigit()
-                        if mygold_bool == True:
-                            print("mygold_", mygold_)
-                            gold_2 = int(mygold_)
-                    else:
-                        print("파악 불가")
-                    click_pos_2(920, 55, cla)
+                        gold_2 = int(mygold_)
                 else:
-                    golded_ = text_check_get(505, 70, 585, 95, cla)
-                    gold_ = golded_.split("\n")
-                    gold = int_put_(gold_[0])
-                    gold_bloon = gold.isdigit()
-                    if len(gold) >= 1 and gold_bloon == True:
-                        gold_1 = int(gold)
+                    print("파악 불가")
+                click_pos_2(920, 55, cla)
+            else:
+                golded_ = text_check_get(505, 70, 585, 95, cla)
+                gold_ = golded_.split("\n")
+                gold = int_put_(gold_[0])
+                gold_bloon = gold.isdigit()
+                if len(gold) >= 1 and gold_bloon == True:
+                    gold_1 = int(gold)
+                    time.sleep(1 + random_int())
+                    print("gold_1", gold_1)
+                    time.sleep(12)
+
+                    golded_2 = text_check_get(505, 70, 585, 95, cla)
+                    gold_22_ = golded_2.split("\n")
+                    gold_22 = int_put_(gold_22_[0])
+                    gold2_bloon = gold_22.isdigit()
+                    if len(gold_22) >= 1 and gold2_bloon == True:
+                        gold_2 = int(gold_22)
                         time.sleep(1 + random_int())
-                        print("gold_1", gold_1)
-                        time.sleep(12)
+                        print("gold_2", gold_2)
 
-                        golded_2 = text_check_get(505, 70, 585, 95, cla)
-                        gold_22_ = golded_2.split("\n")
-                        gold_22 = int_put_(gold_22_[0])
-                        gold2_bloon = gold_22.isdigit()
-                        if len(gold_22) >= 1 and gold2_bloon == True:
-                            gold_2 = int(gold_22)
-                            time.sleep(1 + random_int())
-                            print("gold_2", gold_2)
-
-                if gold_1 == gold_2:
-                    # 현재 가만히 있는 중...
-                    if cla == "one":
-                        v_.one_cla_stop += 1
-                        if v_.one_cla_stop > 3:
-                            line_to_me(cla, "가만히 있는 중")
-                    if cla == "two":
-                        v_.two_cla_stop += 1
-                        if v_.two_cla_stop > 3:
-                            line_to_me(cla, "가만ㅅ만히 있는 중")
-                    print("shit_..." + data)
-                    click_pos_2(900, 890, cla)
-                    time.sleep(1)
-                else:
-                    if cla == "one":
-                        v_.one_cla_stop = 0
-                    if cla == "two":
-                        v_.two_cla_stop = 0
-                    # 현재 뭔가 잡는 중...
-                    print("현재? 뭔가를 잡는중", data)
-                    ing_Check_ = True
-                    time.sleep(1)
+            if gold_1 == gold_2:
+                # 현재 가만히 있는 중...
+                if cla == "one":
+                    v_.one_cla_stop += 1
+                    if v_.one_cla_stop > 3:
+                        line_to_me(cla, "가만히 있는 중")
+                if cla == "two":
+                    v_.two_cla_stop += 1
+                    if v_.two_cla_stop > 3:
+                        line_to_me(cla, "가만ㅅ만히 있는 중")
+                print("shit_..." + data)
+                click_pos_2(900, 890, cla)
+                time.sleep(1)
+            else:
+                if cla == "one":
+                    v_.one_cla_stop = 0
+                if cla == "two":
+                    v_.two_cla_stop = 0
+                # 현재 뭔가 잡는 중...
+                print("현재? 뭔가를 잡는중", data)
+                ing_Check_ = True
+                time.sleep(1)
         else:
+            what = str(data) + "=> 마을이란다"
+            line_to_me(cla, what)
             print("now_hunting_is : 현재 마을이다")
             if cla == 'one':
                 v_.one_cla_ing ='check'

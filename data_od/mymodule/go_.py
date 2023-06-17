@@ -5,10 +5,11 @@ sys.path.append('C:/my_games/coobcco2/data_od/mymodule')
 
 import variable as v_
 
+
 def go_test(cla):
     from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5
     from chango import go_chango, chango_, auction
-    from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing
+    from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing, int_put_
     from event_get import game_event_get_ready, game_event_get, go_item_open, go_ticket_open, go_get_open
     import numpy as np
     from schedule import myQuest_number_check, start_id_search, myQuest_play_check
@@ -16,11 +17,11 @@ def go_test(cla):
     import cv2
     import os
     import time
+    import re
     from login_start import get_cla_count, characterChange
     from dungeon import dunjeon_cla_ready
     import git
-
-    print("test", cla)
+    from dungeon_su import dunjeon_cla_play_su
 
     v_.global_howcla = "onecla"
 
@@ -39,11 +40,79 @@ def go_test(cla):
     # myPotion_check("jadong", cla)
     # go_to_home("start", cla)
 
-    print("aaaaaaaaaaaaaaaaaaaaa")
+    # print("aaaaaaaaaaaaaaaaaaaaa")
+    #
+    #
+    #
+    # # 수령 다 받을때까지 WHILE  반복
+    #
+    # dun = "공허_3"
+    #
+    # dunjeon_spl_ = dun.split("_")
+    # print("dunjeon_spl_[0]", dunjeon_spl_[0])
+    # print("dunjeon_spl_[1]", dunjeon_spl_[1])
 
-    # 수령 다 받을때까지 WHILE  반복
 
-    is_stop(cla)
+
+    # dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
+
+    # if dun_where == "공허":
+    #     imgs_ = imgs_set_(80, 645, 200, 685, cla, img, 0.88)
+    # if dun_where == "난쟁이":
+    #     imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
+    # if dun_where == "지하감옥":
+    #     imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
+
+    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
+    img_array = np.fromfile(full_path, np.uint8)
+    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.88)
+    if imgs_ is None:
+        print("ㄱ오허허허")
+    else:
+        print("공헣ㅎㅎ", imgs_)
+
+    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
+    img_array = np.fromfile(full_path, np.uint8)
+    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
+    if imgs_ is None:
+        print("난재이앵")
+    else:
+        print("난재애애애", imgs_)
+
+    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
+    img_array = np.fromfile(full_path, np.uint8)
+    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
+    if imgs_ is None:
+        print("지하하하")
+    else:
+        print("dlTs좌하하하k", imgs_)
+
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.95)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("던전진입ㄱ", imgs_)
+    # else:
+    #     print("dlTsk")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #     # # 카드 있는지 파악 후 있다면 카드 클릭
@@ -222,4 +291,3 @@ def go_test(cla):
     #     print("black_six_check_event3", imgs_)
     # else:
     #     print("33 없")
-

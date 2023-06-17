@@ -51,6 +51,7 @@ from where import go_worldmap
 from go_ import go_test
 from grow import yotoon_grow, potion_grow, common_grow, nida_grow, nida_grow_end, tuto_grow, yotoon_grow_end
 from stop_18 import is_stop
+from dungeon_su import dunjeon_cla_play_su
 
 
 from massenger import line_to_me, line_monitor
@@ -684,9 +685,9 @@ class FirstTab(QWidget):
         sche_down_modify = QPushButton('down')
         sche_down_modify.clicked.connect(self.sche_down_modify)
         # 스케쥴 변경 확인.
-        self.sche_add1 = QPushButton('one 대기중', self)
+        self.sche_add1 = QPushButton('one 대기중')
         self.sche_add1.clicked.connect(self.mySchedule_start1)
-        self.sche_add2 = QPushButton('two 대기중', self)
+        self.sche_add2 = QPushButton('two 대기중')
         self.sche_add2.clicked.connect(self.mySchedule_start2)
 
         # 테스트 버튼
@@ -3129,11 +3130,16 @@ class game_Playing(QThread):
                                 dunjeon = "gonghu"  # 보내고자 하는 던전
 
 
-                                result = dunjeon_cla_play(cla, data, dunjeon)
-
+                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
                                 if result == True:
                                     data_ = 'gonghu'
                                     result_ = myQuest_play_add(cla, data_)
+
+                                # result = dunjeon_cla_play(cla, data, dunjeon)
+                                #
+                                # if result == True:
+                                #     data_ = 'gonghu'
+                                #     result_ = myQuest_play_add(cla, data_)
 
 
 
@@ -3144,7 +3150,7 @@ class game_Playing(QThread):
 
                                 print("난쟁이 시작해볼까")
 
-                                result = dunjeon_cla_play(cla, data, dunjeon)
+                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
 
                                 if result == True:
                                     data_ = 'nanjang'
@@ -3156,7 +3162,7 @@ class game_Playing(QThread):
 
                                 dunjeon = "underprison"  # 보내고자 하는 던전
 
-                                result = dunjeon_cla_play(cla, data, dunjeon)
+                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
 
                                 print("점검__8", cla, result)
                                 if result == True:
