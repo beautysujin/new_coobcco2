@@ -14,6 +14,7 @@ def go_test(cla):
     import numpy as np
     from schedule import myQuest_number_check, start_id_search, myQuest_play_check
     from stop_18 import is_stop
+    from dungeon import jadong_cla_play
     import cv2
     import os
     import time
@@ -31,6 +32,17 @@ def go_test(cla):
         plus = 0
     if cla == 'two':
         plus = 960
+
+    jadong_cla_play(cla, "살얼음언덕")
+
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set(400, 965, 580, 1010, cla, img)
+    # if imgs_ is None or imgs_ == False:
+    #     print("니다벨리르가 안보여")
+    # else:
+    #     print("보여")
 
     # get_cla_count(cla)
 
@@ -63,41 +75,7 @@ def go_test(cla):
     # if dun_where == "지하감옥":
     #     imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
 
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.88)
-    if imgs_ is None:
-        print("ㄱ오허허허")
-    else:
-        print("공헣ㅎㅎ", imgs_)
 
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
-    if imgs_ is None:
-        print("난재이앵")
-    else:
-        print("난재애애애", imgs_)
-
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
-    if imgs_ is None:
-        print("지하하하")
-    else:
-        print("dlTs좌하하하k", imgs_)
-
-    # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-    # img_array = np.fromfile(full_path, np.uint8)
-    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    # imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.95)
-    # if imgs_ is not None and imgs_ != False:
-    #     print("던전진입ㄱ", imgs_)
-    # else:
-    #     print("dlTsk")
 
 
 

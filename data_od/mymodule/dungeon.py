@@ -98,6 +98,8 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong_yotoon.png"
                     if world_ == 'midgard':
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_midgard.png"
+                    if world_ == 'nida':
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     imgs_ = imgs_set(400, 965, 580, 1010, cla, img)
@@ -106,6 +108,8 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                             print("요툰하임이 안보여")
                         if world_ == 'midgard':
                             print("미드가르드가 안보여")
+                        if world_ == 'nida':
+                            print("니다벨리르가 안보여")
 
                         click_pos_2(80, 956, cla)  # 중복
                         time.sleep(1)  # 중복
@@ -113,6 +117,8 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                             click_pos_2(280, 450, cla)
                         if world_ == 'midgard':
                             click_pos_2(160, 515, cla)
+                        if world_ == 'nida':
+                            click_pos_2(370, 570, cla)
 
                         time.sleep(1)  # 중복
                         click_pos_2(550, 994, cla)  # 중복
@@ -122,6 +128,9 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                             print("요툰하임이 보여")
                         if world_ == 'midgard':
                             print("미드가르드가 보여")
+                        if world_ == 'nida':
+                            print("니다벨리르가 보여")
+
 
                         result_2 = go_worldmap(cla, "world_moglog")
                         time.sleep(2)
