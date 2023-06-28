@@ -571,6 +571,18 @@ def game_event_search(cla, data, y_):
                 else:
                     isGet = True
                     print("포인트 부족", int(bom_wind))
+            elif data == "twenty"
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event\\yellow_red_dot.PNG"  # '완료' 그림 갯수 파악
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                last_x = 0
+                last_y = 0
+                for list in pyautogui.locateAllOnScreen(img, region=(50 + plus, 510, 540, 200), confidence=0.9):
+                    last_x = list.left
+                    last_y = list.top
+                    print("list", list)
+                    print("last_x", last_x)
+                    print("last_y", last_y)
 
             else:
 
