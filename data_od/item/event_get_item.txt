@@ -1,5 +1,5 @@
 360/seven
-490/fourteen
-540/fourteen
-660/yellow_six
+540/
+720/fourteen
+drag
 720/fourteen
