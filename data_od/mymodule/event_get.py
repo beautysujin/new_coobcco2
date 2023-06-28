@@ -571,18 +571,65 @@ def game_event_search(cla, data, y_):
                 else:
                     isGet = True
                     print("포인트 부족", int(bom_wind))
-            elif data == "twenty"
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event\\yellow_red_dot.PNG"  # '완료' 그림 갯수 파악
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            elif data == "twenty":
+                # 아래는 임의로 지정한 숫자값(좌표)
                 last_x = 0
                 last_y = 0
+
+                # 아래는 완료 글자를 찾아서 마지막 값을 last_x, last_y에 담아 내는 공식
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event_complete_2.png"  # '완료' 그림 갯수 파악
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 for list in pyautogui.locateAllOnScreen(img, region=(50 + plus, 510, 540, 200), confidence=0.9):
-                    last_x = list.left
-                    last_y = list.top
+                    # 값을 담는 공식
+                    last_x = list.left # 100
+                    last_y = list.top # 575
                     print("list", list)
                     print("last_x", last_x)
                     print("last_y", last_y)
+
+                # 완료 글자가 없을 경우 공식
+                if last_x == 0:
+                    click_pos_2(100, 575, cla)
+
+                # 첫번째 오른쪽 일 경우
+                elif 510 < last_x < 590 and 520 < last_y < 610:
+                    click_pos_2(100, 660, cla)
+
+                # 두번째 오른쪽 일 경우
+                elif 510 < last_x < 590 and 620 < last_y < 700:
+                    drag_pos(285, 700, 285, 550, cla)
+                    time.sleep(0.5)
+                    # 여기서 한번더 완료 글자 있는지 파악하기
+
+                    last_x_2 = 0
+                    last_y_2 = 0
+
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event_complete_2.png"  # '완료' 그림 갯수 파악
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    for list in pyautogui.locateAllOnScreen(img, region=(60 + plus, 620, 460, 100), confidence=0.9):
+                        # 값을 담는 공식
+                        last_x_2 = list.left  # 100
+                        last_y_2 = list.top  # 575
+                        print("list", list)
+                        print("last_x_2", last_x_2)
+                        print("last_y_2", last_y_2)
+
+                    if last_x_2 == 0:
+                        click_pos_2(100, 680, cla)
+
+                    elif 430 < last_x < 630 and 520 < last_y < 720:
+                        click_pos_2(660, 660, cla)
+
+                    else:
+                        click_pos_2(last_x_2+80, last_y_2, cla)
+
+                # 완료 좌표가 있을 경우 공식
+                else:
+                    click_pos_2(last_x+80, last_y, cla)
+
+
 
             else:
 

@@ -33,7 +33,7 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    jadong_cla_play(cla, "살얼음언덕")
+    dunjeon_cla_play_su(cla, "공허", "2")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)
