@@ -1,3 +1,13 @@
+360/
+430/
+480/
+540/
+600/
+660/
+720/
+drag
+680/
+740/
 490/fivetofive
 600/fourteen
 660/fourteen
@@ -8,3 +18,4 @@ seven_four
 yellow_six
 black_six
 change
+twenty
