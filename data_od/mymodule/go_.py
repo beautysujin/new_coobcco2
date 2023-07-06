@@ -14,7 +14,7 @@ def go_test(cla):
     import numpy as np
     from schedule import myQuest_number_check, start_id_search, myQuest_play_check
     from stop_18 import is_stop
-    from dungeon import jadong_cla_play
+    from dungeon import jadong_cla_play, jadong_cla_ready
     import cv2
     import os
     import time
@@ -33,7 +33,7 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    dunjeon_cla_play_su(cla, "공허", "2")
+    jadong_cla_ready(cla, "고블린부패")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)

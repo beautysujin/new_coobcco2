@@ -8,10 +8,8 @@
 drag
 680/
 740/
-490/fivetofive
-600/fourteen
-660/fourteen
-720/fourteen
+fivetofive
+fourteen
 drag
 seven
 seven_four
