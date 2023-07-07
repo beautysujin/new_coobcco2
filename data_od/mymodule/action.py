@@ -302,7 +302,7 @@ def go_boonhae(cla, story):
             is_count = 0
             while isBoonhae is False:
                 is_count += 1
-                if is_count > 5:
+                if is_count > 1:
                     isBoonhae = True
                     print("분해하는데 오류 있다...")
 
