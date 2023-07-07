@@ -378,7 +378,7 @@ def click_pos_reg(pos_1, pos_2, cla):
     except Exception as e:
         print("error:", e)
 
-def mouse_move_cpp(pos_1, pos_2, cla):
+def mouse_move_cpp_reg(pos_1, pos_2, cla):
     try:
         import serial
         import pyautogui

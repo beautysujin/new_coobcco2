@@ -240,7 +240,7 @@ def go_soongan_f5(cla):
 
 def go_boonhae(cla, story):
     try:
-        from myfunction import imgs_set_, click_pos_reg, click_pos_2, drag_pos, imgs_set, random_int, text_check_get
+        from myfunction import imgs_set_, click_pos_reg, click_pos_2, drag_pos, imgs_set, random_int, text_check_get, mouse_move_cpp
         import numpy as np
         import cv2
         import os.path
@@ -299,7 +299,13 @@ def go_boonhae(cla, story):
                         time.sleep(1)
 
             isBoonhae = False
+            is_count = 0
             while isBoonhae is False:
+                is_count += 1
+                if is_count > 5:
+                    isBoonhae = True
+                    print("분해하는데 오류 있다...")
+
                 ready_ = go_bag(cla, get_story)
                 if ready_ == True:
 
@@ -399,22 +405,24 @@ def go_boonhae(cla, story):
                                     # time.sleep(10 + random_int())
                                     # click_pos_2(305, 660, cla)
                                     # time.sleep(random_int())
+                            mouse_move_cpp(400, 500, cla)
                             time.sleep(2)
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boonhae2.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                             imgs_ = imgs_set(600, 990, 680, 1025, cla, img)
 
-                            if imgs_ is None or imgs_ == False:
-                                print('분해12 안보여 다시..')
-                                click_pos_2(920, 55, cla)
-                                time.sleep(1)
-
-                            else:
+                            if imgs_ is not None and imgs_ != False:
                                 isBoonhae = True
                                 print('분해12 보여...끝')
                                 click_pos_2(305, 660, cla)
                                 time.sleep(1)
+                            else:
+                                print('분해12 안보여 다시..')
+                                click_pos_2(920, 55, cla)
+                                time.sleep(1)
+
+
 
 
             result_alrim_ = go_alrim_(cla)
