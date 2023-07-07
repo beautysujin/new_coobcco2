@@ -273,7 +273,7 @@ def click_pos_2(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 100
+            k_reg = 20
             c_reg = 3
 
             if -c_reg < x_reg < c_reg:
@@ -344,7 +344,7 @@ def click_pos_reg(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 100
+            k_reg = 20
             c_reg = 3
 
             if -c_reg < x_reg < c_reg:
