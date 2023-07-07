@@ -35,9 +35,9 @@ def go_test(cla):
 
     # jadong_cla_ready(cla, "고블린부패")
 
-    go_boonhae(cla, "test")
+    # go_boonhae(cla, "test")
 
-
+    chango_(cla, "before")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)

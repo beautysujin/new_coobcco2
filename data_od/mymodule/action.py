@@ -431,7 +431,7 @@ def go_boonhae(cla, story):
                                 if imgs_ is not None and imgs_ != False:
                                     print("분해할 아이템이 없다. 분해 끝")
                                     isBoonhae = True
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(790, 1005, cla)
                                     time.sleep(1)
                                 else:
                                     print('분해12 안보여 다시..')
