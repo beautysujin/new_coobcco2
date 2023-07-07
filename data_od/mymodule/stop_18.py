@@ -4,8 +4,9 @@ import sys
 sys.path.append('C:/my_games/coobcco2/data_od/mymodule')
 
 
-
 def is_stop(cla):
+    print("18오딘")
+def is_stop_ex(cla):
     from action import go_mynumber_, go_bag
     from chango import go_chango, chango_, auction
     from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg

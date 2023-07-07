@@ -61,9 +61,18 @@ two_cla_stop = 0
 
 dir_path = "C:\\my_games\\coobcco2\\data_od"
 file_path = dir_path + "\\mymodule\\version.txt"
+file_path2 = "C:\\my_games\\mouse\\port.txt"
 
 with open(file_path, "r", encoding='utf-8-sig') as file:
     version_ = file.read()
     print("version???", version_)
+
+with open(file_path2, "r", encoding='utf-8-sig') as file:
+    my_mouse = file.read().splitlines()
+
+    COM_ = my_mouse[0]
+    speed_ = my_mouse[1]
+    print("COM_???", COM_)
+    print("speed_???", speed_)
 
 this_game = "오딘"

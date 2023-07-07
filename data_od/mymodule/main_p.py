@@ -166,7 +166,7 @@ class MyApp(QDialog):
         # 업데이트 버젼
         # pyinstaller --hidden-import PyQt5 --hidden-import requests --hidden-import chardet -i="star_icon.ico" --add-data="star_icon.ico;./" --icon="star_icon.ico" --paths "C:\my_games\venv\lib\site-packages\cv2" main.py
         # 풀버젼
-        # pyinstaller --hidden-import PyQt5 --hidden-import requests --hidden-import chardet --add-data="C:\\my_games\\coobcco2\\data_od;./data" --add-data="C:\\my_games\\coobcco2\\odin_schedule;./odin_schedule" --add-data="C:\\my_games\\coobcco2\\odin_quest;./odin_quest" -i="star_icon.ico" --add-data="star_icon.ico;./" --icon="star_icon.ico" --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" main.py
+        # pyinstaller --hidden-import PyQt5 --hidden-import requests --hidden-import chardet --add-data="C:\\my_games\\coobcco2\\data_od;./data_od" -i="star_icon.ico" --add-data="star_icon.ico;./" --icon="star_icon.ico" --paths "C:\Users\1_S_3\AppData\Local\Programs\Python\Python311\Lib\site-packages\cv2" main.py
 
         self.setGeometry(50, 300, 830, 600)
         self.show()

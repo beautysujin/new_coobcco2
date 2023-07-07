@@ -1140,7 +1140,7 @@ def characterChange_before(cla):
 
         character_power_level = False
         while character_power_level is False:
-            time.sleep(random_int())
+            time.sleep(0.2)
             power_ran = random_int()
             if power_ran == 1:
                 char_staus_ = text_check_get_2(111, 274, 230, 335, cla)
@@ -1203,7 +1203,7 @@ def characterChange_before(cla):
                     v_.mypower_2 = power
                 print("level", level)
                 print("power", power)
-                time.sleep(random_int())
+                time.sleep(0.2)
             else:
                 character_power_level = True
                 if cla == 'one':
@@ -1283,9 +1283,9 @@ def characterChange(data, cla):
         if result_char_select == False:
             print("characterChange, isCount == 0:")
             chango_(cla, 'before')
-            time.sleep(1)
+            time.sleep(0.5)
             click_pos_2(920, 55, cla)
-            time.sleep(1)
+            time.sleep(0.5)
 
         isChecked = False
         isCount = 0
@@ -1344,7 +1344,7 @@ def characterChange(data, cla):
                         time.sleep(0.2)
                         characterChange_before(cla)
                         click_pos_2(835, 990, cla)
-                        time.sleep(0.1)
+                        time.sleep(0.2)
                         click_pos_2(835, 990, cla)
                     else:
                         # 진입하기

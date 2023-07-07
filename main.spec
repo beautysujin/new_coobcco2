@@ -6,9 +6,9 @@ block_cipher = None
 
 a = Analysis(
     ['main.py'],
-    pathex=['C:\\my_games\\venv\\lib\\site-packages\\cv2'],
+    pathex=['C:\\Users\\1_S_3\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cv2'],
     binaries=[],
-    datas=[('star_icon.ico', './')],
+    datas=[('C:\\\\my_games\\\\coobcco2\\\\data_od', './data_od'), ('star_icon.ico', './')],
     hiddenimports=['PyQt5', 'requests', 'chardet'],
     hookspath=[],
     hooksconfig={},
