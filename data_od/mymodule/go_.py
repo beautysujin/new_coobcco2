@@ -7,7 +7,7 @@ import variable as v_
 
 
 def go_test(cla):
-    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5
+    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5, go_boonhae
     from chango import go_chango, chango_, auction
     from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing, int_put_
     from event_get import game_event_get_ready, game_event_get, go_item_open, go_ticket_open, go_get_open
@@ -33,7 +33,11 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    jadong_cla_ready(cla, "고블린부패")
+    # jadong_cla_ready(cla, "고블린부패")
+
+    go_boonhae(cla, "test")
+
+
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)

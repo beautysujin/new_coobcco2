@@ -360,7 +360,7 @@ def go_boonhae(cla, story):
                                     except:
                                         pass
 
-                            time.sleep(random_int())
+                            time.sleep(1)
                             if selected_item == True:
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boonhae_cancle.png"
                                 img_array = np.fromfile(full_path, np.uint8)
@@ -386,7 +386,12 @@ def go_boonhae(cla, story):
                                         click_pos_2(550, 660, cla)
 
                                     isboon_ = False
+                                    isboon_count = 0
                                     while isboon_ is False:
+                                        isboon_count += 1
+                                        if isboon_count > 5:
+                                            isboon_ = True
+
                                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
                                         img_array = np.fromfile(full_path, np.uint8)
                                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -402,6 +407,7 @@ def go_boonhae(cla, story):
                                             isboon_ = True
                                             print("가방표시 있다. 분해 마무리단계")
                                             time.sleep(0.5)
+                                        time.sleep()
                                     # time.sleep(10 + random_int())
                                     # click_pos_2(305, 660, cla)
                                     # time.sleep(random_int())
@@ -418,9 +424,19 @@ def go_boonhae(cla, story):
                                 click_pos_2(305, 660, cla)
                                 time.sleep(1)
                             else:
-                                print('분해12 안보여 다시..')
-                                click_pos_2(920, 55, cla)
-                                time.sleep(1)
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boonhae_cancle.png"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set(740, 990, 830, 1030, cla, img)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("분해할 아이템이 없다. 분해 끝")
+                                    isBoonhae = True
+                                    click_pos_2(920, 55, cla)
+                                    time.sleep(1)
+                                else:
+                                    print('분해12 안보여 다시..')
+                                    click_pos_2(920, 55, cla)
+                                    time.sleep(1)
 
 
 
