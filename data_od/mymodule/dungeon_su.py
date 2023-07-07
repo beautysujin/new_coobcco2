@@ -177,7 +177,7 @@ def dun_go(cla, dun_where, dun_step):
                 dun_img3_count = 0
                 while dun_img3 is False:
                     dun_img3_count += 1
-                    if dun_img3_count > 5:
+                    if dun_img3_count > 10:
                         dun_img3 = True
 
                     # 정예던전 이미지 확인
@@ -196,9 +196,14 @@ def dun_go(cla, dun_where, dun_step):
                             comp_g = True
 
                         else:
-                            in_dunjeon_list_su(cla, dun_where, dun_step)
+                            result_in_dunjeon_list_su = in_dunjeon_list_su(cla, dun_where, dun_step)
+                            print("in_dunjeon_list_su_result", result_in_dunjeon_list_su)
+                            time.sleep(0.5)
                             click_pos_2(840, 990, cla)
+                            time.sleep(0.2)
                             click_pos_2(840, 990, cla)
+
+                            time.sleep(0.5)
 
                             result_ = go_alrim_yes(cla)
                             if result_[0] == True:
@@ -208,7 +213,7 @@ def dun_go(cla, dun_where, dun_step):
 
                             # 던전 진입 후 순간이동서 클릭
                             dun_in_sungan(cla)
-
+                    time.sleep(1)
 
 
 
@@ -228,6 +233,7 @@ def dun_go(cla, dun_where, dun_step):
 
 def in_dunjeon_list_su(cla, dun_where, dunjeon_level):
     try:
+        print("in_dunjeon_list_su")
         from myfunction import random_int, click_pos_2
         from schedule import myQuest_play_check
 
@@ -500,7 +506,7 @@ def dun_in_sungan(cla):
 
                         click_pos_2(900, 890, cla)
                     time.sleep(0.5)
-            time.sleep(0.5)
+            time.sleep(0.8)
 
 
     except Exception as e:

@@ -22,7 +22,7 @@ def go_test(cla):
     from login_start import get_cla_count, characterChange
     from dungeon import dunjeon_cla_ready
     import git
-    from dungeon_su import dunjeon_cla_play_su
+    from dungeon_su import dunjeon_cla_play_su, dun_go
 
     v_.global_howcla = "onecla"
 
@@ -37,7 +37,7 @@ def go_test(cla):
 
     # go_boonhae(cla, "test")
 
-    chango_(cla, "before")
+    dun_go(cla, "공허", "3")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)
