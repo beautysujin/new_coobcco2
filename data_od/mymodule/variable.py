@@ -76,3 +76,6 @@ with open(file_path2, "r", encoding='utf-8-sig') as file:
     print("speed_???", speed_)
 
 this_game = "오딘"
+
+mouse_speed = 10
+mouse_pm = 3

@@ -273,8 +273,8 @@ def click_pos_2(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 20
-            c_reg = 3
+            k_reg = v_.mouse_speed
+            c_reg = v_.mouse_pm
 
             if -c_reg < x_reg < c_reg:
                 moveX = x_reg
@@ -344,8 +344,8 @@ def click_pos_reg(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 20
-            c_reg = 3
+            k_reg = v_.mouse_speed
+            c_reg = v_.mouse_pm
 
             if -c_reg < x_reg < c_reg:
                 moveX = x_reg
@@ -412,16 +412,17 @@ def mouse_move_cpp(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 20
+            k_reg = v_.mouse_speed
+            c_reg = v_.mouse_pm
 
-            if -5 < x_reg < 5:
+            if -c_reg < x_reg < c_reg:
                 moveX = x_reg
             elif x_reg > 0:
                 moveX = min(k_reg, x_reg)
             else:
                 moveX = max(-k_reg, x_reg)
 
-            if -5 < y_reg < 5:
+            if -c_reg < y_reg < c_reg:
                 moveY = y_reg
             elif y_reg > 0:
                 moveY = min(k_reg, y_reg)
@@ -432,7 +433,7 @@ def mouse_move_cpp(pos_1, pos_2, cla):
             ser.write(data.encode())
             received_data = ser.readline().decode().strip()
 
-            if received_data == '0' or (-5 < moveX < 5 and -5 < moveY < 5):
+            if received_data == '0' or (-c_reg < moveX < c_reg and -c_reg < moveY < c_reg):
                 move_ = True
                 data = f'x = {moveX}, y = {moveY}, z = {moveZ}\n'
                 ser.write(data.encode())
@@ -478,16 +479,18 @@ def mouse_move_cpp(pos_1, pos_2, cla):
             if move_count > 200:
                 move_ = True
 
-            k_reg = 20
+            k_reg = v_.mouse_speed
+            c_reg = v_.mouse_pm
 
-            if -5 < x_reg < 5:
+
+            if -c_reg < x_reg < c_reg:
                 moveX = x_reg
             elif x_reg > 0:
                 moveX = min(k_reg, x_reg)
             else:
                 moveX = max(-k_reg, x_reg)
 
-            if -5 < y_reg < 5:
+            if -c_reg < y_reg < c_reg:
                 moveY = y_reg
             elif y_reg > 0:
                 moveY = min(k_reg, y_reg)
@@ -498,7 +501,7 @@ def mouse_move_cpp(pos_1, pos_2, cla):
             ser.write(data.encode())
             received_data = ser.readline().decode().strip()
 
-            if received_data == '0' or (-5 < moveX < 5 and -5 < moveY < 5):
+            if received_data == '0' or (-c_reg < moveX < c_reg and -c_reg < moveY < c_reg):
                 move_ = True
                 data = f'x = {moveX}, y = {moveY}, z = {moveZ}\n'
                 ser.write(data.encode())
