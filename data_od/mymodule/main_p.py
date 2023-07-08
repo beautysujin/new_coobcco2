@@ -2975,7 +2975,7 @@ class game_Playing(QThread):
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\touching.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = pyautogui.locateCenterOnScreen(img, region=(0, 0, 1920, 1030),
+                imgs_ = pyautogui.locateCenterOnScreen(img, region=(0, 0, 3840, 1080),
                                                        confidence=0.7)
                 if imgs_ is not None and imgs_ != False:
                     print("터칭 모드 중(ver " + str(version) + ")", imgs_)
