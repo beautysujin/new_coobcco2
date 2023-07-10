@@ -2150,6 +2150,7 @@ def in_village_go_to(cla):
         from myfunction import click_pos_2, random_int, text_check_get, imgs_set, go_auto
         from where import go_worldmap
         from action import go_alrim_
+        from clean import clean_screen
         import numpy as np
         import cv2
 
@@ -2318,7 +2319,15 @@ def in_village_go_to(cla):
 
                     if imgs_ is None or imgs_ == False:
                         print("어떤 상태인지 파악 불가")
-                        in_village_go_to(cla)
+
+                        clean_screen(cla, "in_village_go_to : 마을로 가는 중")
+
+                        resutl_village = in_village_ready(cla)
+                        if resutl_village == 'none':
+                            print("젠장 여긴 어디지???")
+                            in_village_go_to(cla)
+                        else:
+                            print("얏호 마을이당", resutl_village)
                     else:
                         print("이새끼 수영한다.")
                         click_pos_2(30, 55, cla)
