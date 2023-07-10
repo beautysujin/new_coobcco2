@@ -377,7 +377,7 @@ def myPotion_check(data, cla):
 
                 result___ = menuOpenCheck(cla, "myPotion_check_start")
                 if result___ == True:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                 else:
 
@@ -426,7 +426,7 @@ def myPotion_check(data, cla):
             if potion < 150:
                 result_po = potion_count(cla)
                 time.sleep(0.5)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 if cla == 'one':
                     v_.mypotion_1 = result_po
                 if cla == 'two':
@@ -443,7 +443,7 @@ def myPotion_check(data, cla):
             if isPotion_ < 150:
                 result_po = potion_count(cla)
                 time.sleep(0.5)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 if cla == 'one':
                     v_.mypotion_1 = result_po
                 if cla == 'two':

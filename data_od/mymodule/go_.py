@@ -7,8 +7,8 @@ import variable as v_
 
 
 def go_test(cla):
-    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5, go_boonhae
-    from chango import go_chango, chango_, auction
+    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5, go_boonhae, go_alrim_
+    from chango import go_chango, chango_, auction, in_village_ready, in_village_go, in_village_go_to
     from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing, int_put_
     from event_get import game_event_get_ready, game_event_get, go_item_open, go_ticket_open, go_get_open
     import numpy as np
@@ -26,7 +26,7 @@ def go_test(cla):
 
     v_.global_howcla = "onecla"
 
-    cla = "one"
+    cla = "two"
 
     if cla == 'one':
         plus = 0
@@ -37,7 +37,8 @@ def go_test(cla):
 
     # go_boonhae(cla, "test")
 
-    dun_go(cla, "공허", "3")
+    rea_ = go_alrim_(cla)
+    print("maul", rea_)
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)

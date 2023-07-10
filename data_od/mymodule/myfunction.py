@@ -886,7 +886,7 @@ def menuOpen(cla):
             else:
                 clean_screen(cla, "menu_open..")
                 time.sleep(1)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
             time.sleep(1)
 
     except Exception as e:
@@ -954,7 +954,7 @@ def go_to_home(data, cla):
             go_boonhae(cla, "go_to_home")
 
             time.sleep(1)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(1)
         ###########################################
             if this_mana == True:
@@ -963,7 +963,7 @@ def go_to_home(data, cla):
                 if result_go_chango == False:
                     result_menu = menuOpenCheck(cla, "go_to_home_start")
                     if result_menu == True:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(1)
                 else:
                     isSomopoom = False
@@ -993,7 +993,7 @@ def go_to_home(data, cla):
                             else:
                                 result_menu = menuOpenCheck(cla, "go_to_home_middle1")
                                 if result_menu == True:
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
 
                         else:
@@ -1240,7 +1240,7 @@ def go_to_home(data, cla):
                 if result_go_chango == False:
                     result_menu = menuOpenCheck(cla, "go_to_home_middle2")
                     if result_menu == True:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(1)
                 else:
                     isSomopoom = False
@@ -1266,7 +1266,7 @@ def go_to_home(data, cla):
                             else:
                                 result_menu = menuOpenCheck(cla, "go_to_home_middle3")
                                 if result_menu == True:
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
 
                         else:
@@ -1549,11 +1549,11 @@ def go_to_home(data, cla):
                             print('result_somopoom2 = go_somopoom(cla)', result_somopoom)
                             time.sleep(1)
                             if result_somopoom == True:
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
                                 time.sleep(1)
                                 result_go_chango = go_chango(cla, 'village')
                                 if result_go_chango == False:
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
                                 else:
                                     isGoToHome = True
@@ -1571,7 +1571,7 @@ def go_to_home(data, cla):
             elif data == 'grow':
                 isGoToHome = True
                 print("게임 시작 하러 ㄱㄱ : grow(cla, data)", data)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
 
             elif data == '미드가르드' or data == '요툰하임':
                 isGoToHome = True
@@ -1707,7 +1707,7 @@ def dead_die(cla, story):
 
                     ismenu_ = menuOpenCheck(cla, "dead_die")
                     if ismenu_ == True:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(1)
 
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boohwal.png"
@@ -2046,7 +2046,7 @@ def myPotion_check(data, cla):
 
                 result___ = menuOpenCheck(cla, "myPotion_check_start")
                 if result___ == True:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                 else:
 
@@ -2100,7 +2100,7 @@ def myPotion_check(data, cla):
                     if cla_ing == 'grow':
                         result_po = potion_count_grow(cla)
                         time.sleep(0.5)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         if cla == 'one':
                             v_.mypotion_1 = result_po
                         if cla == 'two':
@@ -2108,7 +2108,7 @@ def myPotion_check(data, cla):
                     else:
                         result_po = potion_count(cla)
                         time.sleep(0.5)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         if cla == 'one':
                             v_.mypotion_1 = result_po
                         if cla == 'two':
@@ -2156,7 +2156,7 @@ def myPotion_check(data, cla):
                                             else:
                                                 result__ = potion_count(cla)
                                             time.sleep(1)
-                                            click_pos_2(920, 55, cla)
+                                            click_pos_2(920, 65, cla)
                                             time.sleep(1)
                                             click_pos_2(800, 840, cla)
                                             time.sleep(1)
@@ -2172,7 +2172,7 @@ def myPotion_check(data, cla):
                                 # click_pos_2(860, 55, cla)
                                 # time.sleep(1)
                             else:
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
                                 time.sleep(1)
                     else:
                         print("가방이 있다...")
@@ -2185,7 +2185,7 @@ def myPotion_check(data, cla):
                 if cla_ing == 'grow':
                     result_po = potion_count_grow(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':
@@ -2197,7 +2197,7 @@ def myPotion_check(data, cla):
                 else:
                     result_po = potion_count(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':
@@ -2248,7 +2248,7 @@ def background_myPotion_check(data):
 
                 result___ = menuOpenCheck(cla, "background_myPotion_check_start")
                 if result___ == True:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                 else:
 
@@ -2294,7 +2294,7 @@ def background_myPotion_check(data):
                 if cla_ing == 'grow':
                     result_po = potion_count_grow(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':
@@ -2305,7 +2305,7 @@ def background_myPotion_check(data):
                 else:
                     result_po = potion_count(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':
@@ -2326,7 +2326,7 @@ def background_myPotion_check(data):
                     #         time.sleep(random_int())
                     #         click_pos_2(550, 610, cla)
                     #     else:
-                    #         click_pos_2(920, 55, cla)
+                    #         click_pos_2(920, 65, cla)
                     #         time.sleep(random_int())
                     else:
                         print("휴...안가도 된다")
@@ -2367,7 +2367,7 @@ def background_myPotion_check(data):
                                         else:
                                             result__ = potion_count(cla)
                                         time.sleep(1)
-                                        click_pos_2(920, 55, cla)
+                                        click_pos_2(920, 65, cla)
                                         time.sleep(1)
                                         click_pos_2(800, 840, cla)
                                         time.sleep(1)
@@ -2383,7 +2383,7 @@ def background_myPotion_check(data):
                             # click_pos_2(860, 55, cla)
                             # time.sleep(1)
                         else:
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(1)
                 else:
                     print("가방이 있다...")
@@ -2395,7 +2395,7 @@ def background_myPotion_check(data):
                 if cla_ing == 'grow':
                     result_po = potion_count_grow(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':
@@ -2406,7 +2406,7 @@ def background_myPotion_check(data):
                 else:
                     result_po = potion_count(cla)
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     if cla == 'one':
                         v_.mypotion_1 = result_po
                     if cla == 'two':

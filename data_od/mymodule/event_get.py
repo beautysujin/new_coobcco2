@@ -30,7 +30,7 @@ def go_get_open(cla):
         time.sleep(1)
         go_item_open(cla)
         time.sleep(1)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     except Exception as e:
         print(e)
@@ -401,7 +401,7 @@ def game_event_search(cla, data, y_):
                         #             time.sleep(random_int())
                         #         else:
                         #             print("event1 안보여", imgs_)
-                        #             click_pos_2(920, 55, cla)
+                        #             click_pos_2(920, 65, cla)
                         #             time.sleep(random_int())
                         #             result = menuOpenCheck(cla, "game_event_get_ready")
                         #             if result == True:
@@ -1038,7 +1038,7 @@ def game_event_get_ready(cla):
                 time.sleep(random_int())
             else:
                 print("event1 안보여", imgs_)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(random_int())
                 result = menuOpenCheck(cla, "game_event_get_ready")
                 if result == True:
@@ -1101,7 +1101,7 @@ def achieve_get_(cla):
                 if imgs_ is not None and imgs_ != False:
                     print("업적 받기 끝")
                     isachieve_ = True
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                 else:
                     time.sleep(0.5)
@@ -1109,7 +1109,7 @@ def achieve_get_(cla):
                     time.sleep(1)
             else:
                 time.sleep(0.5)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(1)
                 isMenu = False
                 while isMenu is False:
@@ -1127,11 +1127,11 @@ def achieve_get_(cla):
                         else:
                             isachieve_ = True
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(1)
                     else:
                         time.sleep(0.5)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(1)
 
                         # result_menu = menuOpenCheck(cla, "achieve_get_2")
@@ -1140,7 +1140,7 @@ def achieve_get_(cla):
                         #     isguild_ = False
                         #     print("업적 비활성화 상태")
                         #     time.sleep(0.5)
-                        #     click_pos_2(920, 55, cla)
+                        #     click_pos_2(920, 65, cla)
                         #     time.sleep(1)
 
         # while isachieve_ is False:
@@ -1242,13 +1242,13 @@ def achieve_get_(cla):
         #                 isachieve_ = True
         #                 print("업적 획득 끝")
         #                 time.sleep(0.3)
-        #                 click_pos_2(920, 55, cla)
+        #                 click_pos_2(920, 65, cla)
         #                 time.sleep(1)
         #
         #
         #     else:
         #         time.sleep(0.5)
-        #         click_pos_2(920, 55, cla)
+        #         click_pos_2(920, 65, cla)
         #         time.sleep(1)
         #         isMenu = False
         #         while isMenu is False:
@@ -1264,11 +1264,11 @@ def achieve_get_(cla):
         #                     isguild_ = False
         #                     print("업적 비활성화 상태")
         #                     time.sleep(0.5)
-        #                     click_pos_2(920, 55, cla)
+        #                     click_pos_2(920, 65, cla)
         #                     time.sleep(1)
         #             else:
         #                 time.sleep(0.5)
-        #                 click_pos_2(920, 55, cla)
+        #                 click_pos_2(920, 65, cla)
         #                 time.sleep(1)
     except Exception as e:
         print(e)
@@ -1292,7 +1292,7 @@ def special_package(cla):
         #     ismenu_ = menuOpenCheck(cla, "special_package")
         #     time.sleep(0.5)
         #     if ismenu_ == False:
-        #         click_pos_2(920, 55, cla)
+        #         click_pos_2(920, 65, cla)
         #     else:
         #         isSpecial_Package = True
         #         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\special_package\\point_1.png"
@@ -1382,7 +1382,7 @@ def special_package(cla):
         #     time.sleep(1)
         # ismenu_ = menuOpenCheck(cla, "special_package 받기 완료")
         # if ismenu_ == True:
-        #     click_pos_2(920, 55, cla)
+        #     click_pos_2(920, 65, cla)
 
     except Exception as e:
         print(e)

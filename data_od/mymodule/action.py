@@ -95,7 +95,7 @@ def go_bag(cla, story):
                     clean_screen(cla, get_story) #찾았다 시팍
                     result_me_ = menuOpenCheck(cla, "go_bag")
                     if result_me_ == True:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
         else:
             print("가방이 있다...")
             go_ = True
@@ -188,7 +188,7 @@ def go_soongan_f5(cla):
                                         click_pos_2(905, 1005, cla)
                                         time.sleep(1)
                                         go_to_home('start', cla)
-                                        click_pos_2(920, 55, cla)
+                                        click_pos_2(920, 65, cla)
                                         ready_ = go_bag(cla, "go_soongan_f5")
                                     else:
                                         isquick_ = True
@@ -322,7 +322,7 @@ def go_boonhae(cla, story):
                         imgs_ = imgs_set(740, 990, 830, 1030, cla, img)
                         if imgs_ is None or imgs_ == False:
                             print('분해캔슬 안보여 다시..')
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(random_int())
                         else:
                             print('분해캔슬 보여...')
@@ -343,7 +343,7 @@ def go_boonhae(cla, story):
 
                         if imgs_ is None or imgs_ == False:
                             print('분해1 안보여 다시..')
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(random_int())
                         else:
                             print('분해1 보여...진행')
@@ -368,7 +368,7 @@ def go_boonhae(cla, story):
                                 imgs_ = imgs_set(740, 990, 830, 1030, cla, img)
                                 if imgs_ is None or imgs_ == False:
                                     print('selected_item == True : 분해캔슬 안보여 다시..')
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
                                 else:
                                     print('selected_item == True : 분해캔슬 보여...')
@@ -435,7 +435,7 @@ def go_boonhae(cla, story):
                                     time.sleep(1)
                                 else:
                                     print('분해12 안보여 다시..')
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
 
 
@@ -541,10 +541,10 @@ def go_level(cla):
                     if cla == 'two':
                         v_.mylevel_2 = 1
             else:
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(1)
 
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
         time.sleep(1)
         return mylevel
     except Exception as e:
@@ -896,7 +896,7 @@ def go_escape(cla):
     try:
         from myfunction import click_pos_2, random_int
 
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
         time.sleep(random_int())
         click_pos_2(920, 525, cla)
         time.sleep(random_int())
@@ -1104,7 +1104,7 @@ def go_mynumber_(cla):
                 while isSet_ is False:
                     result = menuOpenCheck(cla, "go_mynumber_")
                     if result == False:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(random_int())
                     else:
                         isSet_ = True
@@ -1194,15 +1194,15 @@ def go_skip(cla):
                 if imgs_ is not None:
                     print("skip_3", imgs_)
                     click_pos_reg(imgs_.x, imgs_.y, cla)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
             else:
                 print("skip_2", imgs_)
                 click_pos_reg(imgs_.x, imgs_.y, cla)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
         else:
             print("skip_1", imgs_)
             click_pos_reg(imgs_.x, imgs_.y, cla)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
 
     except Exception as e:
         print(e)
@@ -1290,7 +1290,7 @@ def go_juljun(cla, story):
             # if cla_ing != "grow":
             #     game_settings(cla, 'juljun')
             #     time.sleep(random_int())
-            #     click_pos_2(920, 55, cla)
+            #     click_pos_2(920, 65, cla)
             #     time.sleep(random_int())
 
 
@@ -1333,14 +1333,14 @@ def mypost(cla):
                 isAnboyuCount += 1
                 if isAnboyuCount > 4:
                     clean_screen(cla, "mypost")
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(random_int())
                 re_ = menuOpenCheck(cla, "mypost")
                 if re_ == True:
                     click_pos_2(680, 525, cla)
                     time.sleep(random_int())
                 else:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                     click_pos_2(680, 525, cla)
                     time.sleep(random_int())
@@ -1543,7 +1543,7 @@ def game_settings(cla, data):
             while isSet_ is False:
                 result = menuOpenCheck(cla, "game_settings_start")
                 if result == False:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                 else:
                     isSet_ = True
@@ -1568,7 +1568,7 @@ def game_settings(cla, data):
             while isSet_ is False:
                 result = menuOpenCheck(cla, "game_settings_end")
                 if result == False:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                 else:
                     isSet_ = True
@@ -1579,7 +1579,7 @@ def game_settings(cla, data):
 
 
             # result = menuOpenCheck(cla)
-            # click_pos_2(920, 55, cla)
+            # click_pos_2(920, 65, cla)
             # time.sleep(random_int())
             #
             # click_pos_2(910, 650, cla)
@@ -1756,7 +1756,7 @@ def game_settings(cla, data):
             while isSet_ is False:
                 result = menuOpenCheck(cla, "game_settings_end")
                 if result == False:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                 else:
                     isSet_ = True
@@ -2054,7 +2054,7 @@ def now_hunting_is(data, cla):
                         gold_2 = int(mygold_)
                 else:
                     print("파악 불가")
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
             else:
                 golded_ = text_check_get(505, 70, 585, 95, cla)
                 gold_ = golded_.split("\n")

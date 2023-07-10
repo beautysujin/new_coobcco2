@@ -69,7 +69,7 @@ def login_start_ready(howcla):
 
                         mynum_ = go_mynumber_(v_.now_cla)
                         time.sleep(0.2)
-                        click_pos_2(920, 55, v_.now_cla)
+                        click_pos_2(920, 65, v_.now_cla)
                         time.sleep(0.2)
 
                         num_bool = myQuest_number_check_bool(v_.now_cla, mynum_)
@@ -88,13 +88,13 @@ def login_start_ready(howcla):
                             if num_bool[1] != "check":
                                 go_bag(v_.now_cla, "처음 사냥터 보내기1")
                                 go_power_bag(v_.now_cla)
-                                click_pos_2(920, 55, v_.now_cla)
+                                click_pos_2(920, 65, v_.now_cla)
                                 go_to_home(num_bool[1], v_.now_cla)
                             else:
                                 print("파워측정 후 사냥터")
                                 go_bag(v_.now_cla, "처음 사냥터 보내기1")
                                 go_power_bag(v_.now_cla)
-                                click_pos_2(920, 55, v_.now_cla)
+                                click_pos_2(920, 65, v_.now_cla)
                                 go_jadong_cla_mypower(v_.now_cla)
 
                             time.sleep(1)
@@ -107,7 +107,7 @@ def login_start_ready(howcla):
                             time.sleep(1)
                             go_bag(v_.now_cla, "처음 사냥터 보내기2")
                             go_power_bag(v_.now_cla)
-                            click_pos_2(920, 55, v_.now_cla)
+                            click_pos_2(920, 65, v_.now_cla)
                             go_jadong_cla_mypower(v_.now_cla)
                             time.sleep(1)
                             v_.now_cla = 'one'
@@ -119,7 +119,7 @@ def login_start_ready(howcla):
                         time.sleep(1)
                         go_bag(v_.now_cla, "처음 사냥터 보내기3")
                         go_power_bag(v_.now_cla)
-                        click_pos_2(920, 55, v_.now_cla)
+                        click_pos_2(920, 65, v_.now_cla)
                         go_jadong_cla_mypower(v_.now_cla)
                         time.sleep(1)
                         v_.now_cla = 'one'
@@ -1284,7 +1284,7 @@ def characterChange(data, cla):
             print("characterChange, isCount == 0:")
             chango_(cla, 'before')
             time.sleep(0.5)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(0.5)
 
         isChecked = False
@@ -1300,7 +1300,7 @@ def characterChange(data, cla):
                 result__ = menuOpenCheck(cla, "characterChange")
                 if result__ != True:
 
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                 else:
 
@@ -1508,29 +1508,29 @@ def grow_chango_check(cla):
                     if result_menu == True:
                         isquestCheck_1 = True
                         time.sleep(0.5)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(0.5)
                         click_pos_2(30, 225, cla)
                         time.sleep(0.5)
                         go_alrim_confirm(cla, "grow_chango_check_2")
                     else:
                         time.sleep(0.5)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(0.5)
             else:
                 time.sleep(1)
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(1)
 
         print("quest_check_", quest_check_)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
         time.sleep(1)
         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\quest.png"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
         imgs_ = imgs_set(30, 30, 160, 80, cla, img)
         if imgs_ is not None:
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(1)
 
         return quest_check_
@@ -1597,7 +1597,7 @@ def status_check_get(cla):
             # 여기서 전투력 파악하기
 
             time.sleep(0.5)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(1)
 
 

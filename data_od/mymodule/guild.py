@@ -108,7 +108,7 @@ def guild_join_(cla):
                             isguild_ = True
                             isbosang = True
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
             else:
                 print("guild_join_길드가입")
                 ########################길드가입#############################################
@@ -139,11 +139,11 @@ def guild_join_(cla):
                         if guild_count > 3:
                             isguild_ = True
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(1)
                 else:
                     time.sleep(0.5)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(1)
                     isMenu = False
                     while isMenu is False:
@@ -162,11 +162,11 @@ def guild_join_(cla):
                                 isguild_ = False
                                 print("길드가입 비활성화 상태")
                                 time.sleep(0.5)
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
                                 time.sleep(1)
                         else:
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(1)
                 ########################길드가입#############################################
     except Exception as e:

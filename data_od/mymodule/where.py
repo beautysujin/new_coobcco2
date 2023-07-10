@@ -87,7 +87,7 @@ def go_maul_(cla):
                     click_pos_2(860, 220, cla)
                     time.sleep(random_int())
                 else:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
 
     except Exception as e:

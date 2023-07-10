@@ -122,7 +122,7 @@ def clean_screen(cla, story):
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
             imgs_ = imgs_set(30, 30, 160, 80, cla, img)
             if imgs_ is not None:
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
 
         thisWorld = False
         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_1.png"
@@ -173,7 +173,7 @@ def clean_screen(cla, story):
             thisWorld = True
 
         if thisWorld == True:
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
 
         # # 인터넷창 열릴 때 꺼놓기
         # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\click_x.png"
@@ -234,7 +234,7 @@ def clean_screen(cla, story):
         #         except:
         #             pass
         # if ismistake == True:
-        #     click_pos_2(920, 55, cla)
+        #     click_pos_2(920, 65, cla)
 
         myQuest_grow_result = myQuest_grow_check(cla)
         print('clean_screen : myQuest_grow_result', myQuest_grow_result)
@@ -255,14 +255,14 @@ def clean_screen(cla, story):
                 result = menuOpenCheck(cla, get_story)
                 if result == True:
                     isClean_ = True
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(0.2)
                     game_event_popup(cla)  # 이벤트창
                 else:
                     result = go_auto(cla, '12')
                     if result == False:
                         print("auto_quest 안보여(clean_screen)")
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         game_event_popup(cla)  # 이벤트창
                     else:
                         print("auto_quest 보여(clean_screen)")

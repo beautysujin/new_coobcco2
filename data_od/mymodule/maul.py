@@ -43,7 +43,7 @@ def go_maul_bosang(cla):
             click_pos_2(x_, 625 + 300, cla)
             x_ = 0
             time.sleep(random_int())
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(random_int())
 
         return go_
@@ -83,7 +83,7 @@ def maul_cou_(cla):
                     click_pos_2(860, 220, cla)
                     time.sleep(random_int())
                 else:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
         else:
             print("def maul_cou_(cla): 마을이 있다...")
@@ -377,10 +377,10 @@ def maul_mission_complete_get(cla, story):
                     pass
         if ismaul_gongan == True:
             time.sleep(random_int())
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(random_int())
             go_boonhae(cla, get_story)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(random_int())
             click_pos_2(860, 220, cla)
             time.sleep(random_int())
@@ -528,7 +528,7 @@ def maul_mission_start(cla):
                                 print("빠른이동 후 마을의뢰 진행중")
                             else:
                                 print("현재 위취와 가까운 곳에서 마을의뢰 진행중", imgs_)
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
 
 
     except Exception as e:
@@ -639,7 +639,7 @@ def maul_mission(cla, maul):
                     click_pos_2(860, 220, cla)
                     time.sleep(random_int())
                 else:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
         else:
             print("마을", imgs_)
@@ -689,7 +689,7 @@ def maul_mission(cla, maul):
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
         imgs_ = imgs_set(30, 30, 160, 80, cla, img)
         if imgs_ is not None:
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
 
         # 현재 퀘스트 중이면 그대로 진행하도록...체크...
         isQuest = False
@@ -728,7 +728,7 @@ def maul_mission(cla, maul):
                         click_pos_2(860, 220, cla)
                         time.sleep(random_int())
                     else:
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                         time.sleep(random_int())
 
             else:
@@ -874,7 +874,7 @@ def maul_mission(cla, maul):
                                 v_.two_cla_ing = 'check'
                             the_end_maul = True
                             isMission_ = True
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             time.sleep(random_int())
                         else:
                             print("마을 외뢰 완료가 있땅.", cla)
@@ -890,7 +890,7 @@ def maul_mission(cla, maul):
                 v_.one_cla_ing = 'check'
             if cla == 'two':
                 v_.two_cla_ing = 'check'
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
         time.sleep(random_int())
 
         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul.png"
@@ -902,7 +902,7 @@ def maul_mission(cla, maul):
 
         else:
             print("마을이 있다...", cla)
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
             time.sleep(random_int())
 
 

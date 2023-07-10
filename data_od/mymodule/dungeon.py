@@ -207,7 +207,7 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                         click_pos_2(30, 110, cla)
                         time.sleep(1)
                     else:
-                        # click_pos_2(920, 55, cla)
+                        # click_pos_2(920, 65, cla)
                         # time.sleep(random_int())
                         clean_screen(cla, "go_jadong_in")
                         click_pos_2(130, 215, cla)  # 중복
@@ -1259,7 +1259,7 @@ def dunjeonCheck(cla, data, same):
 
                                 if thisWorld == True:
                                     isSoongan = True
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                 time.sleep(random_int())
                             else:
                                 isSoongan = True
@@ -1358,7 +1358,7 @@ def mydungeon_check(cla, data):
                             print("던전 단계 안보여")
                             isMap = True
                             go_ = False
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                         else:
                             print("던전 단계 보여", imgs_)
                             isMap = True
@@ -1415,7 +1415,7 @@ def mydungeon_check(cla, data):
                                 print("던전 단계 안보여")
                                 isMap = True
                                 go_ = False
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
                             else:
                                 print("던전 단계 보여", imgs_)
                                 isMap = True

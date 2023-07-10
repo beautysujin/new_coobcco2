@@ -1988,7 +1988,7 @@ class BackGroundPotion(QThread):
                                 if imgs_ is None or imgs_ == False:
                                     background_myPotion_check(data)
                                 else:
-                                    click_pos_2(920, 55, data)
+                                    click_pos_2(920, 65, data)
                                     time.sleep(random_int())
                                     background_myPotion_check(data)
                                 # 줍줍
@@ -2003,7 +2003,7 @@ class BackGroundPotion(QThread):
                                 if imgs_ is None or imgs_ == False:
                                     background_myPotion_check(data)
                                 else:
-                                    click_pos_2(920, 55, data)
+                                    click_pos_2(920, 65, data)
                                     time.sleep(random_int())
                                     background_myPotion_check(data)
                                 # 줍줍
@@ -2043,7 +2043,7 @@ class BackGroundPotion(QThread):
                                 if imgs_ is None or imgs_ == False:
                                     background_myPotion_check(data)
                                 else:
-                                    click_pos_2(920, 55, data)
+                                    click_pos_2(920, 65, data)
                                     time.sleep(random_int())
                                     background_myPotion_check(data)
                                 # 줍줍
@@ -2063,7 +2063,7 @@ class BackGroundPotion(QThread):
                                 #     if imgs_ is not None:
                                 #         background_myPotion_check(data)
                                 # else:
-                                #     click_pos_2(920, 55, data)
+                                #     click_pos_2(920, 65, data)
                                 #     time.sleep(random_int())
                                 #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
                                 #     img_array = np.fromfile(full_path, np.uint8)

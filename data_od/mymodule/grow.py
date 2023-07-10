@@ -268,7 +268,7 @@ def potion_nida(cla):
                                 time.sleep(1.5)
                                 isBigPotion_1 = False
                                 isBigPotion_5 = True
-                                click_pos_2(920, 55, cla)
+                                click_pos_2(920, 65, cla)
                                 time.sleep(1)
                             else:
                                 click_pos_2(160, 160, cla)
@@ -352,7 +352,7 @@ def potion_grow(cla, data):
                         if data == '요툰육성':
                             result_po = potion_count_grow(cla)
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             if result_po < 150:
                                 print("요툰육성 물약 사러가기 150개 이하 : 레벨 판단")
                                 if mylevel > 12:
@@ -360,7 +360,7 @@ def potion_grow(cla, data):
                         elif data == '니다육성':
                             result_po = potion_count_grow(cla)
                             time.sleep(0.5)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
                             if result_po < 200:
                                 print("니다육성 물약 사러가기 : 200개 이하")
                                 # 요툰 대형 물약 사는 곳
@@ -764,7 +764,7 @@ def yotoon_grow(cla):
         print("tuto_potion_click_1", imgs_)
         click_pos_2(840, 840, cla)
         time.sleep(random_int())
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     # tuto_gabang
 
@@ -780,7 +780,7 @@ def yotoon_grow(cla):
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
     imgs_ = imgs_set(500, 40, 950, 300, cla, img)
     if imgs_ is not None:
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_gabang_1.png"
     img_array = np.fromfile(full_path, np.uint8)
@@ -803,7 +803,7 @@ def yotoon_grow(cla):
                 imgs_ = imgs_set(610, 100, 950, 180, cla, img)
                 if imgs_ is not None:
                     print("tuto_gabang_4", imgs_)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
             else:
                 print("tuto_gabang_3", imgs_)
                 click_pos_2(625, 170, cla)
@@ -845,13 +845,13 @@ def yotoon_grow(cla):
             time.sleep(random_int())
             click_pos_2(560, 690, cla)
             time.sleep(random_int())
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
         else:
             click_pos_2(560, 690, cla)
             time.sleep(random_int())
             click_pos_2(560, 690, cla)
             time.sleep(random_int())
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
 
     # tuto_talgut 1~5
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_talgut_1.png"
@@ -880,7 +880,7 @@ def yotoon_grow(cla):
                     imgs_ = imgs_set(760, 110, 950, 180, cla, img)
                     if imgs_ is not None:
                         print("tuto_talgut_5", imgs_)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                 else:
                     print("tuto_talgut_4", imgs_)
                     click_pos_2(880, 1010, cla)
@@ -892,7 +892,7 @@ def yotoon_grow(cla):
             click_pos_2(860, 145, cla)
     else:
         print("tuto_talgut_1", imgs_)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     # tuto_talgut 6~10
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_talgut_6.png"
@@ -921,7 +921,7 @@ def yotoon_grow(cla):
                     imgs_ = imgs_set(760, 120, 950, 180, cla, img)
                     if imgs_ is not None:
                         print("tuto_talgut_10", imgs_)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                 else:
                     print("tuto_talgut_9", imgs_)
                     click_pos_2(880, 1010, cla)
@@ -933,7 +933,7 @@ def yotoon_grow(cla):
             click_pos_2(860, 145, cla)
     else:
         print("tuto_talgut_6", imgs_)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     # tuto_guihwan
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_guihwan_1a.png"
@@ -1022,7 +1022,7 @@ def yotoon_grow(cla):
 
                                         else:
                                             print("tuto_skill_10", imgs_)
-                                            click_pos_2(920, 55, cla)
+                                            click_pos_2(920, 65, cla)
                                     else:
                                         print("tuto_skill_9", imgs_)
                                         click_pos_2(530, 370, cla)
@@ -1037,10 +1037,10 @@ def yotoon_grow(cla):
                             click_pos_2(740, 140, cla)
                     else:
                         print("tuto_skill_5", imgs_)
-                        click_pos_2(920, 55, cla)
+                        click_pos_2(920, 65, cla)
                 else:
                     print("tuto_skill_4", imgs_)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
             else:
                 print("tuto_skill_3", imgs_)
                 click_pos_2(630, 160, cla)
@@ -1080,7 +1080,7 @@ def yotoon_grow(cla):
             print("tuto_skillbook_2", imgs_)
             click_pos_2(555, 690, cla)
             time.sleep(random_int())
-            click_pos_2(920, 55, cla)
+            click_pos_2(920, 65, cla)
     else:
         print("tuto_skillbook_1", imgs_)
         click_pos_2(150, 150, cla)
@@ -1157,7 +1157,7 @@ def yotoon_grow(cla):
                                 imgs_ = imgs_set(690, 100, 950, 180, cla, img)
                                 if imgs_ is not None:
                                     print("tuto_abata_8", imgs_)
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
 
                             else:
                                 print("tuto_abata_7", imgs_)
@@ -1170,7 +1170,7 @@ def yotoon_grow(cla):
                         click_pos_2(800, 130, cla)
                 else:
                     print("tuto_abata_4", imgs_)
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
             else:
                 print("tuto_abata_3", imgs_)
                 click_pos_2(480, 980, cla)
@@ -1229,7 +1229,7 @@ def yotoon_grow(cla):
             click_pos_2(860, 50, cla)
     else:
         print("tuto_boonhae_1", imgs_)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     # tuto_jejak
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_jejak_1.png"
@@ -1279,7 +1279,7 @@ def yotoon_grow(cla):
             click_pos_2(740, 215, cla)
     else:
         print("tuto_jejak_1", imgs_)
-        click_pos_2(920, 55, cla)
+        click_pos_2(920, 65, cla)
 
     # tuto_ganghwa
     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\tuto_ganghwa_1.png"
@@ -1313,7 +1313,7 @@ def yotoon_grow(cla):
                         imgs_ = imgs_set(690, 110, 950, 190, cla, img)
                         if imgs_ is not None:
                             print("tuto_ganghwa_6", imgs_)
-                            click_pos_2(920, 55, cla)
+                            click_pos_2(920, 65, cla)
 
                     else:
                         print("tuto_ganghwa_5", imgs_)

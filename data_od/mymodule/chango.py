@@ -1210,7 +1210,7 @@ def chango_(cla, data):
                                             menu_ = menuOpenCheck(cla, "창고에서 맡기러 가는 중이었음")
                                             if menu_ == True:
                                                 #창고 그림이 있었는데 파악이 안된 상황임.
-                                                click_pos_2(920, 55, cla)
+                                                click_pos_2(920, 65, cla)
                                                 time.sleep(1)
                                                 drag_pos(200, 500, 700, 500, cla)
                                                 chango4 = go_chango(cla, 'village')  # 창고 그림
@@ -1289,7 +1289,7 @@ def chango_(cla, data):
                                     menu_ = menuOpenCheck(cla, "창고에서 꺼내러 가는 중이었음")
                                     if menu_ == True:
                                         # 창고 그림이 있었는데 파악이 안된 상황임.
-                                        click_pos_2(920, 55, cla)
+                                        click_pos_2(920, 65, cla)
                                         time.sleep(1)
                                         drag_pos(200, 500, 700, 500, cla)
                                         chango4 = go_chango(cla, 'village')  # 창고 그림
@@ -1341,7 +1341,7 @@ def chango_(cla, data):
                                     # 파워 저장
                                     go_power_bag(cla)
                                     time.sleep(1)
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
                 else:
                     print("무언가 잘못 되었당.")
@@ -1356,7 +1356,7 @@ def chango_(cla, data):
                 print("가방표시 없다. 창고 꺼내기 끝")
             else:
                 print("가방표시 있다. 창고 꺼내기 끝")
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(random_int())
 
 
@@ -1562,7 +1562,7 @@ def auction(cla):
             if auction_ready == False:
                 ismenu_ = menuOpenCheck(cla, "auction_go_1")
                 if ismenu_ == False:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                     ismenu_ = menuOpenCheck(cla, "auction_go_2")
                     if ismenu_ == False:
@@ -1747,7 +1747,7 @@ def auction_example(cla):
             if auction_ready == False:
                 ismenu_ = menuOpenCheck(cla, "auction_go_1")
                 if ismenu_ == False:
-                    click_pos_2(920, 55, cla)
+                    click_pos_2(920, 65, cla)
                     time.sleep(random_int())
                     ismenu_ = menuOpenCheck(cla, "auction_go_2")
                     if ismenu_ == False:
@@ -1989,7 +1989,7 @@ def auction_all_get(cla):
                                             menu_ = menuOpenCheck(cla, "창고에서 맡기러 가는 중이었음")
                                             if menu_ == True:
                                                 # 창고 그림이 있었는데 파악이 안된 상황임.
-                                                click_pos_2(920, 55, cla)
+                                                click_pos_2(920, 65, cla)
                                                 time.sleep(1)
                                                 drag_pos(200, 500, 700, 500, cla)
                                                 chango4 = go_chango(cla, 'village')  # 창고 그림
@@ -2032,7 +2032,7 @@ def auction_all_get(cla):
                                 menu_ = menuOpenCheck(cla, "창고에서 맡기러 가는 중이었음")
                                 if menu_ == True:
                                     # 창고 그림이 있었는데 파악이 안된 상황임.
-                                    click_pos_2(920, 55, cla)
+                                    click_pos_2(920, 65, cla)
                                     time.sleep(1)
                                     drag_pos(200, 500, 700, 500, cla)
                                     chango4 = go_chango(cla, 'village')  # 창고 그림
@@ -2149,6 +2149,7 @@ def in_village_go_to(cla):
     try:
         from myfunction import click_pos_2, random_int, text_check_get, imgs_set, go_auto
         from where import go_worldmap
+        from action import go_alrim_
         import numpy as np
         import cv2
 
@@ -2258,10 +2259,11 @@ def in_village_go_to(cla):
                                 pass
             time.sleep(1 + random_int())
             time.sleep(2)
+            rea_ = go_alrim_(cla)
 
-            if inVillage == True:
+            if inVillage == True and rea_ == False:
                 click_pos_2(932, 55, cla)
-                print("920, 55")
+                print("920, 65")
                 time.sleep(2 + random_int())
             else:
                 click_pos_2(550, 610, cla)
@@ -2398,7 +2400,7 @@ def in_village_go(cla):
 
 
             else:
-                click_pos_2(920, 55, cla)
+                click_pos_2(920, 65, cla)
                 time.sleep(1)
 
         if result__ == 'nida' or result_vil_data == 'nida':
