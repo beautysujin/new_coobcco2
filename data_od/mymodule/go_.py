@@ -37,8 +37,7 @@ def go_test(cla):
 
     # go_boonhae(cla, "test")
 
-    rea_ = go_alrim_(cla)
-    print("maul", rea_)
+    click_pos_2(1888, 55, "one")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)
