@@ -37,7 +37,42 @@ def go_test(cla):
 
     # go_boonhae(cla, "test")
 
-    click_pos_2(1888, 55, "one")
+    drag_pos(840, 710, 840, 400, "one")
+
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\open_ready.png"  # 오픈대기 파악
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set(35, 400, 400, 770, "one", img)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("click ready one", imgs_)
+    # else:
+    #     print("안 보염 one")
+    #
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\open_ready.png"  # 오픈대기 파악
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set(35, 400, 400, 770, "two", img)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("click ready two", imgs_)
+    # else:
+    #     print("안 보염 two")
+    #
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set_(370, 260, 550, 340, "one", img, 0.8)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("eventandbosang one", imgs_)
+    # else:
+    #     print("eventandbosang 안 보염 one", imgs_)
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set_(370, 260, 550, 340, "two", img, 0.8)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("eventandbosang two", imgs_)
+    # else:
+    #     print("eventandbosang 안 보염 two", imgs_)
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
     # img_array = np.fromfile(full_path, np.uint8)

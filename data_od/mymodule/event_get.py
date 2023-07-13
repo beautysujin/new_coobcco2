@@ -346,7 +346,11 @@ def game_event_search(cla, data, y_):
             if data == 'fivetofive':
                 print("5x5 뽑기")
                 isZero = False
+                isZero_count = 0
                 while isZero is False:
+                    isZero_count += 1
+                    if isZero_count > 7:
+                        isZero = True
                     full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\zero.png"  # zero 파악
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -573,6 +577,8 @@ def game_event_search(cla, data, y_):
                     print("포인트 부족", int(bom_wind))
             elif data == "twenty":
                 # 아래는 임의로 지정한 숫자값(좌표)
+                print("twentytwentytwentytwentytwentytwentytwentytwentytwentytwenty")
+
                 last_x = 0
                 last_y = 0
 
@@ -582,7 +588,11 @@ def game_event_search(cla, data, y_):
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 for list in pyautogui.locateAllOnScreen(img, region=(50 + plus, 510, 540, 200), confidence=0.9):
                     # 값을 담는 공식
-                    last_x = list.left # 100
+                    if cla == "one":
+                        last_x = list.left # 100
+                    if cla == "two":
+                        last_x = list.left - 960
+                    # last_x = list.left # 100
                     last_y = list.top # 575
                     print("list", list)
                     print("last_x", last_x)
@@ -610,7 +620,12 @@ def game_event_search(cla, data, y_):
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                     for list in pyautogui.locateAllOnScreen(img, region=(60 + plus, 620, 460, 100), confidence=0.9):
                         # 값을 담는 공식
-                        last_x_2 = list.left  # 100
+
+                        if cla == "one":
+                            last_x_2 = list.left  # 100
+                        if cla == "two":
+                            last_x_2 = list.left - 960
+                        # last_x_2 = list.left  # 100
                         last_y_2 = list.top  # 575
                         print("list", list)
                         print("last_x_2", last_x_2)
@@ -632,7 +647,7 @@ def game_event_search(cla, data, y_):
 
 
             else:
-
+                print("else:else:else:else:else:else:else:else:else:else:else:")
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event_complete.png"  # '완료' 그림 갯수 파악
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1025,7 +1040,11 @@ def game_event_get_ready(cla):
         clean_screen(cla, "game_event_get_ready_start")
         print("def game_event_get_ready(cla): ", cla)
         isEventCheck = False
+        isEventCheck_count = 0
         while isEventCheck is False:
+            isEventCheck_count += 1
+            if isEventCheck_count > 7:
+                isEventCheck = True
             time.sleep(random_int())
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
             img_array = np.fromfile(full_path, np.uint8)
@@ -1069,7 +1088,14 @@ def game_event_get_ready(cla):
                 print("이벤트 & 보상이 안보여...ㅠㅠ???")
                 click_pos_2(680, 60, cla)
                 time.sleep(random_int())
-                game_event_get(cla)
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\eventandbosang.png"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(400, 280, 600, 330, cla, img)
+                if imgs_ is not None:
+                    game_event_get(cla)
+                else:
+                    print("event_end")
 
     except Exception as e:
         print(e)
