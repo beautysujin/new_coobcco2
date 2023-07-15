@@ -164,6 +164,24 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                                             print("송곳니단본거지 안 보여")
                                             drag_pos(135, 745, 135, 210, cla)
                                         time.sleep(2)
+                                if where == "고원서리이빨":
+                                    isClicked = False
+                                    isClicked_count = 0
+                                    while isClicked is False:
+                                        isClicked_count += 1
+                                        if isClicked_count > 5:
+                                            isClicked = True
+                                        full_path = "c:\\my_games\\coobcco2\\data_od\\jadong\\jadong\\nida_gowon.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set(85, 540, 210, 590, cla, img)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("nida_gowon 보여", imgs_)
+                                            isClicked = True
+                                        else:
+                                            print("nida_gowon 안 보여")
+                                            drag_pos(135, 745, 135, 210, cla)
+                                        time.sleep(2)
 
 
 
@@ -291,13 +309,6 @@ def jadong_cla_play(cla, where):
         from action import now_hunting
 
         nowPlay = 'jadong'
-
-
-        result = False
-        if result == True:
-            print("xxxxxxxxxxxx")
-        else:
-            print("zzzzzzzzzzzz")
 
 
         clean_screen(cla, "jadong_cla_play")

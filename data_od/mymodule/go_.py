@@ -26,18 +26,18 @@ def go_test(cla):
 
     v_.global_howcla = "onecla"
 
-    cla = "two"
+    cla = "one"
 
     if cla == 'one':
         plus = 0
     if cla == 'two':
         plus = 960
 
-    # jadong_cla_ready(cla, "고블린부패")
+    jadong_cla_ready(cla, "고원서리이빨")
 
     # go_boonhae(cla, "test")
 
-    drag_pos(840, 710, 840, 400, "one")
+    # drag_pos(840, 710, 840, 400, "one")
 
     # full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\open_ready.png"  # 오픈대기 파악
     # img_array = np.fromfile(full_path, np.uint8)
