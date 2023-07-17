@@ -365,6 +365,14 @@ def potion_grow(cla, data):
                                 print("니다육성 물약 사러가기 : 200개 이하")
                                 # 요툰 대형 물약 사는 곳
                                 potion_nida(cla)
+                        elif data == '알브육성':
+                            result_po = potion_count_grow(cla)
+                            time.sleep(0.5)
+                            click_pos_2(920, 65, cla)
+                            if result_po < 200:
+                                print("알브육성 물약 사러가기 : 200개 이하")
+                                # 요툰 대형 물약 사는 곳
+                                go_to_home('grow', cla)
 
 
 def common_grow(cla):
@@ -693,10 +701,10 @@ def yotoon_grow(cla):
     print("요툰 성장")
 
     # 맹독
-    if cla =="one":
-        pyautogui.moveTo(480, 480)
-    if cla =="two":
-        pyautogui.moveTo(960 + 480, 480)
+    # if cla =="one":
+    #     pyautogui.moveTo(480, 480)
+    # if cla =="two":
+    #     pyautogui.moveTo(960 + 480, 480)
 
 
     endmangdok = True
@@ -1508,10 +1516,10 @@ def nida_grow_end(cla):
 
         nida_end = False
 
-        if cla == "one":
-            pyautogui.moveTo(480, 480)
-        if cla == "two":
-            pyautogui.moveTo(960 + 480, 480)
+        # if cla == "one":
+        #     pyautogui.moveTo(480, 480)
+        # if cla == "two":
+        #     pyautogui.moveTo(960 + 480, 480)
 
         endmangdok = True
         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\dongool.png"
@@ -1568,4 +1576,22 @@ def nida_grow_end(cla):
         print(e)
         return 0
 
+def alb_grow_end(cla):
+    try:
+        import pyautogui
+        from myfunction import imgs_set, click_pos_2, imgs_set_
+        import numpy as np
+        import cv2
 
+        nida_end = False
+
+        # if cla == "one":
+        #     pyautogui.moveTo(480, 480)
+        # if cla == "two":
+        #     pyautogui.moveTo(960 + 480, 480)
+
+        print("알브 끝")
+        return nida_end
+    except Exception as e:
+        print(e)
+        return 0

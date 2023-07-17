@@ -49,7 +49,7 @@ from guild import guild_join_
 from maul import maul_mission
 from where import go_worldmap
 from go_ import go_test
-from grow import yotoon_grow, potion_grow, common_grow, nida_grow, nida_grow_end, tuto_grow, yotoon_grow_end
+from grow import yotoon_grow, potion_grow, common_grow, nida_grow, nida_grow_end, tuto_grow, yotoon_grow_end, alb_grow_end
 from stop_18 import is_stop
 from dungeon_su import dunjeon_cla_play_su
 
@@ -787,7 +787,7 @@ class FirstTab(QWidget):
         # 마을 의뢰
         self.com_group6 = QGroupBox('마을 의뢰, 육성, 각종템받기, 거래소등록하기')
         cb6 = QComboBox()
-        list6 = ['스케쥴 선택', '캐릭터바꾸기', '미드가르드', '요툰하임', '요툰육성', '니다육성', '각종템받기', '거래소등록', '셋팅초기화']
+        list6 = ['스케쥴 선택', '캐릭터바꾸기', '미드가르드', '요툰하임', '요툰육성', '니다육성', '알브육성', '각종템받기', '거래소등록', '셋팅초기화']
         cb6.addItems(list6)
         vbox6 = QHBoxLayout()
         vbox6.addWidget(cb6)
@@ -3259,6 +3259,39 @@ class game_Playing(QThread):
                                     else:
 
                                         result_quest_ = go_quest_ing(cla)
+
+                                elif start_ready[0][2] == '알브육성':
+                                    nida_end = 0
+                                    potion_grow(cla, start_ready[0][2])
+
+                                    common_grow(cla)
+
+                                    nida_grow(cla)
+
+                                    result = alb_grow_end(cla)
+
+                                    if result == True:
+                                        nida_end += 1
+
+                                    nida_grow(cla)
+
+                                    result = alb_grow_end(cla)
+
+                                    if result == True:
+                                        nida_end += 1
+
+                                    time.sleep(1)
+
+                                    if nida_end >= 1:
+
+                                        print("알브 육성 끝")
+
+                                        result_ = myQuest_play_add(cla, start_ready[0][2])
+
+                                    else:
+
+                                        result_quest_ = go_quest_ing(cla)
+
                                 else:
                                     # 자동 사냥
                                     #go_to_home('start', cla)
