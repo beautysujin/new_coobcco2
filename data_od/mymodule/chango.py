@@ -2410,7 +2410,8 @@ def in_village_go(cla):
 
 
             else:
-                go_alrim_confirm(cla, "캐릭체인지")
+                click_pos_2(410, 615, cla)
+                time.sleep(0.5)
 
                 click_pos_2(920, 65, cla)
                 time.sleep(1)
