@@ -2362,6 +2362,7 @@ def in_village_go(cla):
     try:
         from myfunction import click_pos_2, random_int, imgs_set, go_auto
         from massenger import line_to_me
+        from action import go_alrim_confirm
 
         print("def in_village_go(cla): start")
         thisnida = False
@@ -2409,6 +2410,8 @@ def in_village_go(cla):
 
 
             else:
+                go_alrim_confirm(cla, "캐릭체인지")
+
                 click_pos_2(920, 65, cla)
                 time.sleep(1)
 

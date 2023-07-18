@@ -258,17 +258,17 @@ def click_pos(pos):
 
 
 
-def mouse_move(x, y):
-    import pydirectinput
-    try:
-        reg_x = x + random_int()
-        reg_y = y + random_int()
-        pydirectinput.moveTo(reg_x, reg_y)
-        print("mouse_move", reg_x, reg_y)
-
-    except Exception as e:
-        print(e)
-        return 0
+# def mouse_move(x, y):
+#     import pydirectinput
+#     try:
+#         reg_x = x + random_int()
+#         reg_y = y + random_int()
+#         pydirectinput.moveTo(reg_x, reg_y)
+#         print("mouse_move", reg_x, reg_y)
+#
+#     except Exception as e:
+#         print(e)
+#         return 0
 
 
 def win_left_move(cla):
