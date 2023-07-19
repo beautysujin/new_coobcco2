@@ -61,7 +61,11 @@ def go_bag(cla, story):
             print("가방이 없다...")
 
             ismenu = False
+            ismenu_count = 0
             while ismenu is False:
+                ismenu_count += 1
+                if ismenu_count > 7:
+                    ismenu = True
                 result_ = go_chango(cla, 'village')
                 time.sleep(random_int())
                 result_2 = go_auto(cla, '11')
@@ -154,7 +158,11 @@ def go_soongan_f5(cla):
                 #     print("장착된 상태다.")
                 # else:
                 isquick_ = False
+                isquick_count = 0
                 while isquick_ is False:
+                    isquick_count += 1
+                    if isquick_count > 7:
+                        isquick_ = True
                     result_ = go_quickslot(cla)
                     if result_ == False:
                         time.sleep(1)
@@ -1063,7 +1071,11 @@ def go_mynumber_(cla):
 
         mynumber_ = 0
         isgonumber = False
+        isgonumber_count = 0
         while isgonumber is False:
+            isgonumber_count += 1
+            if isgonumber_count > 7:
+                isgonumber = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\setting.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1101,7 +1113,11 @@ def go_mynumber_(cla):
                 myQuest_number_check(cla, "new")
             else:
                 isSet_ = False
+                isSet_count = 0
                 while isSet_ is False:
+                    isSet_count += 1
+                    if isSet_count > 7:
+                        isSet_ = True
                     result = menuOpenCheck(cla, "go_mynumber_")
                     if result == False:
                         click_pos_2(920, 65, cla)
@@ -1320,7 +1336,11 @@ def mypost(cla):
 
         isPost_ = False
         isAnboyuCount = 0
+        isPost_count = 0
         while isPost_ is False:
+            isPost_count += 1
+            if isPost_count > 7:
+                isPost_ = True
             # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\post.png"
             # img_array = np.fromfile(full_path, np.uint8)
             # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1399,7 +1419,11 @@ def mypost(cla):
                         click_pos_2(880, 1005, cla)
                         time.sleep(random_int())
                         isPostGet = False
+                        isPostGet_count = 0
                         while isPostGet is False:
+                            isPostGet_count += 1
+                            if isPostGet_count > 7:
+                                isPostGet = True
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\post_get_ing.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1434,7 +1458,11 @@ def mypost(cla):
                     plus = 960
 
                 isPostcon = False
+                isPostcon_count = 0
                 while isPostcon is False:
+                    isPostcon_count += 1
+                    if isPostcon_count > 7:
+                        isPostcon = True
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\post_get2.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1475,6 +1503,9 @@ def mypost(cla):
                 print('isPost_2', isPost_2)
                 isPost_count = 0
                 while isPost_2 is False:
+                    isPost_count += 1
+                    if isPost_count > 4:
+                        isPost_2 = True
 
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\post_get.png"
                     img_array = np.fromfile(full_path, np.uint8)
@@ -1540,7 +1571,11 @@ def game_settings(cla, data):
 
         if data == 'juljun':
             isSet_ = False
+            isSet_count = 0
             while isSet_ is False:
+                isSet_count += 1
+                if isSet_count > 5:
+                    isSet_ = True
                 result = menuOpenCheck(cla, "game_settings_start")
                 if result == False:
                     click_pos_2(920, 65, cla)
@@ -1565,7 +1600,11 @@ def game_settings(cla, data):
 
 
             isSet_ = False
+            isSet_count = 0
             while isSet_ is False:
+                isSet_count += 1
+                if isSet_count > 5:
+                    isSet_ = True
                 result = menuOpenCheck(cla, "game_settings_end")
                 if result == False:
                     click_pos_2(920, 65, cla)
@@ -1753,7 +1792,11 @@ def game_settings(cla, data):
 
             # 열기
             isSet_ = False
+            isSet_count = 0
             while isSet_ is False:
+                isSet_count += 1
+                if isSet_count > 5:
+                    isSet_ = True
                 result = menuOpenCheck(cla, "game_settings_end")
                 if result == False:
                     click_pos_2(920, 65, cla)
@@ -1999,7 +2042,11 @@ def now_hunting_is(data, cla):
 
             print("///////////////////////////////////////now_hunting_is//////////////////////////////////////////////////")
             isgoldCheck = False
+            isgoldCheck_count = 0
             while isgoldCheck is False:
+                isgoldCheck_count += 1
+                if isgoldCheck_count > 7:
+                    isgoldCheck = True
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gold_check.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)

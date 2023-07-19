@@ -17,14 +17,6 @@ def is_stop_ex(cla):
     import time
     print("is_stop_check...181818", cla)
 
-    cla = "one"
-
-    if cla == 'one':
-        plus = 0
-    if cla == 'two':
-        plus = 960
-
-
     stop_18181818 = False
     stop_count = 0
     while stop_18181818 is False:

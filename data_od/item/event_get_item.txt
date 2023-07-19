@@ -1,6 +1,6 @@
-360/fivetofive
+360/seven
 430/seven
-480/twenty
+480/fivetofive
 540/twenty
 660/black_six
 drag

@@ -198,6 +198,7 @@ def line_monitor():
     from myfunction import imgs_set
     import time
     from datetime import datetime, timedelta, date
+    from server import server_get_zeno
     from stop_18 import is_stop
     try:
         isLoop = False
@@ -209,98 +210,74 @@ def line_monitor():
             time.sleep(0.1)
             is_stop("two")
 
-            nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
-            print(nowTime)
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_1.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(0, 700, 960, 850, "one", img)
-            if imgs_ is not None:
-                line_to_me("one", "블랙스크린")
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_2.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(0, 700, 960, 850, "two", img)
-            if imgs_ is not None:
-                line_to_me("two", "블랙스크린")
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(0, 0, 960, 1030, "one", img)
-            if imgs_ is None:
-                line_to_me("one", "꺼진것 같다")
+            result_my_server_read = server_get_zeno()
+            print("my_server_read", result_my_server_read)
 
+            dir_path = "C:\\my_games\\load\\odin"
+            file_path = dir_path + "\\start.txt"
 
+            isstart1 = False
+            while isstart1 is False:
+                if os.path.isdir(dir_path) == True:
+                    if os.path.isfile(file_path) == True:
+                        with open(file_path, "r", encoding='utf-8-sig') as file:
+                            start_get = file.read()
+                            isstart1 = True
+                    else:
+                        with open(file_path, "w", encoding='utf-8-sig') as file:
+                            data = 'none'
+                            file.write(str(data))
+                else:
+                    os.makedirs(dir_path)
 
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\kakao_games.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(10, 980, 150, 1030, "one", img)
-            if imgs_ is not None:
-                line_to_me("one", "대기화면(kakaogames)")
+            if result_my_server_read == 'start' and start_get == 'yes' and (v_.now_cla == "one" or v_.now_cla == "two"):
 
-            jangsigan = False
-
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(280, 470, 680, 590, "one", img)
-            if imgs_ is None or imgs_ == False:
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_2.png"
+                nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
+                print(nowTime)
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_1.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(200, 300, 800, 800, "one", img)
-                if imgs_ is None or imgs_ == False:
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_3.png"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(280, 470, 680, 590, "one", img)
-                    if imgs_ is None or imgs_ == False:
-                        print("장시간 없다")
-                    else:
-                        print("장시간 있다", imgs_)
-                        jangsigan = True
-                else:
-                    print("장시간 있다", imgs_)
-                    jangsigan = True
-            else:
-                print("장시간 있다", imgs_)
-                jangsigan = True
-
-            if jangsigan == True:
-                line_to_me("one", "죽어뿌따 ㅠㅅㅠ")
-
-            if v_.global_howcla == "onetwocla":
+                imgs_ = imgs_set(0, 700, 960, 850, "one", img)
+                if imgs_ is not None:
+                    line_to_me("one", "블랙스크린")
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_2.png"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(0, 700, 960, 850, "two", img)
+                if imgs_ is not None:
+                    line_to_me("two", "블랙스크린")
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(0, 0, 960, 1030, "two", img)
+                imgs_ = imgs_set(0, 0, 960, 1030, v_.now_cla, img)
                 if imgs_ is None:
-                    line_to_me("two", "꺼진것 같다")
+                    line_to_me("one", "꺼진것 같다")
+
+
 
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\kakao_games.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(10, 980, 150, 1030, "two", img)
+                imgs_ = imgs_set(10, 980, 150, 1030, v_.now_cla, img)
                 if imgs_ is not None:
-                    line_to_me("two", "대기화면(kakaogames)")
+                    line_to_me("one", "대기화면(kakaogames)")
 
                 jangsigan = False
 
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(280, 470, 680, 590, "two", img)
+                imgs_ = imgs_set(280, 470, 680, 590, v_.now_cla, img)
                 if imgs_ is None or imgs_ == False:
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_2.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(200, 300, 800, 800, "two", img)
+                    imgs_ = imgs_set(200, 300, 800, 800, v_.now_cla, img)
                     if imgs_ is None or imgs_ == False:
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_3.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(280, 470, 680, 590, "two", img)
+                        imgs_ = imgs_set(280, 470, 680, 590, v_.now_cla, img)
                         if imgs_ is None or imgs_ == False:
                             print("장시간 없다")
                         else:
@@ -314,51 +291,53 @@ def line_monitor():
                     jangsigan = True
 
                 if jangsigan == True:
-                    line_to_me("two", "죽어뿌따 ㅠㅅㅠ")
+                    line_to_me("one", "죽어뿌따 ㅠㅅㅠ")
 
 
 
-            # 날짜 갱신 체크 관련
-            print("날짜 갱신 체크~~~~!!!!!!!!!!!")
-            # 닉네임 받아와서 전역변수 설정하기mmm
-            nowDay_ = datetime.today().strftime("%Y%m%d")
-            nowDay = int(nowDay_)
-            nowTime = int(datetime.today().strftime("%H"))
-            yesterday_ = date.today() - timedelta(1)
-            yesterday = int(yesterday_.strftime('%Y%m%d'))
 
-            dir_path = "C:\\my_games\\coobcco2"
-            file_path2 = dir_path + "\\odin_schedule\\quest.txt"
-            file_path13 = dir_path + "\\odin_schedule\\refresh_time.txt"
 
-            isRefresh = False
-            while isRefresh is False:
-                if os.path.isfile(file_path13) == True:
-                    with open(file_path13, "r", encoding='utf-8-sig') as file:
-                        isRefresh = True
-                        refresh_time = file.read()
-                        print("refresh_time", refresh_time)
-                else:
-                    with open(file_path13, "w", encoding='utf-8-sig') as file:
-                        file.write(str(6))
+                # 날짜 갱신 체크 관련
+                print("날짜 갱신 체크~~~~!!!!!!!!!!!")
+                # 닉네임 받아와서 전역변수 설정하기mmm
+                nowDay_ = datetime.today().strftime("%Y%m%d")
+                nowDay = int(nowDay_)
+                nowTime = int(datetime.today().strftime("%H"))
+                yesterday_ = date.today() - timedelta(1)
+                yesterday = int(yesterday_.strftime('%Y%m%d'))
 
-            isNowday = False
-            while isNowday is False:
-                if os.path.isfile(file_path2) == True:
-                    with open(file_path2, "r", encoding='utf-8-sig') as file:
-                        isNowday = True
-                        lines2 = file.read().splitlines()
-                        day_ = lines2[0].split(":")
-                        print("day_", day_)
-                else:
-                    with open(file_path2, "w", encoding='utf-8-sig') as file:
-                        file.write(str(nowDay) + ":" + str(refresh_time) + "\n")
+                dir_path = "C:\\my_games\\coobcco2"
+                file_path2 = dir_path + "\\odin_schedule\\quest.txt"
+                file_path13 = dir_path + "\\odin_schedule\\refresh_time.txt"
 
-            if nowTime >= int(refresh_time) + 1:
-                if int(day_[0]) != nowDay:
-                    print("day_[0]", day_[0])
-                    print("nowDay", nowDay)
-                    line_to_me("one", "쿱꼬 초기화 갱신 안되었다.")
+                isRefresh = False
+                while isRefresh is False:
+                    if os.path.isfile(file_path13) == True:
+                        with open(file_path13, "r", encoding='utf-8-sig') as file:
+                            isRefresh = True
+                            refresh_time = file.read()
+                            print("refresh_time", refresh_time)
+                    else:
+                        with open(file_path13, "w", encoding='utf-8-sig') as file:
+                            file.write(str(6))
+
+                isNowday = False
+                while isNowday is False:
+                    if os.path.isfile(file_path2) == True:
+                        with open(file_path2, "r", encoding='utf-8-sig') as file:
+                            isNowday = True
+                            lines2 = file.read().splitlines()
+                            day_ = lines2[0].split(":")
+                            print("day_", day_)
+                    else:
+                        with open(file_path2, "w", encoding='utf-8-sig') as file:
+                            file.write(str(nowDay) + ":" + str(refresh_time) + "\n")
+
+                if nowTime >= int(refresh_time) + 1:
+                    if int(day_[0]) != nowDay:
+                        print("day_[0]", day_[0])
+                        print("nowDay", nowDay)
+                        line_to_me("one", "쿱꼬 초기화 갱신 안되었다.")
 
             time.sleep(300)
 

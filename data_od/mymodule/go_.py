@@ -33,7 +33,9 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    jadong_cla_ready(cla, "고원서리이빨")
+    game_event_get_ready(cla)
+
+    # jadong_cla_ready(cla, "고원서리이빨")
 
     # go_boonhae(cla, "test")
 

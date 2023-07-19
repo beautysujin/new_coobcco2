@@ -222,7 +222,11 @@ def go_ticket_open(cla):
                             go_skip(cla)
 
                 isticketing = False
+                isticketing_count = 0
                 while isticketing is False:
+                    isticketing_count += 1
+                    if isticketing_count > 5:
+                        isticketing = True
                     full_path = "c:\\my_games\\coobcco2\\data_od\\item\\ticket_open\\x.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -377,7 +381,11 @@ def game_event_search(cla, data, y_):
                                 click_pos_reg(imgs_.x, imgs_.y, cla)
                                 time.sleep(2)
                                 isGet = False
+                                isGet_count = 0
                                 while isGet is False:
+                                    isGet_count += 1
+                                    if isGet_count > 8:
+                                        isGet = True
                                     full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -696,7 +704,11 @@ def game_event_search(cla, data, y_):
             # 여긴 seven_four
             print("seven_four")
             isGetSevenFour = False
+            isGetSevenFour_count = 0
             while isGetSevenFour is False:
+                isGetSevenFour_count += 1
+                if isGetSevenFour_count > 10:
+                    isGetSevenFour = True
                 full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\get_new.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -727,7 +739,11 @@ def game_event_search(cla, data, y_):
                             click_pos_2(350, 570, cla)
                             time.sleep(0.3)
                             isGet = False
+                            isGet_count = 0
                             while isGet is False:
+                                isGet_count += 1
+                                if isGet_count > 5:
+                                    isGet = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -758,8 +774,11 @@ def game_event_search(cla, data, y_):
                             print("완료하여 받기 _ 2", imgs_)
                             click_pos_2(700, 570, cla)
                             time.sleep(0.3)
-                            isGet = False
+                            isGet_count = 0
                             while isGet is False:
+                                isGet_count += 1
+                                if isGet_count > 5:
+                                    isGet = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -791,7 +810,11 @@ def game_event_search(cla, data, y_):
                             click_pos_2(350, 630, cla)
                             time.sleep(0.3)
                             isGet = False
+                            isGet_count = 0
                             while isGet is False:
+                                isGet_count += 1
+                                if isGet_count > 5:
+                                    isGet = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -823,7 +846,11 @@ def game_event_search(cla, data, y_):
                             click_pos_2(700, 630, cla)
                             time.sleep(0.3)
                             isGet = False
+                            isGet_count = 0
                             while isGet is False:
+                                isGet_count += 1
+                                if isGet_count > 5:
+                                    isGet = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -861,8 +888,11 @@ def game_event_item_get(cla):
             data = file.read()
             datas = data.split(":")
             print('datas', datas)
-
+        isGet_count = 0
         while isitemGet_1 is False:
+            isGet_count += 1
+            if isGet_count > 5:
+                isitemGet_1 = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event_get.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -870,7 +900,11 @@ def game_event_item_get(cla):
             if imgs_ is not None:
                 isitemGet_1 = True
                 print("'일차'가 보여", imgs_)
+                isGet_count = 0
                 while isitemGet_2 is False:
+                    isGet_count += 1
+                    if isGet_count > 5:
+                        isitemGet_2 = True
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event_get.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -996,7 +1030,11 @@ def game_event_get(cla):
 
 
         isEventEnd = False
+        isEventEnd_count = 0
         while isEventEnd is False:
+            isEventEnd_count += 1
+            if isEventEnd_count >7:
+                isEventEnd = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\eventandbosang.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1111,7 +1149,11 @@ def achieve_get_(cla):
 
         print("achieve_get_")
         isachieve_ = False
+        isachieve_count = 0
         while isachieve_ is False:
+            isachieve_count += 1
+            if isachieve_count > 7:
+                isachieve_ = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\achieve\\upjuk.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1138,7 +1180,11 @@ def achieve_get_(cla):
                 click_pos_2(920, 65, cla)
                 time.sleep(1)
                 isMenu = False
+                isMenu_count = 0
                 while isMenu is False:
+                    isMenu_count += 1
+                    if isMenu_count > 7:
+                        isMenu = True
                     result_menu = menuOpenCheck(cla, "achieve_get_1")
                     if result_menu == True:
                         isMenu = True

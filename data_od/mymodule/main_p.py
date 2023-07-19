@@ -52,6 +52,7 @@ from go_ import go_test
 from grow import yotoon_grow, potion_grow, common_grow, nida_grow, nida_grow_end, tuto_grow, yotoon_grow_end, alb_grow_end
 from stop_18 import is_stop
 from dungeon_su import dunjeon_cla_play_su
+from server import game_start
 
 
 from massenger import line_to_me, line_monitor
@@ -132,9 +133,7 @@ pytesseract.pytesseract.tesseract_cmd = R'C:\Program Files\Tesseract-OCR\tessera
 ####################################################################################################################
 ####################################################################################################################
 
-
 class MyApp(QDialog):
-
 
     def __init__(self):
         super().__init__()
@@ -161,6 +160,9 @@ class MyApp(QDialog):
         # vbox.addWidget(buttonbox)
 
         self.setLayout(vbox)
+
+        start_ready = game_Playing_Ready(self)
+        start_ready.start()
 
         self.setWindowTitle('오딘(ver ' + str(version) + ')')
         # 업데이트 버젼
@@ -308,11 +310,11 @@ class ThirdTab(QWidget):
             file.write(write_)
 
     def button_monitoring_one(self):
-        v_.global_howcla = 'onecla'
+        # v_.global_howcla = 'onecla'
         m_ = Monitoring(self)
         m_.start()
     def button_monitoring_all(self):
-        v_.global_howcla = 'onetwocla'
+        # v_.global_howcla = 'onetwocla'
         m_ = Monitoring(self)
         m_.start()
 
@@ -898,13 +900,14 @@ class FirstTab(QWidget):
         self.setLayout(vbox)
 
     def temporary_all_pause_game(self):
-        # change_ready_main = True
-        # change_ready_step = True
         print("game_Playing(self): temporary_pause_game")
-        # self.game.isCheck = False
-        # self.game.quit()
-        # self.game.wait(3000)
-        # self.temporary_pause_background()
+        dir_path = "C:\\my_games\\load\\odin"
+        file_path = dir_path + "\\start.txt"
+        with open(file_path, "w", encoding='utf-8-sig') as file:
+            data = 'no'
+            file.write(str(data))
+            time.sleep(0.2)
+        os.execl(sys.executable, sys.executable, *sys.argv)
     def temporary_pause_background(self):
 
         print("game_Playing(self): temporary_pause_background")
@@ -923,6 +926,11 @@ class FirstTab(QWidget):
         # change_ready_step = False
 
         print("업데이트 후 재시작")
+        dir_path = "C:\\my_games\\load\\odin"
+        file_path = dir_path + "\\start.txt"
+        with open(file_path, "w", encoding='utf-8-sig') as file:
+            data = 'no'
+            file.write(str(data))
         # git pull 실행 부분
         my_repo = git.Repo()
         my_repo.remotes.origin.pull()
@@ -1830,9 +1838,9 @@ class FirstTab(QWidget):
 
     def mySchedule_start1(self):
         try:
-            v_.global_howcla = 'onecla'
-            m_ = Monitoring(self)
-            m_.start()
+            # v_.global_howcla = 'onecla'
+            # m_ = Monitoring(self)
+            # m_.start()
 
             self.sche_add1.setText("one 실행중")
             self.sche_add2.setText("two")
@@ -1848,9 +1856,8 @@ class FirstTab(QWidget):
             return 0
     def mySchedule_start2(self):
         try:
-            v_.global_howcla = 'onecla'
-            m_ = Monitoring(self)
-            m_.start()
+            # v_.global_howcla = 'onecla'
+
 
             self.sche_add1.setText("one")
             self.sche_add2.setText("two 실행중")
@@ -1890,287 +1897,6 @@ class FirstTab(QWidget):
 
 
 
-class BackGroundPotion(QThread):
-    #parent = MainWidget을 상속 받음.
-    def __init__(self):
-        super().__init__()
-        self.potion_back_ = True
-    def run(self):
-        # global change_ready_step, change_ready_main
-        try:
-            data = 'none'
-            # 추후
-            # print("BackGroundPotion(QThread): go")
-            while self.potion_back_ is True:
-                # if change_ready_step == False:
-                #     print("(background)1", now_cla)
-                #     time.sleep(3)
-                #     print("(background)2", now_cla)
-                #     time.sleep(3)
-                #     print("(background)3", now_cla)
-                #     time.sleep(3)
-                #     print("(background)4", now_cla)
-                #     time.sleep(3)
-
-                if v_.change_ready_step == False:
-                    if v_.now_cla != 'none' and v_.global_howcla == 'onetwocla':
-
-                        if v_.now_cla == 'one':
-                            data = 'two'
-                            cla_ing_ = v_.two_cla_ing
-                        if v_.now_cla == 'two':
-                            data = 'one'
-                            cla_ing_ = v_.one_cla_ing
-                        cla = data
-
-
-
-                        # 꺼졌을 경우 재 로그인
-                        go_alrim_confirm(data, "BackGroundPotion")
-
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(0, 0, 60, 30, data, img)
-                        if imgs_ is not None and imgs_ != False:
-                            print("오딘 백그라운드 " + str(data) + "클라 켜져있음  ^ㅅ^")
-
-
-
-                            # 절전모드 해제
-
-
-                            # 던전 일 경우
-                            if cla_ing_ == 'gonghu' or cla_ing_ == 'nanjang' or cla_ing_ == 'underprison':
-                                print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<백그라운드 Potion 테스트중입니당>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", data)
-                                lotation_change_ready(cla, 'BackGroundPotion')
-                                result_ = now_hunting_is('백그라운드 바위해안', data)
-                                # chango4 = go_chango(data, 'village')
-                                if result_ == False:
-                                    chango4 = go_chango(data, 'village')
-                                    if chango4 == False:
-                                        click_pos_2(586, 986, data)
-                                        time.sleep(random_int())
-                                        now_hunting_is('백그라운드 ', data)
-                                    else:
-                                        jadong_cla_ready(data, '바위해안')
-
-                                # 가방 꽉 찼을 경우 분해하기
-                                boonhae_ready = False
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\full_mybag_1.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(820, 30, 885, 80, data, img)
-                                if imgs_ is None or imgs_ == False:
-                                    print("full_mybag_1 안보여")
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\full_mybag_2.png"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(820, 30, 885, 80, data, img)
-                                    if imgs_ is None:
-                                        print("full_mybag_2 안보여")
-                                    else:
-                                        print("full_mybag_2 보여", imgs_)
-                                        boonhae_ready = True
-                                else:
-                                    print("full_mybag_1 보여", imgs_)
-                                    boonhae_ready = True
-
-                                if boonhae_ready == True:
-                                    go_boonhae(data, "BackGroundPotion")
-
-
-                                # 물약 체크하기
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(30, 40, 100, 75, data, img)
-                                if imgs_ is None or imgs_ == False:
-                                    background_myPotion_check(data)
-                                else:
-                                    click_pos_2(920, 65, data)
-                                    time.sleep(random_int())
-                                    background_myPotion_check(data)
-                                # 줍줍
-                                go_collection_on(data)
-                            elif cla_ing_ == 'maul':
-                                lotation_change_ready(cla, 'BackGroundPotion')
-                                # 물약 체크하기
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(30, 40, 100, 75, data, img)
-                                if imgs_ is None or imgs_ == False:
-                                    background_myPotion_check(data)
-                                else:
-                                    click_pos_2(920, 65, data)
-                                    time.sleep(random_int())
-                                    background_myPotion_check(data)
-                                # 줍줍
-                                go_collection_on(data)
-                            elif cla_ing_ == 'jadong':
-                                lotation_change_ready(cla, 'BackGroundPotion')
-                                now_hunting_is('background', data)
-                                dead_die(data, "BackGroundPotion => elif cla_ing_ == 'jadong':")
-                                # 가방 꽉 찼을 경우 분해하기
-                                boonhae_ready = False
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\full_mybag_1.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(820, 30, 885, 80, data, img)
-                                if imgs_ is None or imgs_ == False:
-                                    print("full_mybag_1 안보여")
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\full_mybag_2.png"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(820, 30, 885, 80, data, img)
-                                    if imgs_ is None:
-                                        print("full_mybag_2 안보여")
-                                    else:
-                                        print("full_mybag_2 보여", imgs_)
-                                        boonhae_ready = True
-                                else:
-                                    print("full_mybag_1 보여", imgs_)
-                                    boonhae_ready = True
-
-                                if boonhae_ready == True:
-                                    go_boonhae(data, "BackGroundPotion")
-                                # 물약 체크하기
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(30, 40, 100, 75, data, img)
-                                if imgs_ is None or imgs_ == False:
-                                    background_myPotion_check(data)
-                                else:
-                                    click_pos_2(920, 65, data)
-                                    time.sleep(random_int())
-                                    background_myPotion_check(data)
-                                # 줍줍
-                                go_collection_on(data)
-                            elif cla_ing_ == 'grow':
-                                lotation_change_ready(cla, 'BackGroundPotion')
-                                # # 물약 체크하기
-                                # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                # img_array = np.fromfile(full_path, np.uint8)
-                                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                # imgs_ = imgs_set(30, 40, 100, 75, data, img)
-                                # if imgs_ is None or imgs_ == False:
-                                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
-                                #     img_array = np.fromfile(full_path, np.uint8)
-                                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                #     imgs_ = imgs_set(600, 30, 800, 90, cla, img)
-                                #     if imgs_ is not None:
-                                #         background_myPotion_check(data)
-                                # else:
-                                #     click_pos_2(920, 65, data)
-                                #     time.sleep(random_int())
-                                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
-                                #     img_array = np.fromfile(full_path, np.uint8)
-                                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                #     imgs_ = imgs_set(600, 30, 800, 90, cla, img)
-                                #     if imgs_ is not None:
-                                #         background_myPotion_check(data)
-                                # 줍줍
-                                go_collection_on(data)
-                                # 육성
-                                if cla == "one":
-                                    now_growing_ = v_.one_now_growing_
-                                if cla == "two":
-                                    now_growing_ = v_.two_now_growing_
-                                if now_growing_ == "none":
-                                    now_growing_ = "요툰육성"
-                                if now_growing_ == "니다육성":
-                                    # cla_grow = Grow_()
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(600, 30, 800, 90, cla, img)
-                                    if imgs_ is not None:
-                                        # cla_grow.potion_grow(cla, now_growing_)
-                                        potion_grow(cla, now_growing_)
-                                    else:
-                                        clean_screen(cla, "니다육성")
-                                    # cla_grow.common_grow(cla)
-                                    # cla_grow.nida_grow(cla)
-                                    common_grow(cla)
-                                    nida_grow(cla)
-                                elif now_growing_ == "요툰육성":
-                                    # cla_grow = Grow_()
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\event1.png"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(600, 30, 800, 90, cla, img)
-                                    if imgs_ is not None:
-                                        # cla_grow.potion_grow(cla, now_growing_)
-                                        potion_grow(cla, now_growing_)
-                                    else:
-                                        clean_screen(cla, "요툰육성")
-                                    # cla_grow.tuto_grow(cla)
-                                    # cla_grow.common_grow(cla)
-                                    # cla_grow.yotoon_grow(cla)
-                                    tuto_grow(cla)
-                                    common_grow(cla)
-                                    nida_grow(cla)
-                            else:
-                                print("해당사항 없으니 쉬자")
-                        else:
-                            print("오딘 백그라운드 " + str(data) + "클라 꺼져있음  ㅠㅅㅠ")
-
-                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set(0, 0, 960, 1030, data, img)
-                            if imgs_ is not None and imgs_ != False:
-                                print("어라?오딘 백그라운드 " + str(data) + "클라 켜져있음  ^ㅅ^", imgs_)
-                                time.sleep(0.3)
-                                click_pos_reg(imgs_.x + 100, imgs_.y, data)
-                                pyautogui.keyDown('win')
-                                if data == 'one':
-                                    pyautogui.press('left')
-                                elif data == 'two':
-                                    pyautogui.press('right')
-                                pyautogui.keyUp('win')
-                                time.sleep(0.3)
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set(0, 0, 60, 30, data, img)
-                                if imgs_ is not None and imgs_ != False:
-                                    print("정비 완료  ^ㅅ^", imgs_)
-                                    time.sleep(1)
-                                    click_pos_reg(imgs_.x + 100, imgs_.y, data)
-                                    print("다시 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ")
-
-                            else:
-                                print("힝..오딘 백그라운드 " + str(data) + "클라 꺼져있음  ㅠ,.ㅠ")
-                                line_to_me(data, "꺼진 것 같다")
-                            # 꺼져있을때 켜는거 나중에 다시 점검...
-                            # if now_cla != 'none':
-                            #     login_starting(data)
-                            #     time.sleep(random_int())
-                            #     get_cla_count(data)
-                            #     time.sleep(random_int())
-                            #     dead_die(data, "BackGroundPotion => if now_cla != 'none':")
-                            #     go_bag(data, "BackGroundPotion")
-                            #     time.sleep(random_int())
-                            #     chango_(data, 'after')
-                            #     jadong_cla_ready(data, '바위해안')
-
-
-                print("백그라운드 포션 체크 클라 : ", data)
-
-                if v_.change_ready_main == True:
-                    v_.change_ready_main = False
-                    print("(background)5", v_.now_cla)
-                time.sleep(20)
-
-
-        except Exception as e:
-            print(e)
-            return 0
-
-
 
 class Test_check(QThread):
 
@@ -2188,7 +1914,7 @@ class Test_check(QThread):
 
 
         v_.now_cla = 'one'
-        v_.global_howcla = 'onetwocla'
+        # v_.global_howcla = 'onetwocla'
 
         cla = v_.now_cla
         if cla == 'one':
@@ -2201,358 +1927,17 @@ class Test_check(QThread):
 
         go_test(cla)
 
-        # self.parent.temporary_all_pause_game()
-        # color change
-        # potion__ = 0
-        # img = pyautogui.screenshot(region=(get_region(105, 410, 165, 440, cla)))
-        # white_img = image_processing(img, (148, 148, 148), (255, 255, 255))
-        # result = pytesseract.image_to_string(white_img, lang=None)
-        # digit_bloon = int_put_(result).isdigit()
-        # if digit_bloon == True:
-        #     num_ = int(int_put_(result))
-        #     print("num_", num_)
-        #     potion__ += num_
-        # else:
-        #     if result == '':
-        #         print("비웠니랑..")
-        #     else:
-        #         print("보이질 않아", result)
 
-        # go_alrim_confirm(cla, 'test')
-        # go_power_bag(cla)
-
-        # go_jadong_cla_mypower(cla)
-
-
-        #line_to_me("one", "쿱꼬 초기화 갱신 안되었다.")
-
-        # dir_path = "C:\\my_games\\coobcco2"
-        # file_path = dir_path + "\\odin_schedule\\schedule.txt"
-        # file_path2 = dir_path + "\\odin_schedule\\quest.txt"
-        # file_path3 = dir_path + "\\odin_schedule\\schedule2.txt"
-        # file_path13 = dir_path + "\\odin_schedule\\refresh_time.txt"
-        #
-        # if os.path.isfile(file_path) == True:
-        #     with open(file_path, "r", encoding='utf-8-sig') as file:
-        #         refresh_time = file.read()
-        #     if refresh_time == "":
-        #         print("empty")
-        #     else:
-        #         print("refresh_time", refresh_time)
         print(cv2.__file__)
 
 
 
 
 
-        # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\drag_.png"
-        # img_array = np.fromfile(full_path, np.uint8)
-        # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        # imgs_ = imgs_set(220, 930, 800, 1030, cla, img)
-        # if imgs_ is not None:
-        #     print("drag_", imgs_)
-
-        # auction_all_get(cla)
-        # from event_get import special_package
-        # special_package(cla)
-
-
-        # print("5x5 뽑기")
-        # isZero = False
-        # while isZero is False:
-        #     full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\zero.png"  # zero 파악
-        #     img_array = np.fromfile(full_path, np.uint8)
-        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #     imgs_ = imgs_set_(220, 360, 275, 440, cla, img, 0.9)
-        #     if imgs_ is not None and imgs_ != False:
-        #         isZero = True
-        #         print("받을 포인트 부족")
-        #     else:
-        #         print("받기 시작")
-        #         full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
-        #         img_array = np.fromfile(full_path, np.uint8)
-        #         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #         imgs_ = imgs_set_(380, 270, 550, 330, cla, img, 0.8)
-        #         if imgs_ is not None and imgs_ != False:
-        #             click_pos_2(480, 320, cla)
-        #             full_path = "c:\\my_games\\coobcco2\\data_od\\item\\55\\open_ready.png"  # 오픈대기 파악
-        #             img_array = np.fromfile(full_path, np.uint8)
-        #             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #             imgs_ = imgs_set(35, 400, 400, 770, cla, img)
-        #             if imgs_ is not None and imgs_ != False:
-        #                 click_pos_reg(imgs_.x, imgs_.y, cla)
-        #                 time.sleep(2)
-        #                 isGet = False
-        #                 while isGet is False:
-        #                     full_path = "c:\\my_games\\coobcco2\\data_od\\item\\seven_four\\eventandbosang.png"
-        #                     img_array = np.fromfile(full_path, np.uint8)
-        #                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #                     imgs_ = imgs_set_(380, 270, 550, 330, cla, img, 0.8)
-        #                     if imgs_ is not None and imgs_ != False:
-        #                         isGet = True
-        #                         print("5x5 받기 완료", imgs_)
-        #                         time.sleep(0.3)
-        #                     else:
-        #                         print("5x5 스킵하기")
-        #                         click_pos_2(480, 320, cla)
-        #                         time.sleep(0.3)
-
-
-        #char_staus_.split('\n')
-
-        # go_mynumber_(cla)
-        # one_cla_ing = 'check'
-        # go_chango_drag(cla)
-        # go_boonhae_drag(cla)
-
-        # go_soongan_f5(cla)
-        # jadong_cla_ready(cla, '바위해안')
-
-        # clean_screen(cla, "now_hunting_is")
-        # go_bag(cla, 'test')
-        # now_hunting_is("test", cla)
-
-        # golded_ = text_check_get(815, 40, 891, 65, cla)
-        # print("gold??", golded_)
-        # gold_ = golded_.split("\n")
-        # result_ = int_put_(gold_[0])
-        # gold_bloon = isNumber_(result_)
-        # if len(result_) >= 1 and gold_bloon == True:
-        #     gold = int(result_)
-        #     isGold = True
-        #     print("gold", gold)
-        # else:
-        #     gold = 1000000
-        #     print("noGold = True")
-        # re_ = go_power_bag(cla)
-        # print("dd",re_)
-
-        #
-        # result_cou_ = maul_cou_(cla)
-        # # [0]수락 및 완료, [1]총갯수, [2]총갯수 - 수락 및 완료, [3]완료 글자 갯수, [4]수락함 글자 갯수, [5]완료 글자 + 수락함 글자 갯수
-        # # [6] 진행중 의뢰 갯수, [7] 진행중 의뢰 총 갯수 [8] 진행중의뢰 총갯수 - 진행중 의뢰 갯수
-        # print("[0]수락 및 완료, [1]총갯수, [2]총갯수 - 수락 및 완료, [3]완료 글자 갯수, [4]수락함 글자 갯수, [5]완료 글자 + 수락함 글자 갯수")
-        # print("[6] 진행중 의뢰 갯수, [7] 진행중 의뢰 총 갯수 [8] 진행중의뢰 총갯수 - 진행중 의뢰 갯수")
-        # print("result_cou", result_cou_)
-
-
-
-        # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\start_ready_in_jadong\\bawehaean.png"
-        # img_array = np.fromfile(full_path, np.uint8)
-        # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        # imgs_ = imgs_set(45, 105, 200, 160, cla, img)
-        #
-        # if imgs_ is None or imgs_ == False:
-        #     print('바위해안 아님')
-        # else:
-        #     print('바위해안 맞다')
-        #     print("바위해안", imgs_)
-
-        # print("test___________2")
-        # print("================")
-        # for i in range(4):
-        #     print("i : ", i)
-        #     mynick = text_check_get_3(10, 200, 165, 240, i, cla)
-        #     print("mynick2", mynick)
-
-        # for i in range(5):
-        #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangbi_out\\event_item_2.png"
-        #     img_array = np.fromfile(full_path, np.uint8)
-        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #     imgs_ = imgs_set_(540, 70, 950, 980, cla, img, 0.6)
-        #
-        #     if imgs_ is None or imgs_ == False:
-        #         print("evnet_item(out_이)가 없다...")
-        #     else:
-        #         print("있나", imgs_)
-        #         click_pos_reg(imgs_.x - 20, imgs_.y, cla)
-        #         time.sleep(0.3)
-        #         click_pos_reg(890, 1010, cla)
-        #         time.sleep(0.3)
-        # seven_four
-
-        # go_level(cla)
-
-        # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan.png"
-        # img_array = np.fromfile(full_path, np.uint8)
-        # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        # imgs_ = imgs_set(560, 100, 950, 950, cla, img)
-        # if imgs_ is None or imgs_ == False:
-        #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\soongan_2.png"
-        #     img_array = np.fromfile(full_path, np.uint8)
-        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        #     imgs_ = imgs_set(560, 100, 950, 950, cla, img)
-        #     if imgs_ is None or imgs_ == False:
-        #         print("없")
-        #     else:
-        #         print("있2", imgs_)
-        # else:
-        #     print("있1", imgs_)
-        # chango_(cla, 'after')
-
-
-        # result = go_alrim_(cla)
-        # print(result)
-        # for i in range(4):
-        #     print("i : ", i)
-        #     # potion_count_ = text_check_get_3(850, 820, 935, 850, i, cla)
-        #     potion_count_ = text_check_get_3(855, 825, 935, 850, i, cla)
-        #     # potion_count_ = text_check_get_3(865, 830, 935, 850, i, cla)
-        #     print("potion_count_", potion_count_)
-        #     if '/' in potion_count_ and potion_count_ != 0:
-        #         print('/가 있당')
-        #         potion_count1 = potion_count_.split("/")
-        #         print("potion_count1", potion_count1)
-        #         potion_ = int_put_(potion_count1[0])
-        #         potion_bloon = potion_.isdigit()
-        #         if potion_bloon == True:
-        #             potion = int(potion_)
-        #             print("potion", potion)
-        #             ispotion__ = True
-        #             # click_pos_2(700, 840, cla) 이건 최초 1회만 하자
-        #         else:
-        #             print("포션 파악 불가")
-        #             print("포션 파악 불가인 것은 물약이 최대 소지 갯수 초과했기 때문임.")
-        #     else:
-        #         print('/가 없당')
-        #         print("potion_count_99999", potion_count_)
-        #         print("/가 없는 것은 물약이 최대 소지 갯수 초과했기 때문임.")
-
-        # myPotion_check('test', cla)
-        # go_potion_off(cla)
-
-        # self.xy = Grow_()
-        # self.xy.potion_grow(cla, '니다육성')
-
-        # get_cla_count_grow(cla)
-
-        # x_ = game_Playing(self.parent)
-        # x_.start()
-        #
-        # y_ = BackGroundPotion(self.parent)
-        # y_.start()
-        # myId_1 = 1
-        # result_ = myQuest_play_check(cla, '요툰육성')
-        # print('result_[2]', result_[2])
-        # if result_[2] == True:
-        #     self.parent.mySchedule_refresh()
-        # else:
-        #     cla_ing_ = result_
-        #     self.parent.mySchedule_is()
-        # myId_1 = 2
-        # result_ = myQuest_play_add(cla, '요툰육성')
-        # if result_ == 'check':
-        #     cla_ing_ = result_
-        #     self.parent.mySchedule_is()
-
-        # go_chango(cla, 'out')
-        # self.parent.set_rand_int()
-        # result = quest_refresh()
-        # if result == True:
-        #     self.parent.mySchedule_refresh()
-
-
-        # self.parent.temporary_all_pause_game()
-        # self.parent.again_restart_game()
-
-
-
-        # go_juljun(cla)
-
-        # now_cla = 'one'
-        # global_howcla = 'onetwocla'
-        # self.parent.again_restart_game()
-        # print("진행중으로 바꾸기 작업 시도")
-        # self.parent.set_rand_int_jinhang(cla)
-        # result = self.parent.sche_load_()
-        # print(result)
-        # how_ = 'modify'
-        # result = self.parent.mySchedule_change(how_, result)
-        # if result == True:
-        #     self.parent.set_rand_int()
-        # time.sleep(3)
-        # self.parent.set_rand_int_jinhang('two')
-
-
 
 
     def hello(self):
         print("hi hello")
-        # cla = 'one'
-        # howcla= 'onecla'
-        # game_play_test(howcla)
-
-        # while self.one_ is True:
-        #     print("self.one_ = True")
-        #     time.sleep(3)
-        #
-        # while self.two_ is True:
-        #     print("self.two_ = True")
-        #     time.sleep(3)
-
-
-        # print("test!~!~!~!", self.pause)
-        # while self.pause:
-        #     if self.pause == True:
-        #         print("시작한다아")
-        #         game_play_test(howcla)
-        #     else:
-        #         print("정지한다아")
-        # num_ = 0
-        # nono = 'none'
-        # nono2= 'none'
-        # while self.pause:
-        #     num_ += 1
-        #     print('...', num_)
-        #     print('...', nono)
-        #     print('...', nono2)
-        #     if num_ == 2:
-        #         nono = 'good'
-        #     if num_ == 4:
-        #         nono = 'gooddddddddd'
-        #         nono2 = 'zzzzzzzzzzz'
-        #     time.sleep(3)
-
-    # def stop_(self):
-    #
-    #     print("stop!!!!!!!")
-    #     self.pause = False
-    #     self.quit()
-    #     self.wait(3000)  # 3초 대기 (바로 안꺼질수도)
-    #
-    # def go_(self):
-    #     print("start!!!!!!!")
-    #     self.pause = True
-    #     # self.Test_check = Test_check()
-    #     # self.Test_check.start()
-
-
-        # try:
-        #
-        #
-        #     howcla = 'onetwocla'
-        #     game_play_test(howcla)
-        #
-        #
-        #
-        #
-        # except Exception as e:
-        #     print(e)
-        #     return
-
-
-
-            # howcla = 'onetwocla'
-            #
-            # istest = isgloballoop
-            # print('isgloballoop', isgloballoop)
-            # while istest is False:
-            #     print("tttttttttttttttttttttttt")
-            #     # game_play_test(howcla)
-            #     time.sleep(5)
-            #
-            # # game_play_test(howcla)
-
 
 
 
@@ -2850,11 +2235,27 @@ class Monitoring(QThread):
     def run(self):
         try:
             print("monitoring start")
-            line_monitor()
+            # line_monitor()
         except Exception as e:
             print(e)
             return 0
 
+
+class game_Playing_Ready(QThread):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.parent = parent
+
+    def run(self):
+        try:
+
+            m_ = Monitoring(self)
+            m_.start()
+            self.x_ = game_Playing()
+            self.x_.start()
+        except Exception as e:
+            print(e)
+            return 0
 
 class game_Playing_onecla(QThread):
     def __init__(self, parent):
@@ -2862,24 +2263,15 @@ class game_Playing_onecla(QThread):
         self.parent = parent
     def run(self):
         try:
-            v_.now_cla = 'one'
-            howcla = 'onecla'
-            self.x_ = game_Playing()
-            self.x_.start()
-            # howcla = 'onecla'
-            # result_ = login_start_ready(howcla)
-            # if result_ == True:
-            #     print("이제 시작 했다 다 죽었다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", howcla)
-            #
-            #     v_.now_cla = 'one'
-            #     v_.global_howcla = 'onecla'
-            #
-            #     # self.parent.again_restart_game()
-            #     self.x_ = game_Playing()
-            #     self.x_.start()
-            #
-            #     # self.y_ = BackGroundPotion()
-            #     # self.y_.start()
+            dir_path = "C:\\my_games\\load\\odin"
+            file_path = dir_path + "\\start.txt"
+
+            with open(file_path, "w", encoding='utf-8-sig') as file:
+                data = 'yes'
+                file.write(str(data))
+
+            v_.now_cla = 'one' # <= 오딘 제외하고 1클라 돌리는 게임은 주석 처리.
+
         except Exception as e:
             print(e)
             return 0
@@ -2895,26 +2287,14 @@ class game_Playing_twocla(QThread):
     def run(self):
         try:
 
-            v_.now_cla = 'two'
-            howcla = 'onecla'
-            self.x_ = game_Playing()
-            self.x_.start()
+            dir_path = "C:\\my_games\\load\\odin"
+            file_path = dir_path + "\\start.txt"
 
-            # howcla = 'onetwocla'
-            # result_ = login_start_ready(howcla)
-            # if result_ == True:
-            #     print("이제 시작 했다 다 죽었다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", howcla)
-            #
-            #     v_.now_cla = 'one'
-            #     v_.global_howcla = 'onetwocla'
-            #     self.x_ = game_Playing()
-            #     self.x_.start()
-            #
-            #     self.y_ = BackGroundPotion()
-            #     self.y_.start()
-            # else:
-            #     print("아직 2클라 덜 돌아갔다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            # print('return!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', result_)
+            with open(file_path, "w", encoding='utf-8-sig') as file:
+                data = 'yes'
+                file.write(str(data))
+
+            v_.now_cla = 'two'  # <= 오딘 제외하고 1클라 돌리는 게임은 주석 처리.
         except Exception as e:
             print(e)
             return 0
@@ -2963,487 +2343,404 @@ class game_Playing(QThread):
 
             cla = v_.now_cla
             print("now_cla", v_.now_cla)
-            print("global_howclaglobal ", v_.global_howcla)
+            # print("global_howclaglobal ", v_.global_howcla)
 
             print('self.isCheck!!!!!!!!!!!!!', self.isCheck)
 
             print("여긴 실행 모드(ver " + str(version) + ")")
             while self.isCheck is True:
+                result_game = game_start()
+                if v_.now_cla != "none" and result_game == True:
+                    cla = v_.now_cla
+                    is_stop(cla)
 
-                is_stop(cla)
-
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\touching.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = pyautogui.locateCenterOnScreen(img, region=(0, 0, 3840, 1080),
-                                                       confidence=0.7)
-                if imgs_ is not None and imgs_ != False:
-                    print("터칭 모드 중(ver " + str(version) + ")", imgs_)
-                    time.sleep(5)
-                else:
-
-                    # %%%
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\touching.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(0, 0, 60, 30, cla, img)
+                    imgs_ = pyautogui.locateCenterOnScreen(img, region=(0, 0, 3840, 1080),
+                                                           confidence=0.7)
                     if imgs_ is not None and imgs_ != False:
-                        print("오딘 " + str(cla) + "클라 켜져있음  ^ㅅ^")
+                        print("터칭 모드 중(ver " + str(version) + ")", imgs_)
+                        time.sleep(5)
+                    else:
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set(0, 0, 60, 30, cla, img)
+                        if imgs_ is not None and imgs_ != False:
+                            print("오딘 " + str(cla) + "클라 켜져있음  ^ㅅ^")
 
-                        isready_ = False
-                        isready_count = 0
-                        while isready_ is False:
-                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title.PNG"
+                            isready_ = False
+                            isready_count = 0
+                            while isready_ is False:
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
+                                if imgs_ is not None and imgs_ != False:
+                                    isready_count += 1
+                                    if isready_count < 4:
+                                        print("매크로를 내려야 실행됨...15초")
+                                        for i in range(10):
+                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(0, 0, 960, 1030, v_.now_cla, img, 0.8)
+                                            if imgs_ is not None and imgs_ != False:
+                                                if i > 8:
+                                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
+                                                    img_array = np.fromfile(full_path, np.uint8)
+                                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                    # 오딘 1클, 나크 2클, 제노는 3클라 고정
+                                                    imgs_ = imgs_set_(0, 50, 960, 1030, "one", img, 0.8)
+                                                    if imgs_ is not None and imgs_ != False:
+                                                        click_pos_reg(imgs_.x - 40, imgs_.y, v_.now_cla)
+                                                    break
+                                else:
+                                    isready_ = True
+                                time.sleep(5)
+
+
+
+
+
+                            # 처음 로그인 화면 구분
+                            # print("처음시작..get_cla_count(cla)")
+                            #get_cla_count(cla)
+
+                            # 빌어먹을 이벤트 창
+                            is_stop(cla)
+
+
+                            # 우선 방치모드 해제
+                            bangchi_mode(cla)
+
+
+                            # 스케쥴 체크
+                            start_ready = myQuest_play_check(cla, "check")
+
+                            print("진행중으로 바꾸기 작업 시도")
+                            # self.parent.set_rand_int_jinhang(cla)
+
+                            # start_ready[0] 진행중인 정보 [0][1] = id, [0][2] = 던전(공허, 난쟁이, 지하감옥, 자동사냥(들소황무지...), [0][3] = 완료 or 대기중, [3]진행되거나 진행중인 퀘스트
+                            # 몇번째 인자에 정보가 담겨있는지 여부
+                            print("checking", start_ready)
+                            print("checking[0][1]", start_ready[0][1])
+                            print("checking[0][2]", start_ready[0][2])
+                            print("checking[0][3]", start_ready[0][3])
+                            print("checking[3]", start_ready[3])
+
+                            if start_ready[0][2] != "캐릭터바꾸기":
+                                result_char_select = go_character_select(cla)
+                                if result_char_select == True:
+                                    data = int(start_ready[0][1])
+                                    characterChange(data, cla)
+
+                                else:
+                                    # 현재 진행중인 스케쥴 내 캐릭터 id와 기존 캐릭터 id 비교해서 다르면 캐릭터 바꾸기
+                                    dir_path = "C:\\my_games\\coobcco2"
+                                    if cla == 'one':
+                                        file_path = dir_path + "\\odin_schedule\\one_now_id.txt"
+                                    if cla == 'two':
+                                        file_path = dir_path + "\\odin_schedule\\two_now_id.txt"
+
+                                    if os.path.isfile(file_path) == True:
+
+                                        with open(file_path, "r", encoding='utf-8-sig') as file:
+                                            read_id = file.read()
+
+                                        if str(start_ready[0][1]) != str(read_id):
+                                            characterChange(start_ready[0][1], cla)
+                                    else:
+                                        characterChange(start_ready[0][1], cla)
+
+
+                            if start_ready[0][2] == "캐릭터바꾸기":
+                                data = int(start_ready[0][1])
+                                characterChange(data, cla)
+                                myQuest_play_add(cla, "캐릭터바꾸기")
+
+                            elif start_ready[0][2] == "각종템받기":
+                                # if myQuest_grow_result[2] == '각종템받기':
+                                print("우편, 이벤트, 업적 다 받아버리기")
+                                # game_settings(cla, 'start')
+                                game_event_get_ready(cla)
+                                mypost(cla)
+                                achieve_get_(cla)
+                                chango_(cla, 'after')
+                                guild_join_(cla)
+                                myQuest_play_add(cla, start_ready[0][2])
+                                datas = 'check'
+                                start_ready = myQuest_play_check(cla, datas)
+
+                            elif start_ready[0][2] == "거래소등록":
+                                # if myQuest_grow_result[2] == '거래소등록':
+                                print("창고에 꺼내서 팔아버리기")
+                                # 먼저 창고에 가자
+                                auction_all_get(cla)
+                                myQuest_play_add(cla, start_ready[0][2])
+
+                            elif '_' in start_ready[0][2]:
+
+                                dir_path = "C:\\my_games\\coobcco2\\data_od"
+                                file_path = dir_path + "\\imgs\\dunjeon\\in_dun.txt"
+
+                                with open(file_path, "r", encoding='utf-8-sig') as file:
+                                    indun = file.read().splitlines()
+                                    print("&&&&&&", indun)
+                                potion_go = False
+                                for i in range(len(indun)):
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print(indun[i], "있다")
+                                        potion_go = True
+                                if potion_go == False:
+                                    go_to_home('start', cla)
+
+                                result_auto = go_auto(cla, 99)
+                                if result_auto == True:
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\full_bag_1.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set_(820, 0, 960, 100, cla, img, 0.9)
+                                    if imgs_ is not None and imgs_ != False:
+                                        go_boonhae(cla, "full_bag")
+                                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set(30, 40, 100, 75, cla, img)
+                                        if imgs_ is None or imgs_ == False:
+                                            click_pos_2(930, 55, cla)
+
+
+
+                                dunjeon_spl_ = start_ready[0][2].split("_")
+                                print("dunjeon_spl_[0]", dunjeon_spl_[0])
+                                print("dunjeon_spl_[1]", dunjeon_spl_[1])
+                                if dunjeon_spl_[0] == '공허':
+                                    print("game_gonghu", cla)
+                                    data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
+
+                                    dunjeon = "gonghu"  # 보내고자 하는 던전
+
+
+                                    result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
+                                    if result == True:
+                                        data_ = 'gonghu'
+                                        result_ = myQuest_play_add(cla, data_)
+
+                                    # result = dunjeon_cla_play(cla, data, dunjeon)
+                                    #
+                                    # if result == True:
+                                    #     data_ = 'gonghu'
+                                    #     result_ = myQuest_play_add(cla, data_)
+
+
+
+                                elif dunjeon_spl_[0] == '난쟁이':
+                                    print("game_nanjang", cla)
+                                    data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
+                                    dunjeon = "nanjang"  # 보내고자 하는 던전
+
+                                    print("난쟁이 시작해볼까")
+
+                                    result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
+
+                                    if result == True:
+                                        data_ = 'nanjang'
+                                        result_ = myQuest_play_add(cla, data_)
+
+                                elif dunjeon_spl_[0] == '지하감옥':
+                                    print("game_underprison", cla)
+                                    data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
+
+                                    dunjeon = "underprison"  # 보내고자 하는 던전
+
+                                    result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
+
+                                    print("점검__8", cla, result)
+                                    if result == True:
+                                        data_ = 'underprison'
+                                        result_ = myQuest_play_add(cla, data_)
+                                        print("점검__9", cla)
+                            else:
+
+                                if start_ready[0][2] == '미드가르드' or start_ready[0][2] == '요툰하임':
+                                    print("game_maul", cla)
+                                    # data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong', 'maul'
+                                    print("마을 의뢰 시작해볼까")
+
+                                    result = maul_mission(cla, start_ready[0][2])
+
+                                    if result == True:
+                                        data_ = start_ready[0][2]
+                                        result_ = myQuest_play_add(cla, data_)
+
+
+                                else:
+
+                                    if start_ready[0][2] == '요툰육성':
+                                        yotoon_end = 0
+                                        tuto_grow(cla)
+
+                                        result = yotoon_grow_end(cla)
+
+                                        if result == True:
+                                            yotoon_end += 1
+
+                                        # cla_grow.common_grow(cla)
+
+                                        # result = cla_grow.yotoon_grow_end(cla)
+
+                                        common_grow(cla)
+
+                                        result = yotoon_grow_end(cla)
+
+                                        if result == True:
+                                            yotoon_end += 1
+
+                                        # cla_grow.yotoon_grow(cla)
+
+                                        yotoon_grow(cla)
+
+                                        # result = cla_grow.yotoon_grow_end(cla)
+
+                                        result = yotoon_grow_end(cla)
+
+                                        if result == True:
+                                            yotoon_end += 1
+
+                                        time.sleep(1)
+
+                                        if yotoon_end >= 1:
+
+                                            print("요툰 육성 끝")
+
+                                            result_ = myQuest_play_add(cla, start_ready[0][2])
+
+                                        else:
+
+                                            result_quest_ = go_quest_ing(cla)
+
+                                    elif start_ready[0][2] == '니다육성':
+                                        nida_end = 0
+                                        potion_grow(cla, start_ready[0][2])
+
+                                        common_grow(cla)
+
+                                        nida_grow(cla)
+
+                                        result = nida_grow_end(cla)
+
+                                        if result == True:
+                                            nida_end += 1
+
+                                        nida_grow(cla)
+
+                                        result = nida_grow_end(cla)
+
+                                        if result == True:
+                                            nida_end += 1
+
+                                        time.sleep(1)
+
+                                        if nida_end >= 1:
+
+                                            print("니다 육성 끝")
+
+                                            result_ = myQuest_play_add(cla, start_ready[0][2])
+
+                                        else:
+
+                                            result_quest_ = go_quest_ing(cla)
+
+                                    elif start_ready[0][2] == '알브육성':
+                                        nida_end = 0
+                                        potion_grow(cla, start_ready[0][2])
+
+                                        common_grow(cla)
+
+                                        nida_grow(cla)
+
+                                        result = alb_grow_end(cla)
+
+                                        if result == True:
+                                            nida_end += 1
+
+                                        nida_grow(cla)
+
+                                        result = alb_grow_end(cla)
+
+                                        if result == True:
+                                            nida_end += 1
+
+                                        time.sleep(1)
+
+                                        if nida_end >= 1:
+
+                                            print("알브 육성 끝")
+
+                                            result_ = myQuest_play_add(cla, start_ready[0][2])
+
+                                        else:
+
+                                            result_quest_ = go_quest_ing(cla)
+
+                                    else:
+                                        # 자동 사냥
+                                        #go_to_home('start', cla)
+
+                                        result_auto = go_auto(cla, 99)
+                                        if result_auto == True:
+                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\full_bag_1.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set_(820, 0, 960, 100, cla, img, 0.9)
+                                            if imgs_ is not None and imgs_ != False:
+                                                go_boonhae(cla, "full_bag")
+                                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                imgs_ = imgs_set(30, 40, 100, 75, cla, img)
+                                                if imgs_ is None or imgs_ == False:
+                                                    click_pos_2(930, 55, cla)
+
+                                        jadong_cla_play(cla, start_ready[0][2])
+                        else:
+                            print("오딘 " + str(cla) + "클라 꺼져져있음? ㅠㅅㅠ")
+
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                             imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
                             if imgs_ is not None and imgs_ != False:
-                                isready_count += 1
-                                if isready_count < 4:
-                                    print("오딘 매크로 내리면 시작")
-                            else:
-                                isready_ = True
-                            time.sleep(5)
-
-
-
-
-
-                        # 처음 로그인 화면 구분
-                        # print("처음시작..get_cla_count(cla)")
-                        #get_cla_count(cla)
-
-                        # 빌어먹을 이벤트 창
-                        is_stop(cla)
-
-                        # 우선 방치모드 해제
-                        bangchi_mode(cla)
-
-                        # 스케쥴 체크
-                        start_ready = myQuest_play_check(cla, "check")
-
-                        print("진행중으로 바꾸기 작업 시도")
-                        # self.parent.set_rand_int_jinhang(cla)
-
-                        # start_ready[0] 진행중인 정보 [0][1] = id, [0][2] = 던전(공허, 난쟁이, 지하감옥, 자동사냥(들소황무지...), [0][3] = 완료 or 대기중, [3]진행되거나 진행중인 퀘스트
-                        # 몇번째 인자에 정보가 담겨있는지 여부
-                        print("checking", start_ready)
-                        print("checking[0][1]", start_ready[0][1])
-                        print("checking[0][2]", start_ready[0][2])
-                        print("checking[0][3]", start_ready[0][3])
-                        print("checking[3]", start_ready[3])
-
-                        if start_ready[0][2] != "캐릭터바꾸기":
-                            result_char_select = go_character_select(cla)
-                            if result_char_select == True:
-                                data = int(start_ready[0][1])
-                                characterChange(data, cla)
-
-                            else:
-                                # 현재 진행중인 스케쥴 내 캐릭터 id와 기존 캐릭터 id 비교해서 다르면 캐릭터 바꾸기
-                                dir_path = "C:\\my_games\\coobcco2"
-                                if cla == 'one':
-                                    file_path = dir_path + "\\odin_schedule\\one_now_id.txt"
-                                if cla == 'two':
-                                    file_path = dir_path + "\\odin_schedule\\two_now_id.txt"
-
-                                if os.path.isfile(file_path) == True:
-
-                                    with open(file_path, "r", encoding='utf-8-sig') as file:
-                                        read_id = file.read()
-
-                                    if str(start_ready[0][1]) != str(read_id):
-                                        characterChange(start_ready[0][1], cla)
-                                else:
-                                    characterChange(start_ready[0][1], cla)
-
-
-                        if start_ready[0][2] == "캐릭터바꾸기":
-                            data = int(start_ready[0][1])
-                            characterChange(data, cla)
-                            myQuest_play_add(cla, "캐릭터바꾸기")
-
-                        elif start_ready[0][2] == "각종템받기":
-                            # if myQuest_grow_result[2] == '각종템받기':
-                            print("우편, 이벤트, 업적 다 받아버리기")
-                            # game_settings(cla, 'start')
-                            game_event_get_ready(cla)
-                            mypost(cla)
-                            achieve_get_(cla)
-                            chango_(cla, 'after')
-                            guild_join_(cla)
-                            myQuest_play_add(cla, start_ready[0][2])
-                            datas = 'check'
-                            start_ready = myQuest_play_check(cla, datas)
-
-                        elif start_ready[0][2] == "거래소등록":
-                            # if myQuest_grow_result[2] == '거래소등록':
-                            print("창고에 꺼내서 팔아버리기")
-                            # 먼저 창고에 가자
-                            auction_all_get(cla)
-                            myQuest_play_add(cla, start_ready[0][2])
-
-                        elif '_' in start_ready[0][2]:
-
-                            dir_path = "C:\\my_games\\coobcco2\\data_od"
-                            file_path = dir_path + "\\imgs\\dunjeon\\in_dun.txt"
-
-                            with open(file_path, "r", encoding='utf-8-sig') as file:
-                                indun = file.read().splitlines()
-                                print("&&&&&&", indun)
-                            potion_go = False
-                            for i in range(len(indun)):
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
-                                if imgs_ is not None and imgs_ != False:
-                                    print(indun[i], "있다")
-                                    potion_go = True
-                            if potion_go == False:
-                                go_to_home('start', cla)
-
-                            result_auto = go_auto(cla, 99)
-                            if result_auto == True:
-                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\full_bag_1.PNG"
-                                img_array = np.fromfile(full_path, np.uint8)
-                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                imgs_ = imgs_set_(820, 0, 960, 100, cla, img, 0.9)
-                                if imgs_ is not None and imgs_ != False:
-                                    go_boonhae(cla, "full_bag")
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set(30, 40, 100, 75, cla, img)
-                                    if imgs_ is None or imgs_ == False:
-                                        click_pos_2(930, 55, cla)
-
-
-
-                            dunjeon_spl_ = start_ready[0][2].split("_")
-                            print("dunjeon_spl_[0]", dunjeon_spl_[0])
-                            print("dunjeon_spl_[1]", dunjeon_spl_[1])
-                            if dunjeon_spl_[0] == '공허':
-                                print("game_gonghu", cla)
-                                data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
-
-                                dunjeon = "gonghu"  # 보내고자 하는 던전
-
-
-                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
-                                if result == True:
-                                    data_ = 'gonghu'
-                                    result_ = myQuest_play_add(cla, data_)
-
-                                # result = dunjeon_cla_play(cla, data, dunjeon)
-                                #
-                                # if result == True:
-                                #     data_ = 'gonghu'
-                                #     result_ = myQuest_play_add(cla, data_)
-
-
-
-                            elif dunjeon_spl_[0] == '난쟁이':
-                                print("game_nanjang", cla)
-                                data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
-                                dunjeon = "nanjang"  # 보내고자 하는 던전
-
-                                print("난쟁이 시작해볼까")
-
-                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
-
-                                if result == True:
-                                    data_ = 'nanjang'
-                                    result_ = myQuest_play_add(cla, data_)
-
-                            elif dunjeon_spl_[0] == '지하감옥':
-                                print("game_underprison", cla)
-                                data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong'
-
-                                dunjeon = "underprison"  # 보내고자 하는 던전
-
-                                result = dunjeon_cla_play_su(cla, dunjeon_spl_[0], dunjeon_spl_[1])
-
-                                print("점검__8", cla, result)
-                                if result == True:
-                                    data_ = 'underprison'
-                                    result_ = myQuest_play_add(cla, data_)
-                                    print("점검__9", cla)
-                        else:
-
-                            if start_ready[0][2] == '미드가르드' or start_ready[0][2] == '요툰하임':
-                                print("game_maul", cla)
-                                # data = cla_ing_  # 최초 'check', 후에는 'gonghu', 'nanjang', 'underprison', 'jadong', 'maul'
-                                print("마을 의뢰 시작해볼까")
-
-                                result = maul_mission(cla, start_ready[0][2])
-
-                                if result == True:
-                                    data_ = start_ready[0][2]
-                                    result_ = myQuest_play_add(cla, data_)
-
-
-                            else:
-
-                                if start_ready[0][2] == '요툰육성':
-                                    yotoon_end = 0
-                                    tuto_grow(cla)
-
-                                    result = yotoon_grow_end(cla)
-
-                                    if result == True:
-                                        yotoon_end += 1
-
-                                    # cla_grow.common_grow(cla)
-
-                                    # result = cla_grow.yotoon_grow_end(cla)
-
-                                    common_grow(cla)
-
-                                    result = yotoon_grow_end(cla)
-
-                                    if result == True:
-                                        yotoon_end += 1
-
-                                    # cla_grow.yotoon_grow(cla)
-
-                                    yotoon_grow(cla)
-
-                                    # result = cla_grow.yotoon_grow_end(cla)
-
-                                    result = yotoon_grow_end(cla)
-
-                                    if result == True:
-                                        yotoon_end += 1
-
-                                    time.sleep(1)
-
-                                    if yotoon_end >= 1:
-
-                                        print("요툰 육성 끝")
-
-                                        result_ = myQuest_play_add(cla, start_ready[0][2])
-
-                                    else:
-
-                                        result_quest_ = go_quest_ing(cla)
-
-                                elif start_ready[0][2] == '니다육성':
-                                    nida_end = 0
-                                    potion_grow(cla, start_ready[0][2])
-
-                                    common_grow(cla)
-
-                                    nida_grow(cla)
-
-                                    result = nida_grow_end(cla)
-
-                                    if result == True:
-                                        nida_end += 1
-
-                                    nida_grow(cla)
-
-                                    result = nida_grow_end(cla)
-
-                                    if result == True:
-                                        nida_end += 1
-
-                                    time.sleep(1)
-
-                                    if nida_end >= 1:
-
-                                        print("니다 육성 끝")
-
-                                        result_ = myQuest_play_add(cla, start_ready[0][2])
-
-                                    else:
-
-                                        result_quest_ = go_quest_ing(cla)
-
-                                elif start_ready[0][2] == '알브육성':
-                                    nida_end = 0
-                                    potion_grow(cla, start_ready[0][2])
-
-                                    common_grow(cla)
-
-                                    nida_grow(cla)
-
-                                    result = alb_grow_end(cla)
-
-                                    if result == True:
-                                        nida_end += 1
-
-                                    nida_grow(cla)
-
-                                    result = alb_grow_end(cla)
-
-                                    if result == True:
-                                        nida_end += 1
-
-                                    time.sleep(1)
-
-                                    if nida_end >= 1:
-
-                                        print("알브 육성 끝")
-
-                                        result_ = myQuest_play_add(cla, start_ready[0][2])
-
-                                    else:
-
-                                        result_quest_ = go_quest_ing(cla)
-
-                                else:
-                                    # 자동 사냥
-                                    #go_to_home('start', cla)
-
-                                    result_auto = go_auto(cla, 99)
-                                    if result_auto == True:
-                                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\full_bag_1.PNG"
-                                        img_array = np.fromfile(full_path, np.uint8)
-                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set_(820, 0, 960, 100, cla, img, 0.9)
-                                        if imgs_ is not None and imgs_ != False:
-                                            go_boonhae(cla, "full_bag")
-                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\gabang.png"
-                                            img_array = np.fromfile(full_path, np.uint8)
-                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                            imgs_ = imgs_set(30, 40, 100, 75, cla, img)
-                                            if imgs_ is None or imgs_ == False:
-                                                click_pos_2(930, 55, cla)
-
-                                    jadong_cla_play(cla, start_ready[0][2])
-
-
-
-                        # 클라변경
-                        print('global_howcla_change', v_.global_howcla)
-                        if v_.global_howcla == 'onecla':
-                            print("하나만 실행중")
-                        else:
-                            # self.isCheck = False
-                            print("두개 실행중")
-
-                            if v_.now_cla == 'one':
-                                v_.now_cla = 'two'
-                            else:
-                                v_.now_cla = 'one'
-                            print("end game!!!", v_.now_cla)
-                            if cla == 'one':
-                                cla = 'two'
-                                # one_cla_ing = cla_ing_
-                                nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
-                                print('one_two', cla)
-                                print('claChange_1', nowTime)
-                                time.sleep(10)
-                            elif cla == 'two':
-                                cla = 'one'
-                                # two_cla_ing = cla_ing_
-                                nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
-                                print('two_one', cla)
-                                print('claChange_2', nowTime)
-                                time.sleep(10)
-                            v_.now_cla = cla
-                            print('game_play_end', cla)
-
-                            # if change_ready_main == False:
-                            #     change_ready_main = True
-                            #     print("end game", now_cla)
-                            #     ############<<<pause>>>############
-                            #     if self.isCheck == False:
-                            #         paused_ = 0
-                            #     while self.isCheck is False:
-                            #         paused_ += 1
-                            #         if paused_ == 1:
-                            #             print("일시 정지 중입니다!!!!!!!!!")
-                            #         time.sleep(2)
-                            #     #####################################
-
-
-                    else:
-                        print("오딘 " + str(cla) + "클라 꺼져져있음? ㅠㅅㅠ")
-
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
-                        if imgs_ is not None and imgs_ != False:
-                            print("어라?오딘 백그라운드 " + str(cla) + "클라 켜져있음  ^ㅅ^", imgs_)
-                            time.sleep(0.3)
-                            click_pos_reg(imgs_.x + 100, imgs_.y, cla)
-                            pyautogui.keyDown('win')
-                            if cla == 'one':
-                                pyautogui.press('left')
-                            elif cla == 'two':
-                                pyautogui.press('right')
-                            pyautogui.keyUp('win')
-                            time.sleep(0.3)
-                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
-                            img_array = np.fromfile(full_path, np.uint8)
-                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set(0, 0, 60, 30, cla, img)
-                            if imgs_ is not None and imgs_ != False:
-                                print("정비 완료  ^ㅅ^", imgs_)
-                                time.sleep(1)
+                                print("어라?오딘 백그라운드 " + str(cla) + "클라 켜져있음  ^ㅅ^", imgs_)
+                                time.sleep(0.3)
                                 click_pos_reg(imgs_.x + 100, imgs_.y, cla)
-                                print("다시 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ")
-
-                        else:
-                            print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ")
-                            line_to_me(cla, "꺼진 것 같다")
-
-
-                            print('global_howcla_change', v_.global_howcla)
-                            if v_.global_howcla == 'onecla':
-                                print("하나만 실행중")
-
-                                now_hunting_is(cla_ing_, cla)
+                                pyautogui.keyDown('win')
+                                if cla == 'one':
+                                    pyautogui.press('left')
+                                elif cla == 'two':
+                                    pyautogui.press('right')
+                                pyautogui.keyUp('win')
+                                time.sleep(0.3)
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set(0, 0, 60, 30, cla, img)
+                                if imgs_ is not None and imgs_ != False:
+                                    print("정비 완료  ^ㅅ^", imgs_)
+                                    time.sleep(1)
+                                    click_pos_reg(imgs_.x + 100, imgs_.y, cla)
+                                    print("다시 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ")
 
                             else:
-                                # self.isCheck = False
-                                print("두개 실행중")
-
-                                now_hunting_is(cla_ing_, cla)
-
-                                if v_.now_cla == 'one':
-                                    v_.now_cla = 'two'
-                                else:
-                                    v_.now_cla = 'one'
-                                print("end game!!!", v_.now_cla)
-                                if cla == 'one':
-                                    cla = 'two'
-                                    # one_cla_ing = cla_ing_
-                                    nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
-                                    print('one_two', cla)
-                                    print('claChange_1', nowTime)
-                                    time.sleep(10)
-                                elif cla == 'two':
-                                    cla = 'one'
-                                    # two_cla_ing = cla_ing_
-                                    nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
-                                    print('two_one', cla)
-                                    print('claChange_2', nowTime)
-                                    time.sleep(10)
-                                v_.now_cla = cla
-                                print('game_play_end', cla)
-
-                                if v_.change_ready_main == False:
-                                    v_.change_ready_main = True
-                                    print("end game", v_.now_cla)
-
-                                    ############<<<pause>>>############
-                                    paused_ = 0
-                                    while v_.change_ready_main is True:
-                                        paused_ += 1
-                                        if paused_ == 1:
-                                            print("일시 정지 중입니다!!!!!!!!!")
-                                        time.sleep(2)
-                        # %%%
-                        #
-                        #                 #
-                        #                 #
-                        #                 #
-                                    #####################################
-
+                                print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ")
+                                line_to_me(cla, "꺼진 것 같다")
+                time.sleep(1)
 
         except Exception as e:
             print(e)
