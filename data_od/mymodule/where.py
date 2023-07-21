@@ -79,7 +79,12 @@ def go_maul_(cla):
         if imgs_ is None or imgs_ == False:
             print("마을이 없다...")
             ismenu = False
+            ismenu_count = 0
             while ismenu is False:
+
+                ismenu_count += 1
+                if ismenu_count > 7:
+                    ismenu = True
                 result_ = menuOpenCheck(cla, "maul_mission_middle")
                 time.sleep(random_int())
                 if result_ == True:

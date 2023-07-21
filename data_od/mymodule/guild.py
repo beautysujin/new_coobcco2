@@ -64,7 +64,12 @@ def guild_join_(cla):
         print("guild_join_")
         isguild_ = False
         guild_count = 0
+        isguild__count = 0
         while isguild_ is False:
+
+            isguild__count += 1
+            if isguild__count > 7:
+                isguild_ = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\guild\\guild.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -92,7 +97,12 @@ def guild_join_(cla):
                     click_pos_2(200, 105, cla)
 
                     isbosang = False
+                    isbosang_count = 0
                     while isbosang is False:
+
+                        isbosang_count += 1
+                        if isbosang_count > 7:
+                            isbosang = True
                         time.sleep(0.5)
                         click_pos_2(320, 880, cla)
                         time.sleep(1)
@@ -146,7 +156,12 @@ def guild_join_(cla):
                     click_pos_2(920, 65, cla)
                     time.sleep(1)
                     isMenu = False
+                    isMenu_count = 0
                     while isMenu is False:
+
+                        isMenu_count += 1
+                        if isMenu_count > 7:
+                            isMenu = True
                         result_menu = menuOpenCheck(cla, "guild_join_1")
                         if result_menu == True:
                             isMenu = True

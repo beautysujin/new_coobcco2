@@ -2755,6 +2755,26 @@ class game_Playing(QThread):
                             else:
                                 print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ")
                                 line_to_me(cla, "꺼진 것 같다")
+
+                                # start -> yes를 no로 바꾸기
+                                dir_path = "C:\\my_games\\load\\odin"
+                                file_path = dir_path + "\\start.txt"
+
+                                isstart1 = False
+                                while isstart1 is False:
+                                    if os.path.isdir(dir_path) == True:
+                                        if os.path.isfile(file_path) == True:
+                                            with open(file_path, "r", encoding='utf-8-sig') as file:
+                                                start_get = file.read()
+                                                isstart1 = True
+                                        else:
+                                            with open(file_path, "w", encoding='utf-8-sig') as file:
+                                                data = 'none'
+                                                file.write(str(data))
+                                    else:
+                                        os.makedirs(dir_path)
+
+
                 time.sleep(1)
 
         except Exception as e:

@@ -75,7 +75,11 @@ def maul_cou_(cla):
         if imgs_ is None or imgs_ == False:
             print("def maul_cou_(cla): 마을이 없다...")
             ismenu = False
+            ismenu_count = 0
             while ismenu is False:
+                ismenu_count += 1
+                if ismenu_count > 7:
+                    ismenu = True
                 result_ = menuOpenCheck(cla, "maul_cou_")
                 time.sleep(random_int())
                 if result_ == True:
@@ -399,7 +403,12 @@ def maul_mission_ready(cla):
         import cv2
         from myfunction import imgs_set, random_int
         isMission_ = False
+        isMission__count = 0
         while isMission_ is False:
+
+            isMission__count += 1
+            if isMission__count > 7:
+                isMission_ = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_complete_get.png"  # '완료' 글자 클릭 후 보상 받기 버튼...
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -444,7 +453,12 @@ def maul_mission_start(cla):
             time.sleep(random_int())
 
             isAllMonsterCancle = False
+            isAllMonsterCancle_count = 0
             while isAllMonsterCancle is False:
+
+                isAllMonsterCancle_count += 1
+                if isAllMonsterCancle_count > 7:
+                    isAllMonsterCancle = True
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_all_monster.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -545,7 +559,12 @@ def maul_mission_give_up(cla):
         from myfunction import imgs_set, click_pos_reg, random_int
         from action import go_alrim_confirm
         isGiveUp = False
+        isGiveUp_count = 0
         while isGiveUp is False:
+
+            isGiveUp_count += 1
+            if isGiveUp_count > 7:
+                isGiveUp = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_soolockham.png"  # '수락함' 글자 파악
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -583,7 +602,12 @@ def maul_mission_give_up(cla):
                     go_alrim_confirm(cla, 'maul_mission_give_up')
                     time.sleep(1)
         isMission_ = False
+        isMission__count = 0
         while isMission_ is False:
+
+            isMission__count += 1
+            if isMission__count > 7:
+                isMission_ = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_complete_get.png"  # '완료' 글자 클릭 후 보상 받기 버튼...
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -631,7 +655,11 @@ def maul_mission(cla, maul):
         if imgs_ is None or imgs_ == False:
             print("마을이 없다...")
             ismenu = False
+            ismenu_count = 0
             while ismenu is False:
+                ismenu_count += 1
+                if ismenu_count > 7:
+                    ismenu = True
                 result_ = menuOpenCheck(cla, "maul_mission_start")
                 time.sleep(random_int())
                 if result_ == True:
@@ -720,7 +748,11 @@ def maul_mission(cla, maul):
             if imgs_ is None or imgs_ == False:
                 print("마을이 없다...")
                 ismenu = False
+                ismenu_count = 0
                 while ismenu is False:
+                    ismenu_count += 1
+                    if ismenu_count > 7:
+                        ismenu = True
                     result_ = menuOpenCheck(cla, "maul_mission_middle")
                     time.sleep(random_int())
                     if result_ == True:
@@ -774,7 +806,12 @@ def maul_mission(cla, maul):
                     print("보상받고 미션추가 후 미션 시작")
                     # 미션 완료된거인지 파악하기기
                     isMission_ = False
+                    isMission__count = 0
                     while isMission_ is False:
+
+                        isMission__count += 1
+                        if isMission__count > 7:
+                            isMission_ = True
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_complete_get.png"  # '완료' 글자 클릭 후 보상 받기 버튼...
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -802,7 +839,12 @@ def maul_mission(cla, maul):
                                 maul_mission_complete_get(cla, 'elif result_cou_[3] > 0 and result_cou_[4] == 0:')
                                 isGetMaul = False
                                 thisCounter_ = 0
+                                isGetMaul_count = 0
                                 while isGetMaul is False:
+
+                                    isGetMaul_count += 1
+                                    if isGetMaul_count > 27:
+                                        isGetMaul = True
                                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul.png"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -816,13 +858,19 @@ def maul_mission(cla, maul):
                                         thisCounter_ += 1
                                         if thisCounter_ > 15:
                                             go_maul_(cla)
+                                    time.sleep(0.1)
                         else:
                             print("마을 외뢰 완료가 있다.", cla)
                             time.sleep(1)
                             maul_mission_complete_get(cla, 'elif result_cou_[3] > 0 and result_cou_[4] == 0:')
                             isGetMaul = False
                             thisCounter_ = 0
+                            isGetMaul_count = 0
                             while isGetMaul is False:
+
+                                isGetMaul_count += 1
+                                if isGetMaul_count > 17:
+                                    isGetMaul = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul.png"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -856,7 +904,12 @@ def maul_mission(cla, maul):
                     print("보상받고 미션끝", cla)
                     isMission_ = False
 
+                    isMission__count = 0
                     while isMission_ is False:
+
+                        isMission__count += 1
+                        if isMission__count > 7:
+                            isMission_ = True
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\maul_complete_get.png"  # '완료' 글자 클릭 후 보상 받기 버튼...
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)

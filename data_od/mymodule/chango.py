@@ -1113,9 +1113,16 @@ def chango_(cla, data):
         if data == 'before':
             isSomopoomCount = 0
             while heajae_ready_ is False:
+                isSomopoomCount += 1
+                if isSomopoomCount > 7:
+                    heajae_ready_ = True
 
                 ismaul_ = False
+                data_count = 0
                 while ismaul_ is False:
+                    data_count += 1
+                    if data_count > 7:
+                        ismaul_ = True
                     clean_screen(cla, "chango_ : data == 'before'")
                     maul_bool = in_village_go(cla)
                     time.sleep(1)
@@ -1176,7 +1183,11 @@ def chango_(cla, data):
 
                                 print("창고에 맡기러 가는 중")
                                 isChango_go = False
+                                data_count = 0
                                 while isChango_go is False:
+                                    data_count += 1
+                                    if data_count > 7:
+                                        isChango_go = True
                                     chango5 = go_chango(cla, 'chango')  # 창고 글자
                                     if chango5 == True:
                                         print("진행")
@@ -1238,7 +1249,11 @@ def chango_(cla, data):
         if data == 'after':
 
             ismaul_ = False
+            data_count = 0
             while ismaul_ is False:
+                data_count += 1
+                if data_count > 7:
+                    ismaul_ = True
                 clean_screen(cla, "chango_ : data == 'after'")
                 maul_bool = in_village_go(cla)
                 time.sleep(random_int())
@@ -1249,10 +1264,17 @@ def chango_(cla, data):
                     isAfter_2 = False
                     isSomopoomCount = 0
                     while isAfter_2 is False:
+                        isSomopoomCount += 1
+                        if isSomopoomCount > 7:
+                            isAfter_2 = True
                         print("창고 꺼내기 진행")
 
                         isChango_go = False
+                        isChango_go_count = 0
                         while isChango_go is False:
+                            isChango_go_count += 1
+                            if isChango_go_count > 7:
+                                isChango_go = True
                             chango5 = go_chango(cla, 'chango')  # 창고 글자
                             if chango5 == True:
                                 print("진행")
@@ -1534,7 +1556,11 @@ def auction(cla):
         # clean_screen(cla, "auction_start")
         # 거래소 열기
         isAuctionReady = False
+        isAuctionReady_count = 0
         while isAuctionReady is False:
+            isAuctionReady_count += 1
+            if isAuctionReady_count > 7:
+                isAuctionReady = True
             counted_ = text_check_get(33, 39, 110, 70, cla)
             counted_ = counted_.split("\n")
             print("거래소? => ", counted_)
@@ -1582,7 +1608,11 @@ def auction(cla):
             time.sleep(1)
 
             auction_re = False
+            auction_re_count = 0
             while auction_re is False:
+                auction_re_count += 1
+                if auction_re_count > 7:
+                    auction_re = True
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\auction\\auction_re.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1620,7 +1650,11 @@ def auction(cla):
                     sell_count = 0
 
                     isSell_1 = False
+                    data_count = 0
                     while isSell_1 is False:
+                        data_count += 1
+                        if data_count > 7:
+                            isSell_1 = True
 
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\auction\\auction_x.png"
                         img_array = np.fromfile(full_path, np.uint8)
@@ -1658,6 +1692,8 @@ def auction(cla):
 
                                 time.sleep(0.3)
                                 isSell_2_count += 1
+                                if isSell_2_count > 7:
+                                    isSell_2 = True
                                 buy_2 = False
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\auction\\auction_sell_register_2.png"
                                 img_array = np.fromfile(full_path, np.uint8)
@@ -1719,7 +1755,11 @@ def auction_example(cla):
         # clean_screen(cla, "auction_start")
         # 거래소 열기
         isAuctionReady = False
+        data_count = 0
         while isAuctionReady is False:
+            data_count += 1
+            if data_count > 7:
+                isAuctionReady = True
             counted_ = text_check_get(33, 39, 110, 70, cla)
             counted_ = counted_.split("\n")
             print("거래소? => ", counted_)
@@ -1790,7 +1830,11 @@ def auction_example(cla):
 
                         sell_count = 0
                         isSell_1 = False
+                        data_count = 0
                         while isSell_1 is False:
+                            data_count += 1
+                            if data_count > 7:
+                                isSell_1 = True
                             buy_1 = False
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\auction\\auction_sell_register_1.png"
                             img_array = np.fromfile(full_path, np.uint8)
@@ -1812,7 +1856,11 @@ def auction_example(cla):
                                 time.sleep(1)
                                 click_pos_2(540, 715, cla)
                                 isSell_2 = False
+                                isSell_2_count = 0
                                 while isSell_2 is False:
+                                    isSell_2_count += 1
+                                    if isSell_2_count > 7:
+                                        isSell_2 = True
                                     time.sleep(1)
                                     buy_2 = False
                                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\auction\\auction_sell_register_2.png"
@@ -1924,7 +1972,11 @@ def auction_all_get(cla):
         # time.sleep(random_int())
 
         ismaul_ = False
+        ismaul__count = 0
         while ismaul_ is False:
+            ismaul__count += 1
+            if ismaul__count > 7:
+                ismaul_ = True
             clean_screen(cla, "auction_all_get_1")
             maul_bool = in_village_go(cla)
             time.sleep(random_int())
@@ -1935,10 +1987,18 @@ def auction_all_get(cla):
                 isAfter_2 = False
                 isSomopoomCount = 0
                 while isAfter_2 is False:
+                    isSomopoomCount += 1
+                    if isSomopoomCount > 7:
+                        isAfter_2 = True
                     print("창고 꺼내기 진행")
 
                     isChango_go = False
+                    isChango_go_count = 0
                     while isChango_go is False:
+
+                        isChango_go_count += 1
+                        if isChango_go_count > 7:
+                            isChango_go = True
                         chango5 = go_chango(cla, 'chango')  # 창고 글자
                         if chango5 == True:
                             print("진행")
@@ -1955,8 +2015,12 @@ def auction_all_get(cla):
                                 # 창고에 다시 남는 물품 넣기
                                 print("창고에 맡기러 가는 중")
                                 isSomopoomCount = 0
+                                isChango_go_count = 0
                                 isChango_go = False
                                 while isChango_go is False:
+                                    isChango_go_count += 1
+                                    if isChango_go_count > 7:
+                                        isChango_go = True
                                     chango5 = go_chango(cla, 'chango')  # 창고 글자
                                     if chango5 == True:
                                         print("진행")
@@ -2375,8 +2439,13 @@ def in_village_go(cla):
         data = 'none'
 
         isinmaul_ = 0
+        isMenu_count = 0
         isMenu = False
         while isMenu is False:
+
+            isMenu_count += 1
+            if isMenu_count > 7:
+                isMenu = True
             result_auto = go_auto(cla, '6')
             isinmaul_ += 1
             if isinmaul_ == 300:
@@ -2385,8 +2454,13 @@ def in_village_go(cla):
                 print("진행")
                 isMenu = True
                 isVillage_cou_ = 0
+                isVillage_go__count = 0
                 isVillage_go_ = False
                 while isVillage_go_ is False:
+
+                    isVillage_go__count += 1
+                    if isVillage_go__count > 7:
+                        isVillage_go_ = True
                     result_vil_1 = in_village_ready(cla)
                     result_vil_data = result_vil_1
                     if result_vil_data == 'none':

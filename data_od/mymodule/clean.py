@@ -251,7 +251,12 @@ def clean_screen(cla, story):
         else:
 
             isClean_ = False
+            isClean__count = 0
             while isClean_ is False:
+
+                isClean__count += 1
+                if isClean__count > 7:
+                    isClean_ = True
                 result = menuOpenCheck(cla, get_story)
                 if result == True:
                     isClean_ = True

@@ -116,11 +116,20 @@ def potion_nida(cla):
 
     # 요툰 대형 물약 사는 곳
     isBigPotion_1 = False
+    isBigPotion_1_count = 0
     while isBigPotion_1 is False:
+
+        isBigPotion_1_count += 1
+        if isBigPotion_1_count > 7:
+            isBigPotion_1 = True
         result_go_auto = go_auto(cla, '2')
         if result_go_auto == True:
             isBigPotion_2 = False
+            isBigPotion_2_count = 0
             while isBigPotion_2 is False:
+                isBigPotion_2_count += 1
+                if isBigPotion_2_count > 7:
+                    isBigPotion_2 = True
                 result_go_world = go_worldmap(cla, 'world')  # 월드보기
                 time.sleep(1)
                 if result_go_world == False:
@@ -134,7 +143,12 @@ def potion_nida(cla):
                     # time.sleep(1)
             print("hi")
             isBigPotion_3 = False
+            isBigPotion_3_count = 0
             while isBigPotion_3 is False:
+
+                isBigPotion_3_count += 1
+                if isBigPotion_3_count > 7:
+                    isBigPotion_3 = True
                 result_go_world_yotoon = go_worldmap(cla, 'world_yotoon')  # 월드 하단 요툰하임 보기
                 if result_go_world_yotoon == False:
                     click_pos_2(80, 960, cla)
@@ -151,7 +165,12 @@ def potion_nida(cla):
                     time.sleep(1)
             print("hi")
             isBigPotion_4 = False
+            isBigPotion_4_count = 0
             while isBigPotion_4 is False:
+
+                isBigPotion_4_count += 1
+                if isBigPotion_4_count > 7:
+                    isBigPotion_4 = True
                 result_go_world_moglog = go_worldmap(cla, 'world_moglog')  # 월드목록보기
                 if result_go_world_moglog == False:
                     click_pos_2(30, 105, cla)
@@ -169,11 +188,19 @@ def potion_nida(cla):
             print("hi")
     print("hello")
     # 다시 월드맵 진입
+    isBigPotion_1_count = 0
     while isBigPotion_1 is True:
+
+        isBigPotion_1_count += 1
+        if isBigPotion_1_count > 7:
+            isBigPotion_1 = True
         result_go_auto = go_auto(cla, '3')
         if result_go_auto == True:
-            isBigPotion_2 = False
+            isBigPotion_2_count = 0
             while isBigPotion_2 is False:
+                isBigPotion_2_count += 1
+                if isBigPotion_2_count > 7:
+                    isBigPotion_2 = True
                 result_go_world = go_worldmap(cla, 'world')  # 월드보기
                 time.sleep(1)
                 if result_go_world == False:
@@ -187,7 +214,12 @@ def potion_nida(cla):
                     # time.sleep(1)
             print("hi2")
             isBigPotion_3 = False
+            isBigPotion_3_count = 0
             while isBigPotion_3 is False:
+
+                isBigPotion_3_count += 1
+                if isBigPotion_3_count > 7:
+                    isBigPotion_3 = True
                 result_go_world_yotoon = go_worldmap(cla, 'world_yotoon')  # 하단 요툰하임
                 if result_go_world_yotoon == False:
                     click_pos_2(80, 960, cla)
@@ -226,7 +258,12 @@ def potion_nida(cla):
                         time.sleep(1)
 
                         isBigPotion_3 = False
+                        isBigPotion_3_count = 0
                         while isBigPotion_3 is False:
+
+                            isBigPotion_3_count += 1
+                            if isBigPotion_3_count > 7:
+                                isBigPotion_3 = True
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\yotoon_big_potion_2.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -243,7 +280,12 @@ def potion_nida(cla):
                                     line_to_me(cla, "물약 제대로 못사고 있당ㅠㅠ")
                         print("hi")
                         isBigPotion_4 = False
+                        isBigPotion_4_count = 0
                         while isBigPotion_4 is False:
+
+                            isBigPotion_4_count += 1
+                            if isBigPotion_4_count > 7:
+                                isBigPotion_4 = True
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\yotoon_big_potion_3.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -256,7 +298,12 @@ def potion_nida(cla):
                                 print("소모품 상점 가는 중")
                         print("hi")
                         isBigPotion_5 = False
+                        isBigPotion_5_count = 0
                         while isBigPotion_5 is False:
+
+                            isBigPotion_5_count += 1
+                            if isBigPotion_5_count > 7:
+                                isBigPotion_5 = True
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\grow\\yotoon_big_potion_4.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)

@@ -342,7 +342,12 @@ def login_starting(cla):
 
 
         isLogin = False
+        isLogin_count = 0
         while isLogin is False:
+
+            isLogin_count += 1
+            if isLogin_count > 7:
+                isLogin = True
             time.sleep(random_int())
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\log_out.png"
             img_array = np.fromfile(full_path, np.uint8)
@@ -368,7 +373,12 @@ def login_starting(cla):
                 time.sleep(random_int())
 
         isLogin = False
+        isLogin_count = 0
         while isLogin is False:
+
+            isLogin_count += 1
+            if isLogin_count > 7:
+                isLogin = True
 
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\game_start.png"
             img_array = np.fromfile(full_path, np.uint8)
@@ -394,9 +404,13 @@ def login_starting(cla):
                 print("게임스타트 안보여")
                 time.sleep(random_int())
 
-
         isLogin = False
+        isLogin_count = 0
         while isLogin is False:
+
+            isLogin_count += 1
+            if isLogin_count > 7:
+                isLogin = True
 
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\kakao_login.png"
             img_array = np.fromfile(full_path, np.uint8)
@@ -423,7 +437,12 @@ def login_starting(cla):
                 time.sleep(random_int())
 
         isLogin = False
+        isLogin_count = 0
         while isLogin is False:
+
+            isLogin_count += 1
+            if isLogin_count > 7:
+                isLogin = True
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\kakao.png"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -496,7 +515,12 @@ def login_starting(cla):
         # click_with_image("c:\\my_games\\coobcco2\\data_od\\imgs\\final_login.png")
 
         isLogin = False
+        isLogin_count = 0
         while isLogin is False:
+
+            isLogin_count += 1
+            if isLogin_count > 7:
+                isLogin = True
 
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\final_login.png"
             img_array = np.fromfile(full_path, np.uint8)
@@ -1139,7 +1163,12 @@ def characterChange_before(cla):
         print("선택된 캐릭 스텟 펼치기", ready_)
 
         character_power_level = False
+        character_power_level_count = 0
         while character_power_level is False:
+
+            character_power_level_count += 1
+            if character_power_level_count > 7:
+                character_power_level = True
             time.sleep(0.2)
             power_ran = random_int()
             if power_ran == 1:
@@ -1450,7 +1479,12 @@ def grow_chango_check(cla):
 
         quest_check_ = False
         isquestCheck_1 = False
+        isquestCheck_1_count = 0
         while isquestCheck_1 is False:
+
+            isquestCheck_1_count += 1
+            if isquestCheck_1_count > 7:
+                isquestCheck_1 = True
             result_menu = menuOpenCheck(cla, "grow_chango_check")
             if result_menu == True:
                 click_pos_2(800, 220, cla)

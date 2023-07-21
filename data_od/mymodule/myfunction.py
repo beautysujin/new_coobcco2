@@ -128,7 +128,12 @@ def click_with_image(image_path):
         from functools import partial
         import pyautogui
         isClick = False
+        isClick_count = 0
         while isClick is False:
+
+            isClick_count += 1
+            if isClick_count > 7:
+                isClick = True
             location = pyautogui.locateOnScreen(image_path)
             if location is not None:
                 pyautogui.click(location)
@@ -1303,7 +1308,12 @@ def go_to_home(data, cla):
                 else:
                     isSomopoom = False
                     isSomopoomCount = 0
+                    isSomopoom_count = 0
                     while isSomopoom is False:
+
+                        isSomopoom_count += 1
+                        if isSomopoom_count > 7:
+                            isSomopoom = True
                         result_somopoom = go_somopoom(cla)
                         print('result_somopoom1 = go_somopoom(cla)', result_somopoom)
                         time.sleep(1)
@@ -1721,7 +1731,12 @@ def dead_die(cla, story):
             else:
                 click_pos_2(480, 615, cla)
             ischar_sel_ = False
+            ischar_sel__count = 0
             while ischar_sel_ is False:
+
+                ischar_sel__count += 1
+                if ischar_sel__count > 7:
+                    ischar_sel_ = True
                 ischar_sel_ = go_character_select
                 if ischar_sel_ == False:
                     print("아직 캐릭터 선택 화면이 아니다.")
@@ -1759,7 +1774,12 @@ def dead_die(cla, story):
 
             # 마을에 도착했는지 확인하기
             isVillage = False
+            isVillage_count = 0
             while isVillage is False:
+
+                isVillage_count += 1
+                if isVillage_count > 7:
+                    isVillage = True
                 result = go_chango(cla, 'village')
                 if result == False:
 
@@ -1839,7 +1859,12 @@ def dead_die(cla, story):
 
                         isBoggo_ = False
                         iscount_ = 0
+                        isBoggo__count = 0
                         while isBoggo_ is False:
+
+                            isBoggo__count += 1
+                            if isBoggo__count > 7:
+                                isBoggo_ = True
 
                             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boohwal_boggoo.png"
                             img_array = np.fromfile(full_path, np.uint8)
@@ -1886,7 +1911,12 @@ def dead_die(cla, story):
                                 isBoggo_ = True
                                 print("경험치 복구가 있다")
                                 isHaegol = False
+                                isHaegol_count = 0
                                 while isHaegol is False:
+
+                                    isHaegol_count += 1
+                                    if isHaegol_count > 7:
+                                        isHaegol = True
                                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\boohwal_haegol.png"
                                     img_array = np.fromfile(full_path, np.uint8)
                                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -2098,6 +2128,9 @@ def myPotion_check(data, cla):
         ispotionOff = False
         isAnboyuCount = 0
         while ispotionOff is False:
+            isAnboyuCount += 1
+            if isAnboyuCount > 7:
+                ispotionOff = True
 
             result = go_potion_off(cla)
             if result == False:
@@ -2149,9 +2182,13 @@ def myPotion_check(data, cla):
                     print("potion_count_99999", potion_count_)
                     print("/가 없는 것은 물약이 최대 소지 갯수 초과했기 때문임.")
 
-        iwannaPotion = False
+        iwannaPotion_count = 0
         if ispotion__ == True:
             while iwannaPotion is False:
+
+                iwannaPotion_count += 1
+                if iwannaPotion_count > 7:
+                    iwannaPotion = True
                 if potion < 150:
                     iwannaPotion = True
                     print('result_po potion < 150:')
@@ -2187,7 +2224,12 @@ def myPotion_check(data, cla):
                     if imgs_ is None or imgs_ == False:
                         print("가방이 없다...")
                         ismenu = False
+                        ismenu_count = 0
                         while ismenu is False:
+
+                            ismenu_count += 1
+                            if ismenu_count > 7:
+                                ismenu = True
                             result_ = menuOpenCheck(cla, "myPotion_check_middle")
                             time.sleep(1)
 
@@ -2299,7 +2341,12 @@ def background_myPotion_check(data):
 
         ispotion__ = False
         ispotionOff = False
+        ispotionOff_count = 0
         while ispotionOff is False:
+
+            ispotionOff_count += 1
+            if ispotionOff_count > 7:
+                ispotionOff = True
 
             result = go_potion_off(cla)
             if result == False:
@@ -2398,7 +2445,12 @@ def background_myPotion_check(data):
                 if imgs_ is None or imgs_ == False:
                     print("가방이 없다...")
                     ismenu = False
+                    ismenu_count = 0
                     while ismenu is False:
+
+                        ismenu_count += 1
+                        if ismenu_count > 7:
+                            ismenu = True
                         result_ = menuOpenCheck(cla, "background_myPotion_check_middle")
                         time.sleep(1)
 

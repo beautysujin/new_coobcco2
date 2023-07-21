@@ -53,7 +53,12 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
         #     line_to_me(cla, why)
         # 파워 오류로 측정없이 무조건 보내기
         isJadong = False
+        isJadong_count = 0
         while isJadong is False:
+
+            isJadong_count += 1
+            if isJadong_count > 7:
+                isJadong = True
             thisWorld = False
             print("자동장소", where)
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_1.png"
@@ -201,7 +206,12 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
 
                     # 이후 도착했는지 파악하기
                     is8285 = False
+                    is8285_count = 0
                     while is8285 is False:
+
+                        is8285_count += 1
+                        if is8285_count > 7:
+                            is8285 = True
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -235,7 +245,12 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                     isJadong = True
                     go_ = False
                     is8285 = False
+                    is8285_count = 0
                     while is8285 is False:
+
+                        is8285_count += 1
+                        if is8285_count > 7:
+                            is8285 = True
                         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -243,7 +258,12 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                         if imgs_ is None or imgs_ == False:
                             # auto
                             isresultauto = False
+                            isresultauto_count = 0
                             while isresultauto is False:
+
+                                isresultauto_count += 1
+                                if isresultauto_count > 7:
+                                    isresultauto = True
                                 resultauto = go_auto(cla, '10')
                                 if resultauto == False:
                                     print("사냥터 미도착")
@@ -327,7 +347,7 @@ def jadong_cla_play(cla, where):
     try:
         import cv2
         import numpy as np
-        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check, go_auto
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check, go_auto, dead_die
         from clean import clean_screen
         from action import now_hunting, potion_check_juljun, go_alrim_confirm, potion_buy, go_alrim_
         from chango import in_village_ready
@@ -369,20 +389,31 @@ def jadong_cla_play(cla, where):
         if imgs_ is not None and imgs_ != False:
             result_attack = jadong_juljun_attack(cla, where)
             if result_attack == False:
-                at_ = False
-                at_count = 0
-                while at_ is False:
-                    at_count += 1
-                    if at_count > 5:
-                        at_ = True
-                    result_auto = go_auto(cla, 12)
-                    if result_auto == False:
-                        drag_pos(390, 510, 670, 510, cla)
-                    else:
-                        click_pos_2(900, 890, cla)
+
+                result_dead = jadong_juljun_dead(cla, where)
+
+                if result_dead == False:
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                    if imgs_ is not None and imgs_ != False:
+                        click_pos_2(30, 325, cla)
+                else:
+                    at_ = False
+                    at_count = 0
+                    while at_ is False:
+                        at_count += 1
+                        if at_count > 5:
+                            at_ = True
+                        result_auto = go_auto(cla, 12)
+                        if result_auto == False:
+                            drag_pos(390, 510, 670, 510, cla)
+                        else:
+                            click_pos_2(900, 890, cla)
+                            time.sleep(1)
+                            click_pos_2(30, 345)
                         time.sleep(1)
-                        click_pos_2(30, 345)
-                    time.sleep(1)
             else:
                 print("자동사냥중....")
                 # 포션 있는지 없는지만 체크
@@ -424,6 +455,7 @@ def jadong_cla_play(cla, where):
                     v_.potion_count = 0
                     print("포션 있음... 카운터", v_.potion_count)
         else:
+            dead_die(cla, "자동사냥중 죽음")
             clean_screen(cla, "jadong_cla_play")
             complete_1(cla)
             time.sleep(1 + random_int())
@@ -479,6 +511,30 @@ def jadong_juljun_attack(cla, where):
 
         for i in range(30):
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\jadong_attack\\jadong_attack.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(400, 600, 560, 660, cla, img)
+            if imgs_ is not None and imgs_ != False:
+                print("자동 사냥중", imgs_)
+                go_ = True
+                break
+
+        return go_
+    except Exception as e:
+        print(e)
+        return 0
+def jadong_juljun_dead(cla, where):
+    try:
+        import cv2
+        import numpy as np
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check
+
+        print("절전 사냥터 인식")
+
+        go_ = False
+
+        for i in range(30):
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\jadong_attack\\dead_mode.PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
             imgs_ = imgs_set(400, 600, 560, 660, cla, img)
@@ -1339,8 +1395,14 @@ def dunjeonCheck(cla, data, same):
         # 던전내에서 순간이동, 자동사냥, 지도 클릭 => 진행중일땐 최초 1회만...
         isIndungeon = False
         while isdunjeonCheck is False:
+
             if same == False:
+                isIndungeon_count = 0
                 while isIndungeon is False:
+
+                    isIndungeon_count += 1
+                    if isIndungeon_count > 7:
+                        isIndungeon = True
 
                     result = mydungeon_check(cla, 'in_check')
                     if result == False:
@@ -1363,7 +1425,12 @@ def dunjeonCheck(cla, data, same):
 
                         isIndungeon = True
                         isSoongan = False
+                        isSoongan_count = 0
                         while isSoongan is False:
+
+                            isSoongan_count += 1
+                            if isSoongan_count > 7:
+                                isSoongan = True
                             result_ = mydungeon_check(cla, 'in_check')
                             if result_ == False:
                                 print("def dunjeonCheck(cla, data, same): 던전 진입 중, 순간이동 하는 중")
@@ -1494,7 +1561,11 @@ def mydungeon_check(cla, data):
                 go_ = True
 
             isMap = False
+            isMap_count = 0
             while isMap is False:
+                isMap_count += 1
+                if isMap_count > 7:
+                    isMap = True
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dun_x.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -1551,7 +1622,11 @@ def mydungeon_check(cla, data):
                     go_ = True
 
                 isMap = False
+                isMap_count = 0
                 while isMap is False:
+                    isMap_count += 1
+                    if isMap_count > 7:
+                        isMap = True
                     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dun_x.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
