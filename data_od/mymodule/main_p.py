@@ -2229,13 +2229,15 @@ class just_loginstart_two(QThread):
             return 0
 
 class Monitoring(QThread):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.parent = parent
+    # def __init__(self, parent):
+    #     super().__init__(parent)
+    #     self.parent = parent
+    def __init__(self,):
+        super().__init__()
     def run(self):
         try:
             print("monitoring start")
-            # line_monitor()
+            line_monitor()
         except Exception as e:
             print(e)
             return 0
@@ -2249,8 +2251,10 @@ class game_Playing_Ready(QThread):
     def run(self):
         try:
 
-            m_ = Monitoring(self)
-            m_.start()
+            # m_ = Monitoring(self)
+            # m_.start()
+            self.m_ = Monitoring()
+            self.m_.start()
             self.x_ = game_Playing()
             self.x_.start()
         except Exception as e:
