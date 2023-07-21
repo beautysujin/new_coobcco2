@@ -2754,7 +2754,7 @@ class game_Playing(QThread):
 
                             else:
                                 print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ 10초 동안 다시 체크")
-                                line_to_me(cla, "꺼진 것 같다")
+
 
                                 look_odin = False
 
@@ -2775,6 +2775,7 @@ class game_Playing(QThread):
                                     with open(file_path, "w", encoding='utf-8-sig') as file:
                                         data = 'no'
                                         file.write(str(data))
+                                    line_to_me(cla, "꺼진 것 같다")
 
 
                 time.sleep(1)
