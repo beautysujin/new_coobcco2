@@ -1297,23 +1297,51 @@ def characterChange(data, cla):
             result_char_select = go_character_select(cla)
 
             if result_char_select == False:
-                result__ = menuOpenCheck(cla, "characterChange")
-                if result__ != True:
-
-                    click_pos_2(920, 65, cla)
-                    time.sleep(1)
-                else:
-
-                    click_pos_2(740, 530, cla)
-                    time.sleep(1)
-
-                    result = go_alrim_(cla)
-                    if result == True:
-                        result_ = go_alrim_yes(cla)
-                        if result_[0] == True:
-                            click_pos_reg(result_[1], result_[2], cla)
+                clean_screen(cla, "character change")
+                mo_ = False
+                mo_count = 0
+                while mo_ is False:
+                    mo_count += 1
+                    if mo_count > 7:
+                        mo_ = True
+                    result__ = menuOpenCheck(cla, "characterChange")
+                    if result__ != True:
+                        result_char_select = go_character_select(cla)
+                        if result_char_select == True:
+                            mo_ = True
                         else:
+                            click_pos_2(920, 65, cla)
+                            time.sleep(1)
+                            click_pos_2(740, 530, cla)
+                            time.sleep(1)
                             click_pos_2(550, 610, cla)
+                            time.sleep(1)
+                    else:
+                        click_pos_2(740, 530, cla)
+                        time.sleep(1)
+                        click_pos_2(550, 610, cla)
+                        time.sleep(1)
+                    time.sleep(1)
+
+
+                # result__ = menuOpenCheck(cla, "characterChange")
+                # time.sleep(0.5)
+                # if result__ != True:
+                #
+                #     click_pos_2(920, 65, cla)
+                #     time.sleep(1)
+                # else:
+                #
+                #     click_pos_2(740, 530, cla)
+                #     time.sleep(1)
+                #
+                #     result = go_alrim_(cla)
+                #     if result == True:
+                #         result_ = go_alrim_yes(cla)
+                #         if result_[0] == True:
+                #             click_pos_reg(result_[1], result_[2], cla)
+                #         else:
+                #             click_pos_2(550, 610, cla)
             else:
                 isChecked = True
                 isChecked2 = False
@@ -1386,7 +1414,7 @@ def characterChange(data, cla):
                         achieve_get_(cla)
                         game_settings(cla, 'change_start')
 
-            time.sleep(0.5)
+            time.sleep(1)
     except Exception as e:
         print(e)
         return 0

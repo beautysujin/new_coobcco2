@@ -2373,32 +2373,45 @@ class game_Playing(QThread):
                             isready_ = False
                             isready_count = 0
                             while isready_ is False:
+                                isready_count += 1
+                                if isready_count > 10:
+                                    isready_ = True
                                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title.PNG"
                                 img_array = np.fromfile(full_path, np.uint8)
                                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                                 imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
                                 if imgs_ is not None and imgs_ != False:
-                                    isready_count += 1
-                                    if isready_count < 4:
-                                        print("매크로를 내려야 실행됨...15초")
-                                        for i in range(10):
-                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
+
+                                    print("매크로를 내려야 실행됨...10초 카운트")
+                                    for i in range(10):
+
+                                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set_(0, 50, 960, 1030, v_.now_cla, img, 0.8)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print(i, "초(odin_title2)")
+                                            if i > 8:
+                                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
+                                                img_array = np.fromfile(full_path, np.uint8)
+                                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                                # 오딘 1클, 나크 2클, 제노는 3클라 고정
+                                                imgs_ = imgs_set_(0, 50, 960, 1030, "one", img, 0.8)
+                                                if imgs_ is not None and imgs_ != False:
+                                                    click_pos_reg(imgs_.x - 40, imgs_.y, v_.now_cla)
+                                                break
+                                        else:
+                                            print(i, "초")
+                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title.PNG"
                                             img_array = np.fromfile(full_path, np.uint8)
                                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                            imgs_ = imgs_set_(0, 0, 960, 1030, v_.now_cla, img, 0.8)
-                                            if imgs_ is not None and imgs_ != False:
-                                                if i > 8:
-                                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\odin_title2.PNG"
-                                                    img_array = np.fromfile(full_path, np.uint8)
-                                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                                    # 오딘 1클, 나크 2클, 제노는 3클라 고정
-                                                    imgs_ = imgs_set_(0, 50, 960, 1030, "one", img, 0.8)
-                                                    if imgs_ is not None and imgs_ != False:
-                                                        click_pos_reg(imgs_.x - 40, imgs_.y, v_.now_cla)
-                                                    break
+                                            imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
+                                            if imgs_ is None:
+                                                break
+                                        time.sleep(1)
                                 else:
                                     isready_ = True
-                                time.sleep(5)
+                                time.sleep(1)
 
 
 
@@ -2488,17 +2501,17 @@ class game_Playing(QThread):
                                 with open(file_path, "r", encoding='utf-8-sig') as file:
                                     indun = file.read().splitlines()
                                     print("&&&&&&", indun)
-                                potion_go = False
-                                for i in range(len(indun)):
-                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
-                                    img_array = np.fromfile(full_path, np.uint8)
-                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                    imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
-                                    if imgs_ is not None and imgs_ != False:
-                                        print(indun[i], "있다")
-                                        potion_go = True
-                                if potion_go == False:
-                                    go_to_home('start', cla)
+                                # potion_go = False
+                                # for i in range(len(indun)):
+                                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
+                                #     img_array = np.fromfile(full_path, np.uint8)
+                                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                #     imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
+                                #     if imgs_ is not None and imgs_ != False:
+                                #         print(indun[i], "있다")
+                                #         potion_go = True
+                                # if potion_go == False:
+                                #     go_to_home('start', cla)
 
                                 result_auto = go_auto(cla, 99)
                                 if result_auto == True:

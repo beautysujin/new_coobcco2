@@ -7,7 +7,7 @@ import variable as v_
 
 
 def go_test(cla):
-    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5, go_boonhae, go_alrim_
+    from action import go_mynumber_, go_bag, go_potion_off, go_quickslot, go_soongan_f5, go_boonhae, go_alrim_, potion_buy
     from chango import go_chango, chango_, auction, in_village_ready, in_village_go, in_village_go_to
     from myfunction import imgs_set, click_pos_2, text_check_get, text_check_get_2, text_check_get_3, text_check_get_4, imgs_set_, click_pos_reg, menuOpen, myPotion_check, go_to_home, potion_count, drag_pos, get_region, image_processing, int_put_
     from event_get import game_event_get_ready, game_event_get, go_item_open, go_ticket_open, go_get_open
@@ -33,7 +33,35 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    game_event_get_ready(cla)
+    print("던전 클릭 준비 진입")
+    dun_img = False
+    click_pos_2(230, 105, cla)
+    time.sleep(1)
+    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
+    img_array = np.fromfile(full_path, np.uint8)
+    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+    if imgs_ is not None and imgs_ != False:
+        dun_img = True
+    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_3.PNG"
+    img_array = np.fromfile(full_path, np.uint8)
+    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+    if imgs_ is not None and imgs_ != False:
+        dun_img = True
+    if dun_img == True:
+        drag_pos(850, 500, 130, 500, cla)
+        time.sleep(3)
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\all.PNG"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set(530, 570, 630, 610, cla, img)
+    # if imgs_ is not None and imgs_ != False:
+    #     print("all", imgs_)
+    # else:
+    #     print("not")
+
+
 
     # jadong_cla_ready(cla, "고원서리이빨")
 

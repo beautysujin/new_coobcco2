@@ -16,8 +16,11 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
     import os
     import numpy as np
     import cv2
-    from myfunction import imgs_set_
-    from action import now_hunting
+    from myfunction import imgs_set_, click_pos_2, drag_pos, go_auto, imgs_set
+    from action import now_hunting, go_alrim_, go_alrim_confirm, potion_buy, potion_check_juljun
+    from clean import clean_screen
+    from dungeon import jadong_juljun_attack
+    from chango import in_village_ready
     try:
         print("던전 준비")
 
@@ -25,34 +28,169 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
 
         in_dun_ = False
 
-        dir_path = "C:\\my_games\\coobcco2\\data_od"
-        file_path = dir_path + "\\imgs\\dunjeon\\in_dun.txt"
+        # dir_path = "C:\\my_games\\coobcco2\\data_od"
+        # file_path = dir_path + "\\imgs\\dunjeon\\in_dun.txt"
 
-        with open(file_path, "r", encoding='utf-8-sig') as file:
-            indun = file.read().splitlines()
-            print("&&&&&&", indun)
+        # with open(file_path, "r", encoding='utf-8-sig') as file:
+        #     indun = file.read().splitlines()
+        #     print("&&&&&&", indun)
 
-        for i in range(len(indun)):
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
+
+        # for i in range(len(indun)):
+        #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\in_dun\\" + indun[i] + ".PNG"
+        #     img_array = np.fromfile(full_path, np.uint8)
+        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #     imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
+        #     if imgs_ is not None and imgs_ != False:
+        #         print(indun[i], "///////////////////있다/////////////////////")
+        #         in_dun_ = True
+
+        if dun_where == "공허":
+            dun_name = "gonghu"
+        if dun_where == "난쟁이":
+            dun_name = "nanjang"
+        if dun_where == "지하감옥":
+            dun_name = "underprison"
+
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+        if imgs_ is None:
+            # 마을이 아닐 경우 절전 모드하고 비교
+            result_maul = in_village_ready(cla)
+            if result_maul == "none":
+                for i in range(10):
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                    if imgs_ is not None and imgs_ != False:
+                        break
+                    else:
+                        click_pos_2(30, 345, cla)
+                    time.sleep(1)
+        time.sleep(0.5)
+
+        # 절전모드
+
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+        if imgs_ is not None and imgs_ != False:
+
+            path_ = str(dun_name) + "\\" + str(dun_step)
+
+
+            ###
+
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dun_spot\\" + path_ + ".PNG"
             img_array = np.fromfile(full_path, np.uint8)
             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
+            imgs_ = imgs_set(30, 110, 200, 170, cla, img)
             if imgs_ is not None and imgs_ != False:
-                print(indun[i], "///////////////////있다/////////////////////")
-                in_dun_ = True
+                result_attack = jadong_juljun_attack(cla, dun_name)
+                if result_attack == False:
+                    at_ = False
+                    at_count = 0
+                    while at_ is False:
+                        at_count += 1
+                        if at_count > 5:
+                            at_ = True
+                        result_auto = go_auto(cla, 12)
+                        if result_auto == False:
+                            drag_pos(390, 510, 670, 510, cla)
+                        else:
+                            click_pos_2(900, 890, cla)
+                            time.sleep(1)
+                            click_pos_2(30, 345)
+                        time.sleep(1)
+                else:
+                    print("자동사냥중....")
+                    # 포션 있는지 없는지만 체크
+                    result_potion = potion_check_juljun(cla)
+                    if result_potion == False:
 
-        print("in_dun_////////////////////////////", in_dun_)
+                        v_.potion_count += 1
+                        print("포션 없음... 카운터", v_.potion_count)
+                        if v_.potion_count > 3:
 
-        # 던전인지 아닌지 파악 후 아닐 경우 던전 진입하기
-        # 던전일 경우 물약 파악하기
-        if in_dun_ == True:
-            print("던전에 들어와있다")
-            now_hunting(dun_where, cla)
-            data = "테스트"
-            myPotion_check(dun_where, cla)
-        else:
-            print("던고 실행하러 간다")
-            com_gg = dun_go(cla, dun_where, dun_step)
+                            print("물약없다. 포션사러 가자", v_.potion_count)
+                            v_.potion_count = 0
+
+                            go_potion_ = False
+                            go_potion_count = 0
+                            while go_potion_ is False:
+                                go_potion_count += 1
+                                if go_potion_count > 10:
+                                    go_potion_ = True
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                                if imgs_ is not None and imgs_ != False:
+                                    click_pos_2(30, 325, cla)
+
+                                result = go_alrim_(cla)
+                                if result == True:
+                                    go_alrim_confirm(cla, "자동사냥 중 물약사러 가기")
+
+                                result_auto_ = go_auto(cla, 20)
+                                if result_auto_ == True:
+                                    potion_buy(cla)
+                                    go_potion_ = True
+
+                                time.sleep(1)
+                    else:
+                        v_.potion_count = 0
+                        print("포션 있음... 카운터", v_.potion_count)
+            else:
+                for i in range(5):
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                    if imgs_ is not None and imgs_ != False:
+                        drag_pos(390, 510, 700, 510, cla)
+                    else:
+                        break
+                    time.sleep(1)
+                print("던고 실행하러 간다2")
+                com_gg = dun_go(cla, dun_where, dun_step)
+                print("던고 실행 후", com_gg)
+                # 절전모드 아닐경우 절전모드 실행
+                if com_gg != True:
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                    if imgs_ is None:
+                        click_pos_2(30, 345, cla)
+
+            ###
+
+
+            # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dun_spot\\" + path_ + ".PNG"
+            # img_array = np.fromfile(full_path, np.uint8)
+            # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            # imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
+            # if imgs_ is not None and imgs_ != False:
+            #     print(path_, " <= 진입 던전...")
+            #     in_dun_ = True
+            #
+            # print("in_dun_////////", in_dun_)
+            #
+            # # 던전인지 아닌지 파악 후 아닐 경우 던전 진입하기
+            # # 던전일 경우 물약 파악하기
+            # if in_dun_ == True:
+            #     print("던전에 들어와있다")
+            #     now_hunting(dun_where, cla)
+            #     data = "테스트"
+            #     myPotion_check(dun_where, cla)
+            # else:
+            #     print("던고 실행하러 간다")
+            #     com_gg = dun_go(cla, dun_where, dun_step)
 
 
 
@@ -68,11 +206,10 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
 
 
 def dun_go(cla, dun_where, dun_step):
-    from myfunction import menuOpen, click_pos_2, imgs_set_, imgs_set, click_pos_reg
+    from myfunction import menuOpen, click_pos_2, imgs_set_, imgs_set, click_pos_reg, drag_pos
     from action import go_alrim_yes
     import cv2
     import numpy as np
-    from function import drag_pos
     try:
         print("던전 진입")
         print("클라:", cla)
@@ -81,19 +218,12 @@ def dun_go(cla, dun_where, dun_step):
 
         comp_g = False
 
-        # 메뉴 오픈
-        menuOpen(cla)
-        # 던전 클릭
-        click_pos_2(740, 370, cla)
-
-        # 던전 글자 이미지 인식
-
-        dun_img = False
+        dun_img_gnu = False
         dun_img_count = 0
-        while dun_img is False:
+        while dun_img_gnu is False:
             dun_img_count += 1
             if dun_img_count > 5:
-                dun_img = True
+                dun_img_gnu = True
 
             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_2.PNG"
             img_array = np.fromfile(full_path, np.uint8)
@@ -101,128 +231,293 @@ def dun_go(cla, dun_where, dun_step):
             imgs_ = imgs_set_(25, 35, 100, 80, cla, img, 0.88)
             # 정예던전 클릭
             if imgs_ is not None and imgs_ != False:
-                click_pos_2(230, 105, cla)
-                time.sleep(1)
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_3.PNG"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set_(420, 350, 490, 410, cla, img, 0.88)
-                if imgs_ is not None and imgs_ != False:
-                    dun_img = True
-
-            time.sleep(1)
-
-        # 공허 이미지 확인
-        dun_img2 = False
-        dun_img2_count = 0
-        while dun_img2 is False:
-            dun_img2_count += 1
-            if dun_img2_count > 5:
-                dun_img2 = True
-
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
-            # 드래그
-            if imgs_ is not None and imgs_ != False:
-                drag_pos(850, 500, 130, 500, cla)
-                time.sleep(3)
-
                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_5.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set_(730, 360, 820, 400, cla, img, 0.88)
                 if imgs_ is not None and imgs_ != False:
-                    dun_img2 = True
-
-            time.sleep(1)
-
-        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon_lock.png"
-        img_array = np.fromfile(full_path, np.uint8)
-        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-
-        # 여기 던전마다 이미지 위치 달라져야 한다
-        if dun_where == '공허':
-            imgs_ = imgs_set(80, 440, 220, 580, cla, img)
-        if dun_where == '난쟁이':
-            imgs_ = imgs_set(390, 440, 530, 580, cla, img)
-        if dun_where == '지하감옥':
-            imgs_ = imgs_set(710, 440, 850, 580, cla, img)
-
-        if imgs_ is None:
-            print("rock 없고, 0초 인지 파악하자")
-
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            if dun_where == "공허":
-                imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.88)
-            if dun_where == "난쟁이":
-                imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
-            if dun_where == "지하감옥":
-                imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
-            # 0초 남음 여부 확인 후 공허, 난쟁이, 지하감옥 클릭
-            if imgs_ is None:
-                print("던전진입ㄱ")
-                # 여기 던전마다 클릭 위치 달라져야 한다.
-                if dun_where == '공허':
-                    click_pos_2(160, 520, cla)
-                if dun_where == '난쟁이':
-                    click_pos_2(460, 520, cla)
-                if dun_where == '지하감옥':
-                    click_pos_2(760, 520, cla)
-
-                dun_img3 = False
-                dun_img3_count = 0
-                while dun_img3 is False:
-                    dun_img3_count += 1
-                    if dun_img3_count > 10:
-                        dun_img3 = True
-
-                    # 정예던전 이미지 확인
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_6.PNG"
+                    dun_img_gnu = True
+                    print("던전 클릭 준비 끝")
+                    # 진입 시작
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon_lock.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set_(48, 41, 128, 70, cla, img, 0.88)
-                    if imgs_ is not None and imgs_ != False:
-                        dun_img3 = True
 
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_clear_1.PNG"
+                    # 여기 던전마다 이미지 위치 달라져야 한다
+                    if dun_where == '공허':
+                        imgs_ = imgs_set(80, 440, 220, 580, cla, img)
+                    if dun_where == '난쟁이':
+                        imgs_ = imgs_set(390, 440, 530, 580, cla, img)
+                    if dun_where == '지하감옥':
+                        imgs_ = imgs_set(710, 440, 850, 580, cla, img)
+
+                    if imgs_ is None:
+                        print("rock 없고, 0초 인지 파악하자")
+
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(660, 960, 740, 1000, cla, img)
-                        if imgs_ is not None and imgs_ != False:
-                            comp_g = True
+                        if dun_where == "공허":
+                            imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.88)
+                        if dun_where == "난쟁이":
+                            imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
+                        if dun_where == "지하감옥":
+                            imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
+                        # 0초 남음 여부 확인 후 공허, 난쟁이, 지하감옥 클릭
+                        if imgs_ is None:
+                            print("던전진입ㄱ")
+                            # 여기 던전마다 클릭 위치 달라져야 한다.
+                            if dun_where == '공허':
+                                click_pos_2(160, 520, cla)
+                            if dun_where == '난쟁이':
+                                click_pos_2(460, 520, cla)
+                            if dun_where == '지하감옥':
+                                click_pos_2(760, 520, cla)
+
+                            dun_img3 = False
+                            dun_img3_count = 0
+                            while dun_img3 is False:
+                                dun_img3_count += 1
+                                if dun_img3_count > 10:
+                                    dun_img3 = True
+
+                                # 정예던전 이미지 확인
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_6.PNG"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set_(48, 41, 128, 70, cla, img, 0.88)
+                                if imgs_ is not None and imgs_ != False:
+                                    dun_img3 = True
+
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_clear_1.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set(660, 960, 740, 1000, cla, img)
+                                    if imgs_ is not None and imgs_ != False:
+                                        comp_g = True
+
+                                    else:
+                                        result_in_dunjeon_list_su = in_dunjeon_list_su(cla, dun_where, dun_step)
+                                        print("in_dunjeon_list_su_result", result_in_dunjeon_list_su)
+                                        time.sleep(0.5)
+                                        click_pos_2(840, 990, cla)
+                                        time.sleep(0.2)
+                                        click_pos_2(840, 990, cla)
+
+                                        time.sleep(0.5)
+
+                                        result_ = go_alrim_yes(cla)
+                                        if result_[0] == True:
+                                            click_pos_reg(result_[1], result_[2], cla)
+                                        else:
+                                            click_pos_2(550, 610, cla)
+
+                                        # 던전 진입 후 순간이동서 클릭
+                                        dun_in_sungan(cla)
+                                time.sleep(1)
+
+
 
                         else:
-                            result_in_dunjeon_list_su = in_dunjeon_list_su(cla, dun_where, dun_step)
-                            print("in_dunjeon_list_su_result", result_in_dunjeon_list_su)
-                            time.sleep(0.5)
-                            click_pos_2(840, 990, cla)
-                            time.sleep(0.2)
-                            click_pos_2(840, 990, cla)
-
-                            time.sleep(0.5)
-
-                            result_ = go_alrim_yes(cla)
-                            if result_[0] == True:
-                                click_pos_reg(result_[1], result_[2], cla)
-                            else:
-                                click_pos_2(550, 610, cla)
-
-                            # 던전 진입 후 순간이동서 클릭
-                            dun_in_sungan(cla)
+                            print("0초 남음 스케줄 완료")
+                            comp_g = True
+                    else:
+                        print("던전락이니 스케줄 완료")
+                        comp_g = True
+                else:
+                    print("던전 클릭 준비 진입")
+                    dun_img = False
+                    click_pos_2(230, 105, cla)
                     time.sleep(1)
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+                    if imgs_ is not None and imgs_ != False:
+                        dun_img = True
+                        print("그림자성채", imgs_)
+                    else:
+                        print("그림자성채 없")
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_3.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+                    if imgs_ is not None and imgs_ != False:
+                        dun_img = True
+                        print("공허", imgs_)
+                    else:
+                        print("공허 없")
 
-
-
+                    if dun_img == True:
+                        print("drag_pos(850, 500, 130, 500, cla)")
+                        for i in range(5):
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_5.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set_(730, 360, 820, 400, cla, img, 0.88)
+                            if imgs_ is not None and imgs_ != False:
+                                break
+                            else:
+                                print("drag_pos(850, 500, 130, 500, cla)222")
+                                drag_pos(850, 500, 130, 500, cla)
+                            time.sleep(1)
             else:
-                print("0초 남음 스케줄 완료")
-                comp_g = True
-        else:
-            print("던전락이니 스케줄 완료")
-            comp_g = True
+                # 메뉴 오픈
+                menuOpen(cla)
+                # 던전 클릭
+                click_pos_2(740, 370, cla)
+            time.sleep(1)
+
+
+                # # 던전 글자 이미지 인식
+                #
+                # dun_img = False
+                # dun_img_count = 0
+                # while dun_img is False:
+                #     dun_img_count += 1
+                #     if dun_img_count > 5:
+                #         dun_img = True
+                #
+                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_2.PNG"
+                #     img_array = np.fromfile(full_path, np.uint8)
+                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #     imgs_ = imgs_set_(25, 35, 100, 80, cla, img, 0.88)
+                #     # 정예던전 클릭
+                #     if imgs_ is not None and imgs_ != False:
+                #         click_pos_2(230, 105, cla)
+                #         time.sleep(1)
+                #         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
+                #         img_array = np.fromfile(full_path, np.uint8)
+                #         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #         imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+                #         if imgs_ is not None and imgs_ != False:
+                #             dun_img = True
+                #         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_3.PNG"
+                #         img_array = np.fromfile(full_path, np.uint8)
+                #         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #         imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+                #         if imgs_ is not None and imgs_ != False:
+                #             dun_img = True
+                #     else:
+                #         # 메뉴 오픈
+                #         menuOpen(cla)
+                #         # 던전 클릭
+                #         click_pos_2(740, 370, cla)
+                #     time.sleep(1)
+                #
+                # # 공허 이미지 확인
+                # dun_img2 = False
+                # dun_img2_count = 0
+                # while dun_img2 is False:
+                #     dun_img2_count += 1
+                #     if dun_img2_count > 5:
+                #         dun_img2 = True
+                #
+                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
+                #     img_array = np.fromfile(full_path, np.uint8)
+                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #     imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
+                #     # 드래그
+                #     if imgs_ is not None and imgs_ != False:
+                #         drag_pos(850, 500, 130, 500, cla)
+                #         time.sleep(3)
+                #
+                #         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_5.PNG"
+                #         img_array = np.fromfile(full_path, np.uint8)
+                #         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                #         imgs_ = imgs_set_(730, 360, 820, 400, cla, img, 0.88)
+                #         if imgs_ is not None and imgs_ != False:
+                #             dun_img2 = True
+                #
+                #     time.sleep(1)
+
+
+
+        # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon_lock.png"
+        # img_array = np.fromfile(full_path, np.uint8)
+        # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #
+        # # 여기 던전마다 이미지 위치 달라져야 한다
+        # if dun_where == '공허':
+        #     imgs_ = imgs_set(80, 440, 220, 580, cla, img)
+        # if dun_where == '난쟁이':
+        #     imgs_ = imgs_set(390, 440, 530, 580, cla, img)
+        # if dun_where == '지하감옥':
+        #     imgs_ = imgs_set(710, 440, 850, 580, cla, img)
+        #
+        # if imgs_ is None:
+        #     print("rock 없고, 0초 인지 파악하자")
+        #
+        #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\zero.png"
+        #     img_array = np.fromfile(full_path, np.uint8)
+        #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #     if dun_where == "공허":
+        #         imgs_ = imgs_set_(100, 645, 200, 685, cla, img, 0.88)
+        #     if dun_where == "난쟁이":
+        #         imgs_ = imgs_set_(410, 645, 510, 685, cla, img, 0.88)
+        #     if dun_where == "지하감옥":
+        #         imgs_ = imgs_set_(730, 645, 830, 685, cla, img, 0.88)
+        #     # 0초 남음 여부 확인 후 공허, 난쟁이, 지하감옥 클릭
+        #     if imgs_ is None:
+        #         print("던전진입ㄱ")
+        #         # 여기 던전마다 클릭 위치 달라져야 한다.
+        #         if dun_where == '공허':
+        #             click_pos_2(160, 520, cla)
+        #         if dun_where == '난쟁이':
+        #             click_pos_2(460, 520, cla)
+        #         if dun_where == '지하감옥':
+        #             click_pos_2(760, 520, cla)
+        #
+        #         dun_img3 = False
+        #         dun_img3_count = 0
+        #         while dun_img3 is False:
+        #             dun_img3_count += 1
+        #             if dun_img3_count > 10:
+        #                 dun_img3 = True
+        #
+        #             # 정예던전 이미지 확인
+        #             full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_6.PNG"
+        #             img_array = np.fromfile(full_path, np.uint8)
+        #             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #             imgs_ = imgs_set_(48, 41, 128, 70, cla, img, 0.88)
+        #             if imgs_ is not None and imgs_ != False:
+        #                 dun_img3 = True
+        #
+        #                 full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_clear_1.PNG"
+        #                 img_array = np.fromfile(full_path, np.uint8)
+        #                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        #                 imgs_ = imgs_set(660, 960, 740, 1000, cla, img)
+        #                 if imgs_ is not None and imgs_ != False:
+        #                     comp_g = True
+        #
+        #                 else:
+        #                     result_in_dunjeon_list_su = in_dunjeon_list_su(cla, dun_where, dun_step)
+        #                     print("in_dunjeon_list_su_result", result_in_dunjeon_list_su)
+        #                     time.sleep(0.5)
+        #                     click_pos_2(840, 990, cla)
+        #                     time.sleep(0.2)
+        #                     click_pos_2(840, 990, cla)
+        #
+        #                     time.sleep(0.5)
+        #
+        #                     result_ = go_alrim_yes(cla)
+        #                     if result_[0] == True:
+        #                         click_pos_reg(result_[1], result_[2], cla)
+        #                     else:
+        #                         click_pos_2(550, 610, cla)
+        #
+        #                     # 던전 진입 후 순간이동서 클릭
+        #                     dun_in_sungan(cla)
+        #             time.sleep(1)
+        #
+        #
+        #
+        #     else:
+        #         print("0초 남음 스케줄 완료")
+        #         comp_g = True
+        # else:
+        #     print("던전락이니 스케줄 완료")
+        #     comp_g = True
 
 
         return comp_g

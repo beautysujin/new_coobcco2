@@ -2139,7 +2139,7 @@ def in_village_ready(cla):
             data = 'nida'
         if thismana == True:
             data = 'mana'
-        print("def in_village_ready(cla): end")
+        print("def in_village_ready(cla): end", data)
         return data
     except Exception as e:
         print(e)

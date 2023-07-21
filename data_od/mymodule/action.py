@@ -134,6 +134,152 @@ def go_jangchack(cla):
         print(e)
         return 0
 
+def potion_check_juljun(cla):
+    try:
+        from myfunction import imgs_set
+        import numpy as np
+        import cv2
+
+        go_ = True
+
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\juljun_big_potion_zero.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(415, 950, 470, 1030, cla, img)
+        if imgs_ is not None and imgs_ != False:
+            print("큰 포션 0 보여")
+            go_ = False
+        else:
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\juljun_middle_potion_zero.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(415, 950, 470, 1030, cla, img)
+            if imgs_ is not None and imgs_ != False:
+                print("중간 포션 0 보여")
+                go_ = False
+            else:
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\juljun_small_potion_zero.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(415, 950, 470, 1030, cla, img)
+                if imgs_ is not None and imgs_ != False:
+                    print("작은 포션 0 보여")
+                    go_ = False
+                else:
+                    print("포션 있어...")
+        return go_
+    except Exception as e:
+        print(e)
+        return 0
+
+def potion_buy(cla):
+    try:
+        from myfunction import imgs_set, click_pos_2, go_to_home, click_pos_reg, text_check_get
+        import numpy as np
+        import cv2
+        from chango import in_village_ready
+        from clean import clean_screen
+
+        go_alrim_confirm(cla, "물약사러 가기")
+
+        result_maul = in_village_ready(cla)
+
+        # 소모품 상점인지 확인
+        in_sangjum = False
+        in_sangjum_count = 0
+        while in_sangjum is False:
+            in_sangjum_count += 1
+            if in_sangjum_count > 5:
+                in_sangjum = True
+
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\somopoom_title.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(30, 30, 180, 80, cla, img)
+            if imgs_ is not None and imgs_ != False:
+                print("소모품 상점 보여")
+                in_sangjum = True
+
+                in_sangjum2 = False
+                in_sangjum2_count = 0
+                while in_sangjum2 is False:
+                    in_sangjum2_count += 1
+                    if in_sangjum2_count > 5:
+                        in_sangjum2 = True
+
+                    if result_maul == "nida" or result_maul == "yotoon":
+
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\all.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set(530, 570, 630, 610, cla, img)
+                        if imgs_ is not None and imgs_ != False:
+                            click_pos_reg(imgs_.x, imgs_.y, cla)
+                            time.sleep(0.5)
+                            click_pos_2(545, 690, cla)
+                        else:
+                            click_pos_2(165, 165, cla)
+                            time.sleep(1)
+                            result_text = text_check_get(330, 115, 550, 150, cla)
+                            print("result_text...", result_text)
+                            full_potion = "물약아이템최대보유"
+                            equal_ = False
+                            equal_count = 0
+                            if len(result_text) > 0:
+                                for i in range(len(full_potion)):
+                                    for z in range(len(result_text)):
+                                        if full_potion[i] == result_text[z]:
+                                            print(i, full_potion[i], result_text[z])
+                                            equal_count += 1
+                                            if equal_count > 4:
+                                                equal_ = True
+                                                break
+                            print("equal_", equal_)
+                            if equal_ == True:
+                                in_sangjum2 = True
+                        time.sleep(1)
+                    else:
+                        print("이 마을 나오면 진짜 아닌거다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                        go_to_home("potion_buy", cla)
+
+            else:
+                # 소모품 상인 클릭
+                click_pos_2(770, 915, cla)
+
+                for i in range(15):
+                    # 소모품 상점인지 확인
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\somopoom_title.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(30, 30, 180, 80, cla, img)
+                    if imgs_ is not None and imgs_ != False:
+                        break
+                    time.sleep(1)
+            time.sleep(1)
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\somopoom_title.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(30, 30, 180, 80, cla, img)
+        if imgs_ is not None and imgs_ != False:
+            for i in range(5):
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\somopoom_title.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(30, 30, 180, 80, cla, img)
+                if imgs_ is not None and imgs_ != False:
+                    click_pos_2(930, 60, cla)
+                else:
+                    break
+                time.sleep(1)
+        else:
+            clean_screen(cla, "potion_buy_exit")
+
+    except Exception as e:
+        print(e)
+        return 0
+
+
+
 def go_soongan_f5(cla):
     try:
         from myfunction import imgs_set, click_pos_2, random_int, drag_pos, go_to_home, click_pos_reg, imgs_set_
@@ -1277,27 +1423,12 @@ def go_juljun(cla, story):
         elif cla == "two":
             cla_ing = v_.two_cla_ing
 
-
-
-        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\juljun_1.png"
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
         img_array = np.fromfile(full_path, np.uint8)
         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set(200, 290, 700, 750, cla, img)
-
-        if imgs_ is None or imgs_ == False:
-            print("juljun_1 안보여")
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\juljun_2.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(200, 290, 700, 750, cla, img)
-
-            if imgs_ is None or imgs_ == False:
-                print("juljun_2 안보여")
-            else:
-                print("juljun_2 보여")
-                go_ = True
-        else:
-            print("juljun_1 보여")
+        imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+        if imgs_ is not None and imgs_ != False:
+            print("juljun_mode 보여")
             go_ = True
 
         if go_ == True:

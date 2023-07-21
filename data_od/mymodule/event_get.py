@@ -20,13 +20,13 @@ def go_get_open(cla):
         go_item_open(cla)
         time.sleep(1)
         go_ticket_open(cla)
-        drag_pos(800, 900, 800, 200, cla)
+        drag_pos(800, 900, 800, 100, cla)
         time.sleep(1)
         go_ticket_open(cla)
         # drag_pos(800, 300, 800, 900, cla)
         #time.sleep(1)
         go_item_open(cla)
-        drag_pos(800, 900, 800, 200, cla)
+        drag_pos(800, 900, 800, 100, cla)
         time.sleep(1)
         go_item_open(cla)
         time.sleep(1)
@@ -537,7 +537,7 @@ def game_event_search(cla, data, y_):
                         if imgs_ is not None and imgs_ != False:
                             print("sold_out", imgs_)
 
-                            drag_pos(640, 600, 140, 600, cla)
+                            drag_pos(640, 600, 40, 600, cla)
                             time.sleep(0.3)
                             click_pos_2(630, 600, cla)
                             time.sleep(1)
@@ -1025,7 +1025,7 @@ def game_event_get(cla):
                         else:
                             isEventGet = True
                 else:
-                    drag_pos(840, 660, 840, 360, cla)
+                    drag_pos(840, 660, 840, 260, cla)
                     time.sleep(1)
 
 

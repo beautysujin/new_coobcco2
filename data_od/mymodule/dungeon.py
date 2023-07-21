@@ -247,19 +247,40 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                                 resultauto = go_auto(cla, '10')
                                 if resultauto == False:
                                     print("사냥터 미도착")
-                                    time.sleep(random_int())
+                                    time.sleep(1)
                                 else:
-
+                                    time.sleep(1)
                                     isresultauto = True
                                     print("사냥터 도착", delay)
-                                    time.sleep(delay + random_int())
+                                    time.sleep(delay / 2)
+                                    for i in range(delay):
+                                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
+                                        img_array = np.fromfile(full_path, np.uint8)
+                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                        imgs_ = imgs_set(470, 685, 500, 715, cla, img)
+                                        if imgs_ is not None and imgs_ != False:
+                                            print("이동중")
+                                        else:
+                                            time.sleep(2)
+                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
+                                            img_array = np.fromfile(full_path, np.uint8)
+                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                            imgs_ = imgs_set(470, 685, 500, 715, cla, img)
+                                            if imgs_ is not None and imgs_ != False:
+                                                print("이동중")
+                                            else:
+                                                break
+                                        time.sleep(1)
+
 
                                     # x 같은 이벤트
                                     is_stop(cla)
 
                                     click_pos_2(900, 890, cla)
-                                    time.sleep(random_int())
-                                    result_hunting = now_hunting_is(where, cla)
+                                    time.sleep(1)
+                                    # 절전모드
+                                    click_pos_2(30, 345, cla)
+                                    # result_hunting = now_hunting_is(where, cla)
                                     is8285 = True
                                     time.sleep(random_int())
                         else:
@@ -304,42 +325,167 @@ def start_ready_in_jadong(cla):
 
 def jadong_cla_play(cla, where):
     try:
-        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check
+        import cv2
+        import numpy as np
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check, go_auto
         from clean import clean_screen
-        from action import now_hunting
+        from action import now_hunting, potion_check_juljun, go_alrim_confirm, potion_buy, go_alrim_
+        from chango import in_village_ready
+
+        result_attack = False
 
         nowPlay = 'jadong'
 
+        # 자동사냥터에서 사냥중인지 파악하기
 
-        clean_screen(cla, "jadong_cla_play")
-        result_ = now_hunting(nowPlay, cla)  # False는 현재 노사냥, True는 현재 사냥중
-        print("result_ = now_hunting(nowPlay, cla)", result_)
-        print("jadong_cla_play : ", where)
+        result_spot = jadong_juljun_spot(cla, where)
 
-        if result_ == False:
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+        if imgs_ is None:
+            # 마을이 아닐 경우 절전 모드하고 비교
+            result_maul = in_village_ready(cla)
+            if result_maul == "none":
+                for i in range(10):
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                    if imgs_ is not None and imgs_ != False:
+                        break
+                    else:
+                        click_pos_2(30, 345, cla)
+                    time.sleep(1)
+        time.sleep(0.5)
+
+        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\jadong_spot\\" + result_spot + ".PNG"
+        img_array = np.fromfile(full_path, np.uint8)
+        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+        imgs_ = imgs_set(30, 110, 200, 170, cla, img)
+        if imgs_ is not None and imgs_ != False:
+            result_attack = jadong_juljun_attack(cla, where)
+            if result_attack == False:
+                at_ = False
+                at_count = 0
+                while at_ is False:
+                    at_count += 1
+                    if at_count > 5:
+                        at_ = True
+                    result_auto = go_auto(cla, 12)
+                    if result_auto == False:
+                        drag_pos(390, 510, 670, 510, cla)
+                    else:
+                        click_pos_2(900, 890, cla)
+                        time.sleep(1)
+                        click_pos_2(30, 345)
+                    time.sleep(1)
+            else:
+                print("자동사냥중....")
+                # 포션 있는지 없는지만 체크
+                result_potion = potion_check_juljun(cla)
+                if result_potion == False:
+
+                    v_.potion_count += 1
+                    print("포션 없음... 카운터", v_.potion_count)
+                    if v_.potion_count > 3:
+
+                        print("물약없다. 포션사러 가자", v_.potion_count)
+                        v_.potion_count = 0
+
+                        go_potion_ = False
+                        go_potion_count = 0
+                        while go_potion_ is False:
+                            go_potion_count += 1
+                            if go_potion_count > 10:
+                                go_potion_ = True
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                            if imgs_ is not None and imgs_ != False:
+                                click_pos_2(30, 325, cla)
+
+                            result = go_alrim_(cla)
+                            if result == True:
+                                go_alrim_confirm(cla, "자동사냥 중 물약사러 가기")
+
+                            result_auto_ = go_auto(cla, 20)
+                            if result_auto_ == True:
+                                potion_buy(cla)
+                                go_potion_ = True
+
+
+                            time.sleep(1)
+                else:
+                    v_.potion_count = 0
+                    print("포션 있음... 카운터", v_.potion_count)
+        else:
+            clean_screen(cla, "jadong_cla_play")
+            complete_1(cla)
+            time.sleep(1 + random_int())
+            clean_screen(cla, "jadong_cla_play")
             jadong_cla_ready(cla, where)  # False는 자동사냥 진행, True는 자동사냥 노진행
             print("자동사냥 시작")
-            time.sleep(10 + random_int())
-            # click_pos_2(900, 888, cla)
-            # time.sleep(1 + random_int())
-            myPotion_check(nowPlay, cla)
-            if cla == 'one':
-                v_.one_cla_ing = nowPlay
-            if cla == 'two':
-                v_.two_cla_ing = nowPlay
-            time.sleep(5 + random_int())
-            print("자동사냥 체크 끝")
+
+            # 절전모드 아닐경우 절전모드 실행
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+            if imgs_ is not None and imgs_ != False:
+                click_pos_2(30, 345, cla)
 
 
 
-            # 여기에 초기화 시간 넣어서 코딩하기(시간함수)
-            # 시간
-        else:
-            complete_1(cla)
-            myPotion_check(nowPlay, cla)
-        time.sleep(1 + random_int())
-        jadong_0_check = False
+    except Exception as e:
+        print(e)
+        return 0
 
+def jadong_juljun_spot(cla, where):
+    try:
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check
+
+        print("절전 사냥터 인식")
+
+        spot = "none"
+
+        if where == "고원서리이빨":
+            spot = "gowon_tooth"
+        if where == "고블린부패":
+            spot = "goblin"
+        if where == "살얼음언덕":
+            spot = "sal_ice"
+        if where == "전사야영지":
+            spot = "warrior"
+
+        return spot
+    except Exception as e:
+        print(e)
+        return 0
+
+def jadong_juljun_attack(cla, where):
+    try:
+        import cv2
+        import numpy as np
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, myPotion_check
+
+        print("절전 사냥터 인식")
+
+        go_ = False
+
+        for i in range(30):
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\jadong_attack\\jadong_attack.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(400, 600, 560, 660, cla, img)
+            if imgs_ is not None and imgs_ != False:
+                print("자동 사냥중", imgs_)
+                go_ = True
+                break
+
+        return go_
     except Exception as e:
         print(e)
         return 0
@@ -348,7 +494,7 @@ def complete_1(cla):
 
     import numpy as np
     import cv2
-    from function import imgs_set_, click_pos_reg, click_pos_2
+    from myfunction import imgs_set_, click_pos_reg, click_pos_2
 
     try:
         print("complete_1")

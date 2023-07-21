@@ -59,6 +59,8 @@ two_in_dun_count = 0
 one_cla_stop = 0
 two_cla_stop = 0
 
+potion_count = 0
+
 dir_path = "C:\\my_games\\coobcco2\\data_od"
 file_path = dir_path + "\\mymodule\\version.txt"
 file_path2 = "C:\\my_games\\mouse\\port.txt"
