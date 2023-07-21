@@ -68,6 +68,8 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
                     if imgs_ is not None and imgs_ != False:
                         break
                     else:
+                        go_alrim_confirm(cla, "dunjeon_cla_play_su")
+                        time.sleep(0.5)
                         click_pos_2(30, 345, cla)
                     time.sleep(1)
         time.sleep(0.5)

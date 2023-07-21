@@ -356,6 +356,8 @@ def jadong_cla_play(cla, where):
                     if imgs_ is not None and imgs_ != False:
                         break
                     else:
+                        go_alrim_confirm(cla, "jadong_cla_play")
+                        time.sleep(0.5)
                         click_pos_2(30, 345, cla)
                     time.sleep(1)
         time.sleep(0.5)
