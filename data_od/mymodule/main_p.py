@@ -2753,16 +2753,28 @@ class game_Playing(QThread):
                                     print("다시 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ")
 
                             else:
-                                print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ")
+                                print("힝..오딘 백그라운드 " + str(cla) + "클라 꺼져있음  ㅠ,.ㅠ 10초 동안 다시 체크")
                                 line_to_me(cla, "꺼진 것 같다")
 
-                                # start -> yes를 no로 바꾸기
-                                dir_path = "C:\\my_games\\load\\odin"
-                                file_path = dir_path + "\\start.txt"
+                                look_odin = False
 
-                                with open(file_path, "w", encoding='utf-8-sig') as file:
-                                    data = 'no'
-                                    file.write(str(data))
+                                for i in range(10):
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
+                                    if imgs_ is not None and imgs_ != False:
+                                        look_odin = True
+                                        break
+                                    time.sleep(1)
+                                if look_odin == False:
+                                    # start -> yes를 no로 바꾸기
+                                    dir_path = "C:\\my_games\\load\\odin"
+                                    file_path = dir_path + "\\start.txt"
+
+                                    with open(file_path, "w", encoding='utf-8-sig') as file:
+                                        data = 'no'
+                                        file.write(str(data))
 
 
                 time.sleep(1)
