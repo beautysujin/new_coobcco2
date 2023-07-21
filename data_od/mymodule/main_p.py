@@ -2760,19 +2760,9 @@ class game_Playing(QThread):
                                 dir_path = "C:\\my_games\\load\\odin"
                                 file_path = dir_path + "\\start.txt"
 
-                                isstart1 = False
-                                while isstart1 is False:
-                                    if os.path.isdir(dir_path) == True:
-                                        if os.path.isfile(file_path) == True:
-                                            with open(file_path, "r", encoding='utf-8-sig') as file:
-                                                start_get = file.read()
-                                                isstart1 = True
-                                        else:
-                                            with open(file_path, "w", encoding='utf-8-sig') as file:
-                                                data = 'none'
-                                                file.write(str(data))
-                                    else:
-                                        os.makedirs(dir_path)
+                                with open(file_path, "w", encoding='utf-8-sig') as file:
+                                    data = 'no'
+                                    file.write(str(data))
 
 
                 time.sleep(1)
