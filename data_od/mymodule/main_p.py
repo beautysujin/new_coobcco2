@@ -2435,8 +2435,6 @@ class game_Playing(QThread):
 
                             # 스케쥴 체크
                             start_ready = myQuest_play_check(cla, "check")
-
-                            print("진행중으로 바꾸기 작업 시도")
                             # self.parent.set_rand_int_jinhang(cla)
 
                             # start_ready[0] 진행중인 정보 [0][1] = id, [0][2] = 던전(공허, 난쟁이, 지하감옥, 자동사냥(들소황무지...), [0][3] = 완료 or 대기중, [3]진행되거나 진행중인 퀘스트

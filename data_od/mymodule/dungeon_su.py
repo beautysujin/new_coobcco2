@@ -52,27 +52,7 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
         if dun_where == "지하감옥":
             dun_name = "underprison"
 
-        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
-        img_array = np.fromfile(full_path, np.uint8)
-        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-        imgs_ = imgs_set(390, 360, 570, 420, cla, img)
-        if imgs_ is None:
-            # 마을이 아닐 경우 절전 모드하고 비교
-            result_maul = in_village_ready(cla)
-            if result_maul == "none":
-                for i in range(10):
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(390, 360, 570, 420, cla, img)
-                    if imgs_ is not None and imgs_ != False:
-                        break
-                    else:
-                        go_alrim_confirm(cla, "dunjeon_cla_play_su")
-                        time.sleep(0.5)
-                        click_pos_2(30, 345, cla)
-                    time.sleep(1)
-        time.sleep(0.5)
+
 
         # 절전모드
 
@@ -170,32 +150,25 @@ def dunjeon_cla_play_su(cla, dun_where, dun_step):
                     if imgs_ is None:
                         click_pos_2(30, 345, cla)
 
-            ###
-
-
-            # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dun_spot\\" + path_ + ".PNG"
-            # img_array = np.fromfile(full_path, np.uint8)
-            # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            # imgs_ = imgs_set_(40, 100, 240, 340, cla, img, 0.85)
-            # if imgs_ is not None and imgs_ != False:
-            #     print(path_, " <= 진입 던전...")
-            #     in_dun_ = True
-            #
-            # print("in_dun_////////", in_dun_)
-            #
-            # # 던전인지 아닌지 파악 후 아닐 경우 던전 진입하기
-            # # 던전일 경우 물약 파악하기
-            # if in_dun_ == True:
-            #     print("던전에 들어와있다")
-            #     now_hunting(dun_where, cla)
-            #     data = "테스트"
-            #     myPotion_check(dun_where, cla)
-            # else:
-            #     print("던고 실행하러 간다")
-            #     com_gg = dun_go(cla, dun_where, dun_step)
-
-
-
+        else:
+            # 마을이 아닐 경우 절전 모드하고 비교
+            result_maul = in_village_ready(cla)
+            if result_maul == "none":
+                go_alrim_confirm(cla, "dunjeon_cla_play_su")
+                time.sleep(0.5)
+                click_pos_2(30, 345, cla)
+                time.sleep(1)
+            print("던고 실행하러 간다3")
+            com_gg = dun_go(cla, dun_where, dun_step)
+            print("던고 실행 후", com_gg)
+            # 절전모드 아닐경우 절전모드 실행
+            if com_gg != True:
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong\\juljun_mode.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(390, 360, 570, 420, cla, img)
+                if imgs_ is None:
+                    click_pos_2(30, 345, cla)
 
 
 
