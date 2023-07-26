@@ -1,8 +1,6 @@
-360/seven
-430/seven
-480/fivetofive
-540/twenty
-660/black_six
+360/fourteen
+480/twenty
+600/black_six
+720/yellow_six
 drag
-680/yellow_six
 740/fourteen
