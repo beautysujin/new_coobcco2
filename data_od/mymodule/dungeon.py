@@ -19,10 +19,10 @@ def go_test(cla):
 
 def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla):
     try:
-        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, go_auto
+        from myfunction import imgs_set, random_int, click_pos_2, drag_pos, go_auto, click_pos_reg
         from where import go_worldmap
         from clean import clean_screen
-        from action import now_hunting_is
+        from action import now_hunting_is, go_alrim_confirm
         from massenger import line_to_me
         from stop_18 import is_stop
         import numpy as np
@@ -46,7 +46,7 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
         if cla == 'two':
             jadong_power = int(v_.mypower_2)
 
-        if jadong_power >= force_required:
+        if int(jadong_power) >= int(force_required):
             print("good my Power")
         # else:
         #     why = "요구 전투력 : " + str(force_required) + " / " + "내 전투력 : " + str(jadong_power)
@@ -61,263 +61,324 @@ def go_jadong_in(world_, where, force_required, drag, moglog, select, delay, cla
                 isJadong = True
             thisWorld = False
             print("자동장소", where)
-            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_1.png"
-            img_array = np.fromfile(full_path, np.uint8)
-            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-            imgs_ = imgs_set(1, 30, 100, 80, cla, img)
-            if imgs_ is None or imgs_ == False:
-                print("월드맵 아니닷")
 
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_2.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(1, 30, 100, 80, cla, img)
-                if imgs_ is None or imgs_ == False:
-                    print("월드맵 아니닷2")
-                else:
-                    print("월드맵이닷2", imgs_)
-                    thisWorld = True
-            else:
-                print("월드맵이닷", imgs_)
-                thisWorld = True
+            result_world = go_worldmap(cla, 'world')
 
-            time.sleep(random_int())
-
-            if thisWorld == True:
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(400, 400, 540, 500, cla, img)
-                if imgs_ is None or imgs_ == False:
-                    print("빠른이동이 안보여")
-                    # 시작
-                    result_2 = go_worldmap(cla, "world_moglog")
+            if result_world == True:
+                # 시작
+                # 목록??
+                result_2 = go_worldmap(cla, "world_moglog")
+                time.sleep(0.5)
+                if result_2 == False:
+                    print("아직 월드맵 목록이 아니여")
+                    # 목록 열기
+                    click_pos_2(30, 110, cla)
+                    time.sleep(1)
+                    for i in range(10):
+                        result_world_mog = go_worldmap(cla, "world_moglog")
+                        if result_world_mog == True:
+                            break
+                        else:
+                            print("목록 여는 중")
+                        time.sleep(0.5)
                     time.sleep(0.5)
+
+                time.sleep(random_int())  # 중복
+                if world_ == 'yotoon':
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong_yotoon.png"
+                if world_ == 'midgard':
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_midgard.png"
+                if world_ == 'nida':
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(400, 965, 580, 1010, cla, img)
+                if imgs_ is None:
+                    if world_ == 'yotoon':
+                        print("요툰하임이 안보여")
+                    if world_ == 'midgard':
+                        print("미드가르드가 안보여")
+                    if world_ == 'nida':
+                        print("니다벨리르가 안보여")
+
+                    click_pos_2(80, 956, cla)  # 중복
+                    time.sleep(1)  # 중복
+
+                    # 왔는지 보기
+                    for i in range(10):
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\mid_1.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set(90, 520, 260, 590, cla, img)
+                        if imgs_ is not None:
+                            break
+                        else:
+                            print("이동중")
+                        time.sleep(0.5)
+                    time.sleep(0.5)
+                    for i in range(10):
+                        # 클릭하면 밑에 화면 뜸...
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\maul_move.PNG"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set(330, 970, 500, 1030, cla, img)
+                        if imgs_ is not None:
+                            click_pos_2(550, 1000, cla)
+                            break
+                        else:
+                            if world_ == 'yotoon':
+                                click_pos_2(280, 450, cla)
+                            if world_ == 'midgard':
+                                click_pos_2(160, 515, cla)
+                            if world_ == 'nida':
+                                click_pos_2(370, 570, cla)
+                        time.sleep(0.5)
+                    time.sleep(0.5)
+
+                    # 월드진입했는지 다시 체크
+                    for i in range(10):
+                        result_world = go_worldmap(cla, 'world')
+
+                        if result_world == True:
+                            break
+                        else:
+                            print("월드보기 있는 화면으로 이동중")
+                        time.sleep(0.5)
+                    time.sleep(0.5)
+                else:
+                    if world_ == 'yotoon':
+                        print("요툰하임이 보여")
+                    if world_ == 'midgard':
+                        print("미드가르드가 보여")
+                    if world_ == 'nida':
+                        print("니다벨리르가 보여")
+
+                    result_2 = go_worldmap(cla, "world_moglog")
+                    time.sleep(2)
                     if result_2 == False:
                         print("아직 월드맵 목록이 아니여")
-                        click_pos_2(130, 215, cla)  # 중복
-
-
-                    time.sleep(random_int())  # 중복
-                    if world_ == 'yotoon':
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jadong_yotoon.png"
-                    if world_ == 'midgard':
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_midgard.png"
-                    if world_ == 'nida':
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\world_nida.png"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(400, 965, 580, 1010, cla, img)
-                    if imgs_ is None or imgs_ == False:
-                        if world_ == 'yotoon':
-                            print("요툰하임이 안보여")
-                        if world_ == 'midgard':
-                            print("미드가르드가 안보여")
-                        if world_ == 'nida':
-                            print("니다벨리르가 안보여")
-
-                        click_pos_2(80, 956, cla)  # 중복
-                        time.sleep(1)  # 중복
-                        if world_ == 'yotoon':
-                            click_pos_2(280, 450, cla)
-                        if world_ == 'midgard':
-                            click_pos_2(160, 515, cla)
-                        if world_ == 'nida':
-                            click_pos_2(370, 570, cla)
-
-                        time.sleep(1)  # 중복
-                        click_pos_2(550, 994, cla)  # 중복
-                        time.sleep(1)  # 중복
+                        # 목록 열기
+                        click_pos_2(30, 110, cla)
+                        time.sleep(1)
+                        for i in range(10):
+                            result_world_mog = go_worldmap(cla, "world_moglog")
+                            if result_world_mog == True:
+                                break
+                            else:
+                                print("월드목록 여는 중")
+                            time.sleep(0.5)
+                        time.sleep(0.5)
                     else:
-                        if world_ == 'yotoon':
-                            print("요툰하임이 보여")
-                        if world_ == 'midgard':
-                            print("미드가르드가 보여")
-                        if world_ == 'nida':
-                            print("니다벨리르가 보여")
+                        print("월드맵 목록이 맞당께")
 
-
-                        result_2 = go_worldmap(cla, "world_moglog")
-                        time.sleep(2)
-                        if result_2 == False:
-                            print("아직 월드맵 목록이 아니여")
-                            click_pos_2(30, 110, cla)  # 중복
-                            time.sleep(1)  # 중복
-                        else:
-                            print("월드맵 목록이 맞당께")
-
-
-                            if drag == True:
-                                # 드래그
+                        if drag == True:
+                            # 드래그
+                            for i in range(2):
                                 drag_pos(135, 745, 135, 210, cla)
                                 time.sleep(1)
-                                if where == "전사야영지":
-                                    isClicked = False
-                                    isClicked_count = 0
-                                    while isClicked is False:
-                                        isClicked_count += 1
-                                        if isClicked_count > 5:
-                                            isClicked = True
-                                        full_path = "c:\\my_games\\coobcco2\\data_od\\jadong\\jadong\\songotnidan_bonguji.PNG"
-                                        img_array = np.fromfile(full_path, np.uint8)
-                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set(85, 495, 200, 540, cla, img)
-                                        if imgs_ is not None and imgs_ != False:
-                                            print("송곳니단본거지 보여", imgs_)
-                                            isClicked = True
-                                        else:
-                                            print("송곳니단본거지 안 보여")
-                                            drag_pos(135, 745, 135, 210, cla)
-                                        time.sleep(2)
-                                if where == "고원서리이빨":
-                                    isClicked = False
-                                    isClicked_count = 0
-                                    while isClicked is False:
-                                        isClicked_count += 1
-                                        if isClicked_count > 5:
-                                            isClicked = True
-                                        full_path = "c:\\my_games\\coobcco2\\data_od\\jadong\\jadong\\nida_gowon.PNG"
-                                        img_array = np.fromfile(full_path, np.uint8)
-                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set(85, 540, 210, 590, cla, img)
-                                        if imgs_ is not None and imgs_ != False:
-                                            print("nida_gowon 보여", imgs_)
-                                            isClicked = True
-                                        else:
-                                            print("nida_gowon 안 보여")
-                                            drag_pos(135, 745, 135, 210, cla)
-                                        time.sleep(2)
+                            if where == "전사야영지":
+                                isClicked = False
+                                isClicked_count = 0
+                                while isClicked is False:
+                                    isClicked_count += 1
+                                    if isClicked_count > 5:
+                                        isClicked = True
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\jadong\\jadong\\songotnidan_bonguji.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set(85, 495, 200, 540, cla, img)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("송곳니단본거지 보여", imgs_)
+                                        isClicked = True
+                                    else:
+                                        print("송곳니단본거지 안 보여")
+                                        drag_pos(135, 745, 135, 210, cla)
+                                    time.sleep(2)
+                            if where == "고원서리이빨":
+                                isClicked = False
+                                isClicked_count = 0
+                                while isClicked is False:
+                                    isClicked_count += 1
+                                    if isClicked_count > 5:
+                                        isClicked = True
+                                    full_path = "c:\\my_games\\coobcco2\\data_od\\jadong\\jadong\\nida_gowon.PNG"
+                                    img_array = np.fromfile(full_path, np.uint8)
+                                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                    imgs_ = imgs_set(85, 540, 210, 590, cla, img)
+                                    if imgs_ is not None and imgs_ != False:
+                                        print("nida_gowon 보여", imgs_)
+                                        isClicked = True
+                                    else:
+                                        print("nida_gowon 안 보여")
+                                        drag_pos(135, 745, 135, 210, cla)
+                                    time.sleep(2)
 
+                        # where로 정확한 장소 이동하게 만들기...
+                        for i in range(5):
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set(400, 400, 540, 500, cla, img)
+                            if imgs_ is not None:
+                                click_pos_2(892, 1004, cla)  # 중복
+                                time.sleep(1)
+                                click_pos_2(545, 610, cla)
+                                time.sleep(2)
+                                go_alrim_confirm(cla, "자사 이동중")
+                                break
+                            else:
+                                print("뿌엥", i)
+                                click_pos_2(135, int(moglog), cla)
+                                time.sleep(1)  # 중복
+                                click_pos_2(705, int(select), cla)
+                                time.sleep(0.5)  # 중복
+                                click_pos_2(892, 1004, cla)  # 중복
+                                time.sleep(1)
+                            time.sleep(1)  # 중복
 
+                        print("이동 클릭 후...")
 
-                            # where로 정확한 장소 이동하게 만들기...
+                        for i in range(10):
+                            result_out = go_auto(cla, 50)
+                            if result_out == True:
+                                break
+                            else:
+                                print("사냥터로 이동중")
+                            time.sleep(0.5)
 
-                            click_pos_2(135, moglog, cla)
-                            time.sleep(2)  # 중복
-                            click_pos_2(705, select, cla)
-                            time.sleep(2)  # 중복
-                            click_pos_2(892, 1004, cla)  # 중복
-                            time.sleep(2)  # 중복
-                else:
-                    print("빠른이동이 보여")
-                    isJadong = True
-                    go_ = False
+                        # auto
+                        isresultauto = False
+                        isresultauto_count = 0
+                        while isresultauto is False:
 
+                            isresultauto_count += 1
+                            if isresultauto_count > 7:
+                                isresultauto = True
+                            resultauto = go_auto(cla, '10')
+                            if resultauto == False:
+                                print("사냥터 미도착")
+                                time.sleep(1)
+                            else:
+                                time.sleep(1)
+                                isresultauto = True
+                                print("사냥터 도착", delay)
+                                time.sleep(delay)
+                                isJadong = True
+                                # for i in range(delay):
+                                #     full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
+                                #     img_array = np.fromfile(full_path, np.uint8)
+                                #     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                #     imgs_ = imgs_set(470, 685, 500, 715, cla, img)
+                                #     if imgs_ is not None and imgs_ != False:
+                                #         print("이동중")
+                                #     else:
+                                #         time.sleep(2)
+                                #         full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
+                                #         img_array = np.fromfile(full_path, np.uint8)
+                                #         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                #         imgs_ = imgs_set(470, 685, 500, 715, cla, img)
+                                #         if imgs_ is not None and imgs_ != False:
+                                #             print("이동중")
+                                #         else:
+                                #             isJadong = True
+                                #             break
+                                #     time.sleep(1)
 
-                    # 이후 도착했는지 파악하기
-                    is8285 = False
-                    is8285_count = 0
-                    while is8285 is False:
+                                # x 같은 이벤트
+                                is_stop(cla)
 
-                        is8285_count += 1
-                        if is8285_count > 7:
-                            is8285 = True
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(400, 400, 540, 500, cla, img)
-                        if imgs_ is None or imgs_ == False:
-                            is8285 = True
-                        else:
-                            click_pos_2(545, 610, cla)  # 중복
+                                click_pos_2(900, 890, cla)
+                                time.sleep(1)
+                                # 절전모드
+                                click_pos_2(30, 345, cla)
+                                # result_hunting = now_hunting_is(where, cla)
+                                is8285 = True
                             time.sleep(random_int())
 
             else:
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
+                # 월드보기(월드맵내)가 안보여서 월드맵 진입하기
+                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\mid_1.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(400, 400, 540, 500, cla, img)
-                if imgs_ is None or imgs_ == False:
-                    print("빠른이동이 안보여")
-                    time.sleep(1)
-                    result_world = go_worldmap(cla, 'world')
-                    if result_world == True:
-                        click_pos_2(30, 110, cla)
-                        time.sleep(1)
-                    else:
-                        # click_pos_2(920, 65, cla)
-                        # time.sleep(random_int())
-                        clean_screen(cla, "go_jadong_in")
-                        click_pos_2(130, 215, cla)  # 중복
-                        time.sleep(1)
-                else:
-                    print("빠른이동이 보여")
-                    isJadong = True
-                    go_ = False
-                    is8285 = False
-                    is8285_count = 0
-                    while is8285 is False:
-
-                        is8285_count += 1
-                        if is8285_count > 7:
-                            is8285 = True
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\bbaln_move.png"
+                imgs_ = imgs_set(90, 520, 260, 590, cla, img)
+                if imgs_ is not None:
+                    for i in range(10):
+                        # 클릭하면 밑에 화면 뜸...
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\maul_move.PNG"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(400, 400, 540, 500, cla, img)
-                        if imgs_ is None or imgs_ == False:
-                            # auto
-                            isresultauto = False
-                            isresultauto_count = 0
-                            while isresultauto is False:
-
-                                isresultauto_count += 1
-                                if isresultauto_count > 7:
-                                    isresultauto = True
-                                resultauto = go_auto(cla, '10')
-                                if resultauto == False:
-                                    print("사냥터 미도착")
-                                    time.sleep(1)
-                                else:
-                                    time.sleep(1)
-                                    isresultauto = True
-                                    print("사냥터 도착", delay)
-                                    time.sleep(delay / 2)
-                                    for i in range(delay):
-                                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
-                                        img_array = np.fromfile(full_path, np.uint8)
-                                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                        imgs_ = imgs_set(470, 685, 500, 715, cla, img)
-                                        if imgs_ is not None and imgs_ != False:
-                                            print("이동중")
-                                        else:
-                                            time.sleep(2)
-                                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\check\\m.PNG"
-                                            img_array = np.fromfile(full_path, np.uint8)
-                                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                                            imgs_ = imgs_set(470, 685, 500, 715, cla, img)
-                                            if imgs_ is not None and imgs_ != False:
-                                                print("이동중")
-                                            else:
-                                                break
-                                        time.sleep(1)
-
-
-                                    # x 같은 이벤트
-                                    is_stop(cla)
-
-                                    click_pos_2(900, 890, cla)
-                                    time.sleep(1)
-                                    # 절전모드
-                                    click_pos_2(30, 345, cla)
-                                    # result_hunting = now_hunting_is(where, cla)
-                                    is8285 = True
-                                    time.sleep(random_int())
+                        imgs_ = imgs_set(330, 970, 500, 1030, cla, img)
+                        if imgs_ is not None:
+                            click_pos_2(550, 1000, cla)
+                            break
                         else:
+                            if world_ == 'yotoon':
+                                click_pos_2(280, 450, cla)
+                            if world_ == 'midgard':
+                                click_pos_2(160, 515, cla)
+                            if world_ == 'nida':
+                                click_pos_2(370, 570, cla)
+                        time.sleep(0.5)
+                    time.sleep(0.5)
 
-                            click_pos_2(545, 610, cla)  # 중복
-                            time.sleep(random_int())
+                    # 월드진입했는지 다시 체크
+                    for i in range(10):
+                        result_world = go_worldmap(cla, 'world')
 
+                        if result_world == True:
+                            break
+                        else:
+                            print("월드보기 있는 화면으로 이동중")
+                        time.sleep(0.5)
+                    time.sleep(0.5)
 
-        # else:
-        #     print("요구투력 보다 낮아 자동 장소로 변경")
-        #     # go_jadong_in(마을, 장소, 요구전투력, 드래그여부, 목록, 선택, 딜레이, cla)
-        #     # jadong_cla_ready(cla, '바위해안')
-        #     go_jadong_cla_mypower(cla)
-        #     # go_jadong_in('yotoon', where, 0, False, 300, 850, cla)
+                else:
+                    result_out = go_auto(cla, 50)
+                    if result_out == False:
+                        clean_screen(cla, "월드맵 진입")
+                    # 던전 중일땐 나가기 클릭하도록 던전인지 파악하기
+                    result = mydungeon_check(cla, "in_check")
+                    print("result in check", result)
+                    if result == False:
 
+                        #월드맵 아님월드맵 아님
 
+                        click_pos_2(130, 215, cla)
+                        # 월드 진입했는지 확인
+                        # 월드진입했는지 다시 체크
+                        for i in range(10):
+                            result_world = go_worldmap(cla, 'world')
 
+                            if result_world == True:
+                                break
+                            else:
+                                print("월드보기 있는 화면으로 이동중")
+                            time.sleep(0.5)
+                        time.sleep(0.5)
+                    else:
+                        for i in range(8):
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\confirm.PNG"
+                            img_array = np.fromfile(full_path, np.uint8)
+                            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            imgs_ = imgs_set(470, 580, 660, 660, cla, img)
+                            if imgs_ is not None:
+                                print("확인 클릭")
+                                click_pos_reg(imgs_.x, imgs_.y, cla)
+                                time.sleep(0.2)
+                                break
+                            else:
+                                click_pos_2(30, 220, cla)
+                                time.sleep(0.3)
+                            time.sleep(0.5)
+                        for i in range(10):
+                            result_out = go_auto(cla, 50)
+                            if result_out == True:
+                                break
+                            else:
+                                print("밖으로 이동중")
+                            time.sleep(0.5)
+                        time.sleep(0.5)
+            time.sleep(1)
         return go_
     except Exception as e:
         print(e)
@@ -1601,67 +1662,72 @@ def mydungeon_check(cla, data):
                     print("던전 X 보여", imgs_)
                     isMap = True
                     go_ = True
+            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\world.PNG"
+            img_array = np.fromfile(full_path, np.uint8)
+            img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+            imgs_ = imgs_set(0, 0, 200, 150, cla, img)
+            if imgs_ is None:
+                print("월드맵 아님")
+                if go_ == False:
+                    drag_pos(545, 725, 600, 725, cla)
+                    time.sleep(1)
+                    click_pos_2(125, 215, cla)
+                    time.sleep(1)
 
-            if go_ == False:
-                drag_pos(545, 725, 600, 725, cla)
-                time.sleep(1)
-                click_pos_2(125, 215, cla)
-                time.sleep(1)
-
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\namum_2.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(100, 280, 200, 330, cla, img)
-                if imgs_ is not None:
-                    go_ = True
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\namum_3.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(100, 280, 200, 330, cla, img)
-                if imgs_ is not None:
-                    go_ = True
-
-                isMap = False
-                isMap_count = 0
-                while isMap is False:
-                    isMap_count += 1
-                    if isMap_count > 7:
-                        isMap = True
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dun_x.png"
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\namum_2.png"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(630, 320, 700, 365, cla, img)
-                    if imgs_ is None:
-                        print("던전 X 안보여")
-                        click_pos_2(125, 215, cla)
-                        time.sleep(1)
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\namum.png"
+                    imgs_ = imgs_set(100, 280, 200, 330, cla, img)
+                    if imgs_ is not None:
+                        go_ = True
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\namum_3.png"
+                    img_array = np.fromfile(full_path, np.uint8)
+                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    imgs_ = imgs_set(100, 280, 200, 330, cla, img)
+                    if imgs_ is not None:
+                        go_ = True
+
+                    isMap = False
+                    isMap_count = 0
+                    while isMap is False:
+                        isMap_count += 1
+                        if isMap_count > 7:
+                            isMap = True
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dun_x.png"
                         img_array = np.fromfile(full_path, np.uint8)
                         img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(100, 280, 200, 330, cla, img)
+                        imgs_ = imgs_set(630, 320, 700, 365, cla, img)
                         if imgs_ is None:
-                            print("던전 남음 안보여")
-                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dangye.png"
+                            print("던전 X 안보여")
+                            click_pos_2(125, 215, cla)
+                            time.sleep(1)
+                            full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\namum.png"
                             img_array = np.fromfile(full_path, np.uint8)
                             img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                            imgs_ = imgs_set(360, 320, 600, 365, cla, img)
+                            imgs_ = imgs_set(100, 280, 200, 330, cla, img)
                             if imgs_ is None:
-                                print("던전 단계 안보여")
-                                isMap = True
-                                go_ = False
-                                click_pos_2(920, 65, cla)
+                                print("던전 남음 안보여")
+                                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dangye.png"
+                                img_array = np.fromfile(full_path, np.uint8)
+                                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                                imgs_ = imgs_set(360, 320, 600, 365, cla, img)
+                                if imgs_ is None:
+                                    print("던전 단계 안보여")
+                                    isMap = True
+                                    go_ = False
+                                    click_pos_2(920, 65, cla)
+                                else:
+                                    print("던전 단계 보여", imgs_)
+                                    isMap = True
+                                    go_ = True
                             else:
-                                print("던전 단계 보여", imgs_)
+                                print("던전 남음 보여", imgs_)
                                 isMap = True
                                 go_ = True
                         else:
-                            print("던전 남음 보여", imgs_)
+                            print("던전 X 보여", imgs_)
                             isMap = True
                             go_ = True
-                    else:
-                        print("던전 X 보여", imgs_)
-                        isMap = True
-                        go_ = True
 
         # 던전 사진들 비교하기기 x 545 y 725 x 600
         if data =='in_check':
@@ -1692,28 +1758,39 @@ def mydungeon_check(cla, data):
                     go_ = True
                 else:
                     print("던전 단계 안보여(in_check)")
+
                     click_pos_2(120, 210, cla)
-                    time.sleep(1)
-                    drag_pos(545, 725, 600, 725, cla)
-                    time.sleep(1)
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dangye.png"
+                    time.sleep(2)
+
+                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\world.PNG"
                     img_array = np.fromfile(full_path, np.uint8)
                     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(360, 320, 600, 365, cla, img)
-                    full_path2 = "c:\\my_games\\coobcco2\\data_od\\imgs\\jiha.png"
-                    img_array2 = np.fromfile(full_path2, np.uint8)
-                    img2 = cv2.imdecode(img_array2, cv2.IMREAD_COLOR)
-                    imgs_2 = imgs_set(360, 320, 600, 365, cla, img2)
-                    if imgs_ is not None:
-                        print("던전 단계 보여2(in_check)", imgs_)
-                        go_ = True
-                    else:
-                        print("던전 단계 안보여2(in_check)")
-                    if imgs_2 is not None:
-                        print("던전 지하 보여2(in_check)", imgs_2)
-                        go_ = True
-                    else:
-                        print("던전 지하 안보여2(in_check)")
+                    imgs_ = imgs_set(0, 0, 200, 150, cla, img)
+                    if imgs_ is None:
+                        print("월드맵 아님")
+
+
+
+                        drag_pos(545, 725, 600, 725, cla)
+                        time.sleep(1)
+                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dangye.png"
+                        img_array = np.fromfile(full_path, np.uint8)
+                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        imgs_ = imgs_set(360, 320, 600, 365, cla, img)
+                        full_path2 = "c:\\my_games\\coobcco2\\data_od\\imgs\\jiha.png"
+                        img_array2 = np.fromfile(full_path2, np.uint8)
+                        img2 = cv2.imdecode(img_array2, cv2.IMREAD_COLOR)
+                        imgs_2 = imgs_set(360, 320, 600, 365, cla, img2)
+                        if imgs_ is not None:
+                            print("던전 단계 보여2(in_check)", imgs_)
+                            go_ = True
+                        else:
+                            print("던전 단계 안보여2(in_check)")
+                        if imgs_2 is not None:
+                            print("던전 지하 보여2(in_check)", imgs_2)
+                            go_ = True
+                        else:
+                            print("던전 지하 안보여2(in_check)")
 
             else:
                 print("던전 남음 보여(in_check)", imgs_)

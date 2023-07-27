@@ -198,7 +198,7 @@ def line_monitor():
     from myfunction import imgs_set
     import time
     from datetime import datetime, timedelta, date
-    from server import server_get_zeno
+    from server import server_get_odin
     from stop_18 import is_stop
     try:
         isLoop = False
@@ -210,7 +210,7 @@ def line_monitor():
             time.sleep(0.1)
             is_stop("two")
 
-            result_my_server_read = server_get_zeno()
+            result_my_server_read = server_get_odin()
             print("my_server_read", result_my_server_read)
 
             dir_path = "C:\\my_games\\load\\odin"

@@ -14,7 +14,7 @@ def go_test(cla):
     import numpy as np
     from schedule import myQuest_number_check, start_id_search, myQuest_play_check
     from stop_18 import is_stop
-    from dungeon import jadong_cla_play, jadong_cla_ready
+    from dungeon import jadong_cla_play, jadong_cla_ready, go_jadong_in
     import cv2
     import os
     import time
@@ -33,25 +33,25 @@ def go_test(cla):
     if cla == 'two':
         plus = 960
 
-    print("던전 클릭 준비 진입")
-    dun_img = False
-    click_pos_2(230, 105, cla)
-    time.sleep(1)
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_4_shadow.PNG"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
-    if imgs_ is not None and imgs_ != False:
-        dun_img = True
-    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\dunjeon\\dungeon_title_3.PNG"
-    img_array = np.fromfile(full_path, np.uint8)
-    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-    imgs_ = imgs_set_(20, 350, 920, 410, cla, img, 0.9)
-    if imgs_ is not None and imgs_ != False:
-        dun_img = True
-    if dun_img == True:
-        drag_pos(850, 500, 130, 500, cla)
-        time.sleep(3)
+    #     # go_jadong_in(마을, 장소, 요구전투력, 드래그여부, 목록, 선택, 딜레이, cla)
+    #     # jadong_cla_ready(cla, '바위해안')
+    #     go_jadong_cla_mypower(cla)
+    #     # go_jadong_in('yotoon', where, 0, False, 300, 850, cla)
+    # nida:살얼음언덕:19000:false:700:830:40
+    # nida:고원서리이빨:19000:true:560:850:40
+
+
+    go_jadong_in("nida", "고원서리이빨", "19000", True, 560, 850, 40, cla)
+
+    # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\worldmap_select\\world.PNG"
+    # img_array = np.fromfile(full_path, np.uint8)
+    # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+    # imgs_ = imgs_set(0, 0, 200, 150, cla, img)
+    # if imgs_ is None:
+    #     print("월드맵 아님", imgs_)
+    # else:
+    #     print("월드맵맞음")
+
     # full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\potion\\all.PNG"
     # img_array = np.fromfile(full_path, np.uint8)
     # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
