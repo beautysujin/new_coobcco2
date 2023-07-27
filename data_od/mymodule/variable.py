@@ -79,5 +79,9 @@ with open(file_path2, "r", encoding='utf-8-sig') as file:
 
 this_game = "오딘"
 
+
+# 아두이노 관련
+now_arduino = "none"
+# 마우스 관련
 mouse_speed = 20
 mouse_pm = 3

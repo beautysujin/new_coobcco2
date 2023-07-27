@@ -146,7 +146,7 @@ class MyApp(QDialog):
         tabs = QTabWidget()
         tabs.addTab(FirstTab(), '스케쥴')
         tabs.addTab(SecondTab(), '내 정보')
-        tabs.addTab(ThirdTab(), '모니터링')
+        tabs.addTab(ThirdTab(), '현재 컴퓨터 및 마우스 설정')
 
         # buttonbox = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         # buttonbox.accepted.connect(self.accept)
@@ -211,7 +211,6 @@ class ThirdTab(QWidget):
 
     def initUI(self):
 
-
         dir_path = "C:\\my_games"
         file_path = dir_path + "\\line\\line.txt"
 
@@ -229,12 +228,29 @@ class ThirdTab(QWidget):
             else:
                 print('line 파일 없당')
                 with open(file_path, "w", encoding='utf-8-sig') as file:
-                    file.write("ccocco:메에롱")
+                    file.write("ccocco:메롱")
 
-        self.monitor = QGroupBox('My Cla Monitor')
+        file_path2 = dir_path + "\\mouse\\arduino.txt"
+
+        isFile = False
+        while isFile is False:
+            if os.path.isfile(file_path2) == True:
+                isFile = True
+                # 파일 읽기
+                with open(file_path2, "r", encoding='utf-8-sig') as file:
+                    line2 = file.read()
+                    v_.now_arduino = line2
+                    print('line2', line2)
+            else:
+                print('line2 파일 없당')
+                with open(file_path2, "w", encoding='utf-8-sig') as file:
+                    file.write("on")
+
+        self.monitor = QGroupBox('My Cla Monitor & Arduino')
 
         self.own = QLabel("       현재 소유자 : " + line_[0] + "\n\n")
         self.computer = QLabel("       현재 컴퓨터 : " + line_[1] + " 컴퓨터\n\n")
+        self.mouse_arduino = QLabel("       현재 아두이노 활성화 상태 : " + line2 + "\n\n")
 
         self.own_in = QLineEdit(self)
         self.own_in.setText(line_[0])
@@ -243,18 +259,19 @@ class ThirdTab(QWidget):
         self.line_save = QPushButton("저장하기")
         self.line_save.clicked.connect(self.button_line_save)
 
-        self.monitoring_1 = QPushButton("one 모니터링")
-        self.monitoring_1.clicked.connect(self.button_monitoring_one)
-        self.monitoring_2 = QPushButton("all 모니터링")
-        self.monitoring_2.clicked.connect(self.button_monitoring_all)
+        self.arduino_on = QPushButton("아두이노 on")
+        self.arduino_on.clicked.connect(self.button_arduino_on)
+        self.arduino_off = QPushButton("아두이노 off")
+        self.arduino_off.clicked.connect(self.button_arduino_off)
 
         mo1_1 = QHBoxLayout()
         mo1_1.addWidget(self.own)
 
-
         mo1_2 = QHBoxLayout()
         mo1_2.addWidget(self.computer)
 
+        mo1_mouse = QHBoxLayout()
+        mo1_mouse.addWidget(self.mouse_arduino)
 
         mo1_3 = QHBoxLayout()
         mo1_3.addStretch(1)
@@ -265,13 +282,14 @@ class ThirdTab(QWidget):
         mo1_3.addStretch(18)
 
         mo1_4 = QHBoxLayout()
-        mo1_4.addWidget(self.monitoring_1)
-        mo1_4.addWidget(self.monitoring_2)
+        mo1_4.addWidget(self.arduino_on)
+        mo1_4.addWidget(self.arduino_off)
 
         Mobox1 = QVBoxLayout()
         Mobox1.addStretch(1)
         Mobox1.addLayout(mo1_1)
         Mobox1.addLayout(mo1_2)
+        Mobox1.addLayout(mo1_mouse)
         Mobox1.addLayout(mo1_3)
         Mobox1.addStretch(3)
         Mobox1.addLayout(mo1_4)
@@ -286,13 +304,6 @@ class ThirdTab(QWidget):
         Vbox_.addLayout(hbox_)
 
         self.setLayout(Vbox_)
-
-        # hbox__ = QHBoxLayout()
-        # hbox__.addWidget(self.monitor)
-        #
-        # ###
-        # vbox = QVBoxLayout()
-        # vbox.addLayout(hbox__)
 
     def button_line_save(self):
         own_ = self.own_in.text()  # line_edit text 값 가져오기
@@ -309,14 +320,23 @@ class ThirdTab(QWidget):
         with open(file_path, "w", encoding='utf-8-sig') as file:
             file.write(write_)
 
-    def button_monitoring_one(self):
-        # v_.global_howcla = 'onecla'
-        m_ = Monitoring(self)
-        m_.start()
-    def button_monitoring_all(self):
-        # v_.global_howcla = 'onetwocla'
-        m_ = Monitoring(self)
-        m_.start()
+    def button_arduino_on(self):
+        print("arduino_on")
+        file_path = "C:\\my_games\\mouse\\arduino.txt"
+        with open(file_path, "w", encoding='utf-8-sig') as file:
+            file.write("on")
+        data = "on"
+        self.mouse_arduino.setText("       현재 아두이노 활성화 상태 : " + data + "\n\n")
+        v_.now_arduino = data
+
+    def button_arduino_off(self):
+        print("arduino_off")
+        file_path = "C:\\my_games\\mouse\\arduino.txt"
+        with open(file_path, "w", encoding='utf-8-sig') as file:
+            file.write("off")
+        data = "off"
+        self.mouse_arduino.setText("       현재 아두이노 활성화 상태 : " + data + "\n\n")
+        v_.now_arduino = data
 
 class SecondTab(QWidget):
 

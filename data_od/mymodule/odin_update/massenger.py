@@ -4,7 +4,7 @@ import requests
 import json
 # import os
 import sys
-sys.path.append('C:/my_games/coobcco2/data_od/mymodule')
+sys.path.append('C:/my_games/ares/data_ares/mymodule')
 
 import variable as v_
 
@@ -149,23 +149,18 @@ def line_to_me(cla, why):
                     read_ = file.read()
                 if read_ == "":
                     print("empty")
-                    line_data = "coob:몇번인지몰라."
+                    line_data = "ccocco:뿌에에에에에엥"
                     with open(file_path, "w", encoding='utf-8-sig') as file:
                         file.write(line_data)
                 else:
                     isLine = True
                     print("read_", read_)
             else:
-                line_data = "coob:대체 몇"
+                line_data = "ccocco:메롱메롱"
                 with open(file_path, "w", encoding='utf-8-sig') as file:
                     file.write(line_data)
 
         read_result = read_.split(":")
-        if read_result[0] == "coob":
-            my_token = "qwERHZyXhOvohyX0ONQcA0rsCh2aEur1djCC7zEplhH"
-        elif read_result[0] == "ccocco":
-            my_token = "hKXb6oosWTnH2JCrhtnchbVV5WN5WN3G3yMtZF4UTos"
-        print("my_token", my_token)
 
         if send_own == str(read_result[0]) and send_cla == cla and send_num == str(read_result[1]):
             print("이미 발송한 상태")
@@ -174,11 +169,13 @@ def line_to_me(cla, why):
             send_cla = cla
             send_num = read_result[1]
 
-            # if read_result[0] == "coob":
-            #     my_token = "qwERHZyXhOvohyX0ONQcA0rsCh2aEur1djCC7zEplhH"
-            # elif read_result[0] == "ccocco":
-            #     my_token = "hKXb6oosWTnH2JCrhtnchbVV5WN5WN3G3yMtZF4UTos"
-
+            if read_result[0] == "coob":
+                my_token = "qwERHZyXhOvohyX0ONQcA0rsCh2aEur1djCC7zEplhH"
+            elif read_result[0] == "ccocco":
+                my_token = "hKXb6oosWTnH2JCrhtnchbVV5WN5WN3G3yMtZF4UTos"
+            elif read_result[0] == "dongho":
+                my_token ="5rIzia52SHouogmxph3z3CBFmk2gSamnMcTaP9fCq3l"
+            v_.this_game
             message = "\n" + v_.this_game + "\n" + str(read_result[0]) + "님\n" + str(read_result[1]) + " 컴퓨터\n[" + str(cla) + "클라] 확인 요망\n=> " + str(why)
             TARGET_URL = 'https://notify-api.line.me/api/notify'
             TOKEN = my_token  # 발급받은 토큰
@@ -190,131 +187,114 @@ def line_to_me(cla, why):
     except Exception as ex:
         print(ex)
 
-def line_monitor():
+def line_monitor(game, cla):
     print("line_monitor")
     import numpy as np
     import os.path
     import cv2
-    from myfunction import imgs_set
+    from function import imgs_set, click_pos_reg
     import time
     from datetime import datetime, timedelta, date
-    from server import server_get_zeno
-    from stop_18 import is_stop
+    from server import server_get_ares
     try:
         isLoop = False
 
         # v_.global_howcla
         while isLoop is False:
 
-            is_stop("one")
-            time.sleep(0.1)
-            is_stop("two")
+            # x같은 팝업창
 
-            result_my_server_read = server_get_zeno()
+            result_my_server_read = server_get_ares()
             print("my_server_read", result_my_server_read)
 
-            dir_path = "C:\\my_games\\load\\odin"
-            file_path = dir_path + "\\start.txt"
+            if result_my_server_read == 'start':
 
-            isstart1 = False
-            while isstart1 is False:
-                if os.path.isdir(dir_path) == True:
-                    if os.path.isfile(file_path) == True:
-                        with open(file_path, "r", encoding='utf-8-sig') as file:
-                            start_get = file.read()
-                            isstart1 = True
-                    else:
-                        with open(file_path, "w", encoding='utf-8-sig') as file:
-                            data = 'none'
-                            file.write(str(data))
-                else:
-                    os.makedirs(dir_path)
-
-            if result_my_server_read == 'start' and start_get == 'yes' and (v_.now_cla == "one" or v_.now_cla == "two"):
-
+                # 블랙 스크린
                 nowTime = datetime.today().strftime("%Y/%m/%d %H:%M:%S")
                 print(nowTime)
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_1.png"
+                full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\unreal_error_1.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set(0, 700, 960, 850, "one", img)
                 if imgs_ is not None:
-                    line_to_me("one", "블랙스크린")
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\clean\\unreal_error_2.png"
+                    ms_ = str(game) + str(" 블랙스크린")
+                    line_to_me("one", ms_)
+
+                full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\closewithoutsending.PNG"
+                img_array = np.fromfile(full_path, np.uint8)
+                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                imgs_ = imgs_set(0, 700, 960, 850, "one", img)
+                if imgs_ is not None:
+                    ms_ = str(game) + str(" 블랙스크린")
+                    line_to_me("one", ms_)
+
+                full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\unreal_error_2.png"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
                 imgs_ = imgs_set(0, 700, 960, 850, "two", img)
                 if imgs_ is not None:
-                    line_to_me("two", "블랙스크린")
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\odin.png"
+                    ms_ = str(game) + str(" 블랙스크린")
+                    line_to_me("two", ms_)
+
+                full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\sendandrestart.PNG"
                 img_array = np.fromfile(full_path, np.uint8)
                 img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(0, 0, 960, 1030, v_.now_cla, img)
-                if imgs_ is None:
-                    line_to_me("one", "꺼진것 같다")
-
-
-
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\kakao_games.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(10, 980, 150, 1030, v_.now_cla, img)
+                imgs_ = imgs_set(0, 700, 960, 850, "two", img)
                 if imgs_ is not None:
-                    line_to_me("one", "대기화면(kakaogames)")
+                    ms_ = str(game) + str(" 블랙스크린")
+                    line_to_me("two", ms_)
 
+                # 화면
+                # full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\ares_title.PNG"
+                # img_array = np.fromfile(full_path, np.uint8)
+                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                # imgs_ = imgs_set(0, 0, 960, 1030, cla, img)
+                # if imgs_ is None:
+                #     ms_ = str(game) + str(" 꺼진것 같다")
+                #     line_to_me(cla, ms_)
+
+                #나가기 버튼
+                # full_path = "c:\\my_games\\ares\\data_ares\\imgs\\item_1\\exit_1.PNG"
+                # img_array = np.fromfile(full_path, np.uint8)
+                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                # imgs_ = imgs_set(400, 980, 570, 1030, cla, img)
+                # if imgs_ is not None and imgs_ != False:
+                #     print("monitoring catch exit")
+                #     click_pos_reg(imgs_.x, imgs_.y, cla)
+
+
+
+
+                # 장시간
                 jangsigan = False
+                # full_path = "c:\\my_games\\ares\\data_ares\\imgs\\monitor\\jangsigan_1.PNG"
+                # img_array = np.fromfile(full_path, np.uint8)
+                # img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                # imgs_ = imgs_set(300, 450, 700, 550, cla, img)
+                # if imgs_ is not None:
+                #     ms_ = str(game) + str(" 장시간 보여...꺼진 것 같다")
+                #     line_to_me(cla, ms_)
 
-                full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan.png"
-                img_array = np.fromfile(full_path, np.uint8)
-                img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                imgs_ = imgs_set(280, 470, 680, 590, v_.now_cla, img)
-                if imgs_ is None or imgs_ == False:
-                    full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_2.png"
-                    img_array = np.fromfile(full_path, np.uint8)
-                    img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                    imgs_ = imgs_set(200, 300, 800, 800, v_.now_cla, img)
-                    if imgs_ is None or imgs_ == False:
-                        full_path = "c:\\my_games\\coobcco2\\data_od\\imgs\\jangsigan_3.png"
-                        img_array = np.fromfile(full_path, np.uint8)
-                        img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
-                        imgs_ = imgs_set(280, 470, 680, 590, v_.now_cla, img)
-                        if imgs_ is None or imgs_ == False:
-                            print("장시간 없다")
-                        else:
-                            print("장시간 있다", imgs_)
-                            jangsigan = True
-                    else:
-                        print("장시간 있다", imgs_)
-                        jangsigan = True
-                else:
-                    print("장시간 있다", imgs_)
-                    jangsigan = True
 
                 if jangsigan == True:
-                    dir_path = "C:\\my_games\\load\\odin"
-                    file_path = dir_path + "\\start.txt"
-
-                    with open(file_path, "w", encoding='utf-8-sig') as file:
-                        data = 'no'
-                        file.write(str(data))
-                    line_to_me(cla, "꺼진 것 같다")
-
+                    ms_ = str(game) + str(" 죽어뿌따 ㅠㅅㅠ")
+                    line_to_me(cla, ms_)
 
 
 
 
                 # 날짜 갱신 체크 관련
-                print("날짜 갱신 체크~~~~!!!!!!!!!!!")
-                # 닉네임 받아와서 전역변수 설정하기mmm
+                print("날짜 갱신 체크")
+                # 닉네임 받아와서 전역변수 설정하기
                 nowDay_ = datetime.today().strftime("%Y%m%d")
                 nowDay = int(nowDay_)
                 nowTime = int(datetime.today().strftime("%H"))
                 yesterday_ = date.today() - timedelta(1)
                 yesterday = int(yesterday_.strftime('%Y%m%d'))
 
-                dir_path = "C:\\my_games\\coobcco2"
-                file_path2 = dir_path + "\\odin_schedule\\quest.txt"
-                file_path13 = dir_path + "\\odin_schedule\\refresh_time.txt"
+                dir_path = "C:\\my_games\\ares"
+                file_path2 = dir_path + "\\mysettings\\refresh_time\\quest.txt"
+                file_path13 = dir_path + "\\mysettings\\refresh_time\\refresh_time.txt"
 
                 isRefresh = False
                 while isRefresh is False:
@@ -343,7 +323,8 @@ def line_monitor():
                     if int(day_[0]) != nowDay:
                         print("day_[0]", day_[0])
                         print("nowDay", nowDay)
-                        line_to_me("one", "쿱꼬 초기화 갱신 안되었다.")
+                        ms_ = str(game) + str(" 초기화 갱신 안되었다.")
+                        line_to_me(cla, ms_)
 
             time.sleep(300)
 
