@@ -1,5 +1,5 @@
-360/seven
-420/yellow_six
-540/twenty
-600/yellow_six
-660/fourteen
+430/fourteen
+490/yellow_six
+600/twenty
+660/yellow_six
+720/fourteen
