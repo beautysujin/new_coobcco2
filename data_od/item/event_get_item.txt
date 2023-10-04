@@ -1,5 +1,5 @@
-360/fourteen
-480/fivetofive
-540/fourteen
-660/yellow_six
+360/seven
+430/black_six
+480/fourteen
+600/yellow_six
 720/fourteen
